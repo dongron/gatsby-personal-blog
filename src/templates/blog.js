@@ -24,7 +24,21 @@ const Index = ({ data, pageContext }) => {
         </Helmet>
       )}
       <Container>
-        <div>Welcome page</div>
+        {isFirstPage ? (
+          <CardList>
+            <Card {...featuredPost} featured />
+            {posts.slice(1).map(({ node: post }) => (
+              <Card key={post.id} {...post} />
+            ))}
+          </CardList>
+        ) : (
+          <CardList>
+            {posts.map(({ node: post }) => (
+              <Card key={post.id} {...post} />
+            ))}
+          </CardList>
+        )}
+        <Pagination context={pageContext} />
       </Container>
     </Layout>
   )

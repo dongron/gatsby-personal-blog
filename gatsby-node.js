@@ -39,11 +39,23 @@ exports.createPages = ({ graphql, actions }) => {
         },
       })
 
+      // Main blog page
+      createPage({
+        path: `/blog/`,
+        component: path.resolve(`./src/templates/blog.js`),
+        context: {
+          limit: postsPerFirstPage,
+          skip: 0,
+          numPages: numPages + 1,
+          currentPage: 1,
+        },
+      })
+
       // Create additional pagination on home page if needed
       Array.from({ length: numPages }).forEach((_, i) => {
         createPage({
-          path: `/${i + 2}/`,
-          component: path.resolve(`./src/templates/index.js`),
+          path: `/blog/${i + 2}/`,
+          component: path.resolve(`./src/templates/blog.js`),
           context: {
             limit: postsPerPage,
             skip: i * postsPerPage + postsPerFirstPage,
@@ -91,7 +103,7 @@ exports.createPages = ({ graphql, actions }) => {
 
       // Create tag pages with pagination if needed
       tags.map(({ node }) => {
-        const totalPosts = node.post.length
+        const totalPosts = (node.post && node.post.length) || 0
         const numPages = Math.ceil(totalPosts / postsPerPage)
         Array.from({ length: numPages }).forEach((_, i) => {
           createPage({
