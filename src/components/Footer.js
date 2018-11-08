@@ -41,6 +41,8 @@ const Item = styled.li`
   }
 `
 
+const getCurrentYear = () => new Date().getFullYear()
+
 const Footer = () => (
   <Wrapper>
     <List>
@@ -73,6 +75,7 @@ const Footer = () => (
         {/*>*/}
           {/*@ryanwiemer*/}
         {/*</a>*/}
+        @Dominik Gronkiewicz {getCurrentYear()}
       </Item>
     </List>
   </Wrapper>
