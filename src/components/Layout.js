@@ -3,6 +3,8 @@ import { ThemeProvider } from 'styled-components'
 import Helmet from 'react-helmet'
 import favicon from '../images/favicon.ico'
 import '../styles/global'
+import 'react-mdl/extra/material.css';
+import 'react-mdl/extra/material.js';
 import theme from '../styles/theme'
 import config from '../utils/siteConfig'
 import Menu from '../components/Menu'
