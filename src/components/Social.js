@@ -27,34 +27,51 @@ const UsernameContainer = styled.div`
   line-height: 130%;
 `
 
+const ExternalLink = styled.a`
+  text-decoration: none;
+  color: #000;
+`
+
+const githubUrl = 'https://github.com/dongron'
+const linkedInUrl = 'https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/'
+const mailtoUrl = 'mailto:me@dominikgronkiewicz.com?Subject=Mail%20from%20personal%20site'
+
 const Social = () => {
   return (
     <Wrapper>
       <PageTitle> Contact & social media </PageTitle>
       <Grid className="demo-grid-1">
         <Cell col={4}>
-          <IconContainer>
-            <FontAwesomeIcon icon={['fab', 'github']} />
-          </IconContainer>
-          <UsernameContainer>
-            @dongron
-          </UsernameContainer>
+          <ExternalLink href={githubUrl}>
+            <IconContainer>
+              <FontAwesomeIcon icon={['fab', 'github']} />
+            </IconContainer>
+            <UsernameContainer>
+              @dongron
+            </UsernameContainer>
+          </ExternalLink>
         </Cell>
+
         <Cell col={4}>
-          <IconContainer>
-            <FontAwesomeIcon icon={['fab', 'linkedin']} />
-          </IconContainer>
-          <UsernameContainer>
-            @dominik-gronkiewicz-b696b950
-          </UsernameContainer>
+          <ExternalLink href={linkedInUrl}>
+            <IconContainer>
+              <FontAwesomeIcon icon={['fab', 'linkedin']} />
+            </IconContainer>
+            <UsernameContainer>
+              @dominik-gronkiewicz-b696b950
+            </UsernameContainer>
+          </ExternalLink>
         </Cell>
+
         <Cell col={4}>
-          <IconContainer>
-            <FontAwesomeIcon icon="envelope" />
-          </IconContainer>
-          <UsernameContainer>
-            me@dominikgronkiewicz.com
-          </UsernameContainer>
+          <ExternalLink href={mailtoUrl}>
+            <IconContainer>
+              <FontAwesomeIcon icon="envelope" />
+            </IconContainer>
+            <UsernameContainer>
+              me@dominikgronkiewicz.com
+            </UsernameContainer>
+          </ExternalLink>
         </Cell>
       </Grid>
     </Wrapper>
