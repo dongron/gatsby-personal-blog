@@ -8,11 +8,12 @@ import PageTitle from './PageTitle'
 
 const Wrapper = styled.div`
   width: 80vw;
-  height: 100vh;
+  min-height: 100vh;
   color: #000;
   margin: auto;
   text-align: center;
   padding-top: 25vh;
+  padding-bottom: 15vh;
 `
 
 const IconContainer = styled.div`
