@@ -3,14 +3,20 @@ import { ThemeProvider } from 'styled-components'
 import Helmet from 'react-helmet'
 import favicon from '../images/favicon.ico'
 import '../styles/global'
-import 'react-mdl/extra/material.css';
-import 'react-mdl/extra/material.js';
+import 'react-mdl/extra/material.css'
+import 'react-mdl/extra/material.js'
 import theme from '../styles/theme'
 import config from '../utils/siteConfig'
 import Menu from '../components/Menu'
 import Footer from '../components/Footer'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee, faEnvelope, faAt } from '@fortawesome/free-solid-svg-icons'
+
 
 const Template = ({ children }) => {
+  library.add(fab, faCheckSquare, faCoffee, faEnvelope, faAt)
+
   return (
     <div className="siteRoot">
       <Helmet>

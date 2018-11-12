@@ -9,6 +9,7 @@ import Pagination from '../components/Pagination'
 import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
 import Welcome from '../components/Welcome'
+import Social from '../components/Social'
 
 
 const Index = ({ data, pageContext }) => {
@@ -26,6 +27,7 @@ const Index = ({ data, pageContext }) => {
         </Helmet>
       )}
       <Welcome />
+      <Social />
     </Layout>
   )
 }
