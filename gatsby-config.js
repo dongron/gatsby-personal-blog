@@ -1,6 +1,9 @@
 const config = require('./src/utils/siteConfig')
-let contentfulConfig
+let contentfulConfig, googleAnalyticsConfig
 
+/**
+ * Contentful configs
+ */
 try {
   contentfulConfig = require('./.contentful')
 } catch (e) {
@@ -15,6 +18,18 @@ try {
   if (!spaceId || !accessToken) {
     throw new Error('Contentful space ID and access token need to be provided.')
   }
+}
+
+/**
+ * Google analytics configs
+ */
+try {
+  googleAnalyticsConfig = require('./google-analytics')
+} catch (e) {
+  googleAnalyticsConfig = process.env.GOOGLE_ANALYTICS
+} finally {
+  if (!googleAnalyticsConfig.production.trackingId)
+    throw new Error('Google analytics tracking ID needs to be provided.')
 }
 
 module.exports = {
@@ -66,10 +81,7 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-google-analytics',
-      options: {
-        trackingId: process.env.GOOGLE_ANALYTICS,
-        head: true,
-      },
+      options: googleAnalyticsConfig.production,
     },
     'gatsby-plugin-sitemap',
     {
