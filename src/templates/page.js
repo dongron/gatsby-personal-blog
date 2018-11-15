@@ -21,7 +21,7 @@ const PageTemplate = ({ data }) => {
 
       <Container>
         <PageTitle>{title}</PageTitle>
-        <PageBody body={body} />
+        <PageBody body={body} page />
       </Container>
     </Layout>
   )

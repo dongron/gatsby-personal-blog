@@ -97,11 +97,25 @@ const Body = styled.div`
   }
 `
 
+const PostBody = styled(Body)`
+    h3 {
+      color: #111134
+    }
+    p {
+    line-height: 1;
+    margin: 0 0 0 0;
+  }
+`
+
 const PageBody = props => {
   return (
-    <Body
-      dangerouslySetInnerHTML={{ __html: props.body.childMarkdownRemark.html }}
-    />
+    (props && props.page)
+      ? <PostBody
+        dangerouslySetInnerHTML={{ __html: props.body.childMarkdownRemark.html }}
+      />
+      : <Body
+        dangerouslySetInnerHTML={{ __html: props.body.childMarkdownRemark.html }}
+      />
   )
 }
 
