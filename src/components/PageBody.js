@@ -103,7 +103,7 @@ const PostBody = styled(Body)`
     }
     p {
     line-height: 1;
-    margin: 0 0 0 0;
+    margin: 0 0 0.5em 0;
   }
 `
 
