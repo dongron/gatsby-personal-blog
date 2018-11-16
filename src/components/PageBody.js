@@ -98,12 +98,15 @@ const Body = styled.div`
 `
 
 const PostBody = styled(Body)`
+    h1 {
+      margin-top: 1em; 
+    }
     h3 {
       color: #111134
     }
     p {
-    line-height: 1;
-    margin: 0 0 0.5em 0;
+      line-height: 1.25;
+      margin: 0 0 0.5em 0;
   }
 `
 
