@@ -59,11 +59,11 @@ const Menu = () => {
               Blog
             </Link>
           </li>
-          <li>
-            <Link to="/contact/" activeStyle={activeLinkStyle}>
-              Contact
-            </Link>
-          </li>
+          {/*<li>*/}
+            {/*<Link to="/contact/" activeStyle={activeLinkStyle}>*/}
+              {/*Contact*/}
+            {/*</Link>*/}
+          {/*</li>*/}
         </ul>
       </Nav>
     </Header>
