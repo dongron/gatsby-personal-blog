@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import AutomaticAds from "./components/AutomaticAds"
 
 export default class HTML extends React.Component {
   render() {
@@ -13,6 +14,7 @@ export default class HTML extends React.Component {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           {this.props.headComponents}
+          <AutomaticAds />
         </head>
         <body {...this.props.bodyAttributes}>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
