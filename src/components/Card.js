@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 
+
 const Post = styled.li`
   position: relative;
   border: 1px solid ${props => props.theme.colors.secondary};
@@ -58,7 +59,10 @@ const Card = ({ slug, heroImage, title, publishDate, body, ...props }) => {
   return (
     <Post featured={props.featured}>
       <Link to={`/blog/${slug}/`}>
-        <Img fluid={heroImage.fluid} backgroundColor={'#eeeeee'} />
+        {(heroImage && heroImage.fluid) ? (
+          <Img fluid={heroImage.fluid} backgroundColor={'#eeeeee'} />) : (
+          <div />
+        )}
         <Title>{title}</Title>
         <Date>{publishDate}</Date>
         <Excerpt
