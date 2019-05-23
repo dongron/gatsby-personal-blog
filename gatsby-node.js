@@ -67,7 +67,7 @@ exports.createPages = ({ graphql, actions }) => {
 
       // Create each individual post
       posts.forEach((edge, i) => {
-        if (edge.node.slug)
+        if (!edge.node || !edge.node.slug)
           return
         const prev = i === 0 ? null : posts[i - 1].node
         const next = i === posts.length - 1 ? null : posts[i + 1].node
