@@ -17,9 +17,9 @@ const Index = ({ data, pageContext }) => {
   return (
     <Layout>
       <SEO />
-        <Helmet>
-          <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
-        </Helmet>
+      <Helmet>
+        <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
+      </Helmet>
       <Welcome />
       <Social />
     </Layout>
