@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 const Affiliates = () => {
   return (
     <React.Fragment>
-      <meta name="verify-admitad" content="f5f4dc8ea3" />
+      <meta name="verify-admitad" content="14664f38a3" />
     </React.Fragment>
   )
 }
