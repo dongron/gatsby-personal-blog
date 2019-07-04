@@ -1,0 +1,25 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.dominikgronkiewicz.app",
+    "sha256_cert_fingerprints":
+    ["C9:FA:1B:F8:3A:EA:15:46:D9:C7:3E:08:75:D8:E8:F8:C0:F2:3B:80:EF:CE:30:08:A9:D9:53:A1:B9:EF:75:BF"]
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "web",
+    "site": "https://dominikgronkiewicz.com"
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.dominikgronkiewicz.app",
+    "sha256_cert_fingerprints":
+    ["C9:FA:1B:F8:3A:EA:15:46:D9:C7:3E:08:75:D8:E8:F8:C0:F2:3B:80:EF:CE:30:08:A9:D9:53:A1:B9:EF:75:BF"]
+  }
+}]
