@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: dominikgronkiewicz.com
+Token: fd3d93882e64b4c4943a33c634a0886d86d5c05880012a86d944e82e084d8333
