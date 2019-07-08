@@ -8,6 +8,15 @@
   }
 },
 {
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.dominikgronkiewicz.app",
+    "sha256_cert_fingerprints":
+    ["EF:A5:72:ED:4F:49:44:D3:5C:16:6B:03:22:5B:09:15:21:B6:38:A3:65:EC:3F:F5:56:8E:D6:8C:02:59:B4:FA"]
+  }
+},
+{
   "relation": ["delegate_permission/common.get_login_creds"],
   "target": {
     "namespace": "web",
