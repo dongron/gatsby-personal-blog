@@ -2,9 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import theme from '../styles/theme'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Grid, Cell } from 'react-mdl'
 import PageTitle from './PageTitle'
-
 
 const Wrapper = styled.div`
   width: 80vw;
@@ -34,46 +32,48 @@ const ExternalLink = styled.a`
 
 const githubUrl = 'https://github.com/dongron'
 const linkedInUrl = 'https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/'
-const mailtoUrl = 'mailto:me@dominikgronkiewicz.com?Subject=Mail%20from%20personal%20site'
+const mailtoUrl =
+  'mailto:me@dominikgronkiewicz.com?Subject=Mail%20from%20personal%20site'
 
 const Social = () => {
   return (
     <Wrapper>
       <PageTitle> Contact & social media </PageTitle>
-      <Grid className="demo-grid-1">
-        <Cell col={4}>
+      <div
+        className="demo-grid-1"
+        style={{
+          display: 'grid',
+          alignItems: 'center',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+        }}
+      >
+        <div>
           <ExternalLink href={githubUrl}>
             <IconContainer>
               <FontAwesomeIcon icon={['fab', 'github']} />
             </IconContainer>
-            <UsernameContainer>
-              @dongron
-            </UsernameContainer>
+            <UsernameContainer>@dongron</UsernameContainer>
           </ExternalLink>
-        </Cell>
+        </div>
 
-        <Cell col={4}>
+        <div>
           <ExternalLink href={linkedInUrl}>
             <IconContainer>
               <FontAwesomeIcon icon={['fab', 'linkedin']} />
             </IconContainer>
-            <UsernameContainer>
-              @dominik-gronkiewicz-b696b950
-            </UsernameContainer>
+            <UsernameContainer>@dominik-gronkiewicz-b696b950</UsernameContainer>
           </ExternalLink>
-        </Cell>
+        </div>
 
-        <Cell col={4}>
+        <div>
           <ExternalLink href={mailtoUrl}>
             <IconContainer>
               <FontAwesomeIcon icon="envelope" />
             </IconContainer>
-            <UsernameContainer>
-              me@dominikgronkiewicz.com
-            </UsernameContainer>
+            <UsernameContainer>me@dominikgronkiewicz.com</UsernameContainer>
           </ExternalLink>
-        </Cell>
-      </Grid>
+        </div>
+      </div>
     </Wrapper>
   )
 }
