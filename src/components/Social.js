@@ -25,6 +25,20 @@ const UsernameContainer = styled.div`
   line-height: 130%;
 `
 
+const LinksContainer = styled.div`
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 1265px) {
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (max-width: 1000px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+`
+
 const ExternalLink = styled.a`
   text-decoration: none;
   color: #000;
@@ -39,14 +53,7 @@ const Social = () => {
   return (
     <Wrapper>
       <PageTitle> Contact & social media </PageTitle>
-      <div
-        className="demo-grid-1"
-        style={{
-          display: 'grid',
-          alignItems: 'center',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-        }}
-      >
+      <LinksContainer className="socials-grid-1">
         <div>
           <ExternalLink href={githubUrl}>
             <IconContainer>
@@ -73,7 +80,7 @@ const Social = () => {
             <UsernameContainer>me@dominikgronkiewicz.com</UsernameContainer>
           </ExternalLink>
         </div>
-      </div>
+      </LinksContainer>
     </Wrapper>
   )
 }
