@@ -1,6 +1,6 @@
-import React from "react"
-import PropTypes from "prop-types"
-import AutomaticAds from "./components/AutomaticAds"
+import React from 'react'
+import PropTypes from 'prop-types'
+import AutomaticAds from './components/AutomaticAds'
 import Affiliates from './components/Affiliates'
 
 export default class HTML extends React.Component {
@@ -15,10 +15,14 @@ export default class HTML extends React.Component {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           {this.props.headComponents}
+          <AutomaticAds />
           <Affiliates />
         </head>
         <body {...this.props.bodyAttributes}>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
           {this.props.preBodyComponents}
           <div
             key={`body`}
