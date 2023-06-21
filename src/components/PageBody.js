@@ -26,7 +26,7 @@ const Body = styled.div`
   }
 
   p {
-    line-height: 1.6;
+    line-height: 1.5;
     margin: 0 0 2em 0;
   }
 
@@ -57,7 +57,8 @@ const Body = styled.div`
     li {
       list-style: disc;
       list-style-position: inside;
-      line-height: 1.25;
+      line-height: 1.5;
+      margin-bottom: 1em;
       &:last-child {
         margin: 0;
       }
