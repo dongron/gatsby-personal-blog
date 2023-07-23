@@ -1,5 +1,6 @@
 const config = require('./src/utils/siteConfig')
-let contentfulConfig, googleAnalyticsConfig
+let contentfulConfig
+let googleAnalyticsConfig = { production: null }
 
 /**
  * Contentful configs
@@ -26,7 +27,7 @@ try {
 try {
   googleAnalyticsConfig = require('./google-analytics')
 } catch (e) {
-  googleAnalyticsConfig = process.env.GOOGLE_ANALYTICS
+  googleAnalyticsConfig.production.trackingId = process.env.GOOGLE_ANALYTICS
 } finally {
   if (!googleAnalyticsConfig.production.trackingId)
     throw new Error('Google analytics tracking ID needs to be provided.')
