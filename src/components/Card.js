@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from "gatsby-plugin-image";
 
 
 const Post = styled.li`
@@ -60,7 +60,7 @@ const Card = ({ slug, heroImage, title, publishDate, body, ...props }) => {
     <Post featured={props.featured}>
       <Link to={`/blog/${slug}/`}>
         {(heroImage && heroImage.fluid) ? (
-          <Img fluid={heroImage.fluid} backgroundColor={'#eeeeee'} />) : (
+          <GatsbyImage image={heroImage.gatsbyImageData} backgroundColor={'#eeeeee'} />) : (
           <div />
         )}
         <Title>{title}</Title>
@@ -74,7 +74,7 @@ const Card = ({ slug, heroImage, title, publishDate, body, ...props }) => {
           : <div />}
       </Link>
     </Post>
-  )
+  );
 }
 
 export default Card

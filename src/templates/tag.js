@@ -35,14 +35,10 @@ const TagTemplate = ({ data, pageContext }) => {
         </Helmet>
       ) : (
         <Helmet>
-          <title>{`Tag: ${title} - Page ${currentPage} - ${
-            config.siteTitle
-          }`}</title>
+          <title>{`Tag: ${title} - Page ${currentPage} - ${config.siteTitle}`}</title>
           <meta
             property="og:title"
-            content={`Tag: ${title} - Page ${currentPage} - ${
-              config.siteTitle
-            }`}
+            content={`Tag: ${title} - Page ${currentPage} - ${config.siteTitle}`}
           />
           <meta property="og:url" content={`${config.siteUrl}/tag/${slug}/`} />
         </Helmet>
@@ -56,7 +52,7 @@ const TagTemplate = ({ data, pageContext }) => {
         </PageTitle>
 
         <CardList>
-          {posts.slice(skip, limit * currentPage).map(post => (
+          {posts.slice(skip, limit * currentPage).map((post) => (
             <Card {...post} key={post.id} />
           ))}
         </CardList>
@@ -67,7 +63,7 @@ const TagTemplate = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     contentfulTag(slug: { eq: $slug }) {
       title
       id
@@ -79,9 +75,7 @@ export const query = graphql`
         publishDate(formatString: "MMMM DD, YYYY")
         heroImage {
           title
-          fluid(maxWidth: 1800) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImage(layout: FULL_WIDTH, placeholder: BLURRED, width: 1800)
         }
         body {
           childMarkdownRemark {

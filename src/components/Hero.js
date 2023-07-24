@@ -1,12 +1,12 @@
 import React from 'react'
-import Img from 'gatsby-image'
+import { GatsbyImage } from "gatsby-plugin-image";
 import styled from 'styled-components'
 
 const Wrapper = styled.section`
   position: relative;
   min-height: 300px;
 `
-const BgImg = styled(Img)`
+const BgImg = styled(GatsbyImage)`
   position: absolute;
   top: 0;
   left: 0;

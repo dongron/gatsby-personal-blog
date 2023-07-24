@@ -26,36 +26,30 @@ const Index = ({ data, pageContext }) => {
   )
 }
 
-export const query = graphql`
-  query($skip: Int!, $limit: Int!) {
-    allContentfulFragment(
-      sort: { fields: [order], order: DESC }
-      limit: $limit
-      skip: $skip
-      filter: {
-        target: {
-          eq: "home"
-        }
-      }
-    ) {
-      edges {
-        node {
-          id
-          order
-          target
-          publishDate(formatString: "MMMM DD, YYYY")
-          node_locale
-          title
-          slug
-          body {
-            childMarkdownRemark {
-              html
-            }
+export const query = graphql`query ($skip: Int!, $limit: Int!) {
+  allContentfulFragment(
+    sort: {order: DESC}
+    limit: $limit
+    skip: $skip
+    filter: {target: {eq: "home"}}
+  ) {
+    edges {
+      node {
+        id
+        order
+        target
+        publishDate(formatString: "MMMM DD, YYYY")
+        node_locale
+        title
+        slug
+        body {
+          childMarkdownRemark {
+            html
           }
         }
       }
     }
   }
-`
+}`
 
 export default Index

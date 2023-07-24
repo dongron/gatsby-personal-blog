@@ -47,6 +47,9 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`, // Needed for dynamic images
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
@@ -79,10 +82,6 @@ module.exports = {
         process.env.NODE_ENV === 'development'
           ? contentfulConfig.development
           : contentfulConfig.production,
-    },
-    {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: googleAnalyticsConfig.production,
     },
     'gatsby-plugin-sitemap',
     {
@@ -143,26 +142,25 @@ module.exports = {
                 ],
               }))
             },
-            query: `
-              {
-            allContentfulPost(limit: 1000, sort: {fields: [publishDate], order: DESC}) {
-               edges {
-                 node {
-                   title
-                   slug
-                   publishDate(formatString: "MMMM DD, YYYY")
-                   body {
-                     childMarkdownRemark {
-                       html
-                       excerpt(pruneLength: 80)
-                     }
-                   }
-                 }
-               }
-             }
-           }
-      `,
+            query: `{
+  allContentfulPost(limit: 1000, sort: {publishDate: DESC}) {
+    edges {
+      node {
+        title
+        slug
+        publishDate(formatString: "MMMM DD, YYYY")
+        body {
+          childMarkdownRemark {
+            html
+            excerpt(pruneLength: 80)
+          }
+        }
+      }
+    }
+  }
+}`,
             output: '/rss.xml',
+            title: "Dominik Gronkiewicz RSS Feed",
           },
         ],
       },
