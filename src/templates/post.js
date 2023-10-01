@@ -57,7 +57,7 @@ export const query = graphql`
       }
       heroImage {
         title
-        gatsbyImage(layout: FULL_WIDTH, placeholder: BLURRED, width: 1800)
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1800)
         ogimg: resize(width: 1800) {
           src
           width
