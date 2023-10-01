@@ -1,6 +1,7 @@
+import React from 'react'
 import { createGlobalStyle } from 'styled-components'
 
-createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -96,3 +97,14 @@ createGlobalStyle`
   	height: auto;
   }
 `
+
+const GlobalStyleComponent = ({ children }) => {
+  return (
+    <React.Fragment>
+      <GlobalStyle />
+      {children}
+    </React.Fragment>
+  )
+}
+
+export default GlobalStyleComponent
