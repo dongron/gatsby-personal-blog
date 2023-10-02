@@ -1,10 +1,11 @@
 import React from 'react'
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage } from 'gatsby-plugin-image'
 import styled from 'styled-components'
 
 const Wrapper = styled.section`
   position: relative;
   min-height: 300px;
+  max-height: ${(props) => props.height};
 `
 const BgImg = styled(GatsbyImage)`
   position: absolute;
@@ -15,12 +16,12 @@ const BgImg = styled(GatsbyImage)`
   min-height: 300px;
   height: auto;
   display: contents;
-  @media (min-width: ${props => props.theme.responsive.small}) {
-    height: ${props => props.height || 'auto'};
+  @media (min-width: ${(props) => props.theme.responsive.small}) {
+    height: ${(props) => props.height || 'auto'};
   }
   & > img {
-    object-fit: ${props => props.fit || 'cover'} !important;
-    object-position: ${props => props.position || '50% 50%'} !important;
+    object-fit: ${(props) => props.fit || 'cover'} !important;
+    object-position: ${(props) => props.position || '50% 50%'} !important;
   }
   &::before {
     content: '';
@@ -42,7 +43,7 @@ const Title = styled.h1`
   font-weight: 600;
   position: absolute;
   width: 100%;
-  max-width: ${props => props.theme.sizes.maxWidthCentered};
+  max-width: ${(props) => props.theme.sizes.maxWidthCentered};
   padding: 0 1rem;
   top: 50%;
   left: 50%;
@@ -52,12 +53,13 @@ const Title = styled.h1`
   z-index: 1;
 `
 
-const Hero = props => (
-  <Wrapper>
+const Hero = (props) => (
+  <Wrapper height={props.height}>
     <BgImg
       height={props.height}
       image={props.image?.gatsbyImageData}
       backgroundColor={'#eeeeee'}
+      alt="Hero image"
     />
     <Title>{props.title}</Title>
   </Wrapper>
