@@ -12,14 +12,8 @@ import PostDate from '../components/PostDate'
 import SEO from '../components/SEO'
 
 const PostTemplate = ({ data, pageContext }) => {
-  const {
-    title,
-    slug,
-    heroImage,
-    body,
-    publishDate,
-    tags,
-  } = data.contentfulPost
+  const { title, slug, heroImage, body, publishDate, tags } =
+    data.contentfulPost
   const postNode = data.contentfulPost
 
   const previous = pageContext.prev
@@ -45,7 +39,7 @@ const PostTemplate = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     contentfulPost(slug: { eq: $slug }) {
       title
       slug
@@ -63,9 +57,7 @@ export const query = graphql`
       }
       heroImage {
         title
-        fluid(maxWidth: 1800) {
-          ...GatsbyContentfulFluid_withWebp_noBase64
-        }
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1800)
         ogimg: resize(width: 1800) {
           src
           width

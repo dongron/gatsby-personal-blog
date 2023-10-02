@@ -5,21 +5,16 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const loadPosts = new Promise((resolve, reject) => {
-    graphql(`
-      {
-        allContentfulPost(
-          sort: { fields: [publishDate], order: DESC }
-          limit: 10000
-        ) {
-          edges {
-            node {
-              slug
-              publishDate
-            }
-          }
-        }
+    graphql(`{
+  allContentfulPost(sort: {publishDate: DESC}, limit: 10000) {
+    edges {
+      node {
+        slug
+        publishDate
       }
-    `).then(result => {
+    }
+  }
+}`).then(result => {
       const posts = result.data.allContentfulPost.edges
       const postsPerFirstPage = config.postsPerHomePage
       const postsPerPage = config.postsPerPage

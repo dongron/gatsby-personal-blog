@@ -45,12 +45,8 @@ const Index = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query($skip: Int!, $limit: Int!) {
-    allContentfulPost(
-      sort: { fields: [publishDate], order: DESC }
-      limit: $limit
-      skip: $skip
-    ) {
+  query ($skip: Int!, $limit: Int!) {
+    allContentfulPost(sort: { publishDate: DESC }, limit: $limit, skip: $skip) {
       edges {
         node {
           title
@@ -60,9 +56,11 @@ export const query = graphql`
           publishDate(formatString: "MMMM DD, YYYY")
           heroImage {
             title
-            fluid(maxWidth: 1800) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              placeholder: BLURRED
+              width: 1800
+            )
           }
           body {
             childMarkdownRemark {

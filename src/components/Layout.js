@@ -2,15 +2,19 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import Helmet from 'react-helmet'
 import favicon from '../images/favicon.ico'
-import '../styles/global'
+import GlobalStyleComponent from '../styles/global'
 import theme from '../styles/theme'
 import config from '../utils/siteConfig'
 import Menu from '../components/Menu'
 import Footer from '../components/Footer'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee, faEnvelope, faAt } from '@fortawesome/free-solid-svg-icons'
-
+import {
+  faCheckSquare,
+  faCoffee,
+  faEnvelope,
+  faAt,
+} from '@fortawesome/free-solid-svg-icons'
 
 const Template = ({ children }) => {
   library.add(fab, faCheckSquare, faCoffee, faEnvelope, faAt)
@@ -31,13 +35,13 @@ const Template = ({ children }) => {
       </Helmet>
 
       <ThemeProvider theme={theme}>
-        <>
+        <GlobalStyleComponent>
           <div className="siteContent">
             <Menu />
             {children}
           </div>
           <Footer />
-        </>
+        </GlobalStyleComponent>
       </ThemeProvider>
     </div>
   )

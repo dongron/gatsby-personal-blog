@@ -1,12 +1,12 @@
 import React from 'react'
-import Img from 'gatsby-image'
+import { GatsbyImage } from "gatsby-plugin-image";
 import styled from 'styled-components'
 
 const Wrapper = styled.section`
   position: relative;
   min-height: 300px;
 `
-const BgImg = styled(Img)`
+const BgImg = styled(GatsbyImage)`
   position: absolute;
   top: 0;
   left: 0;
@@ -14,6 +14,7 @@ const BgImg = styled(Img)`
   z-index: -1;
   min-height: 300px;
   height: auto;
+  display: contents;
   @media (min-width: ${props => props.theme.responsive.small}) {
     height: ${props => props.height || 'auto'};
   }
@@ -48,13 +49,14 @@ const Title = styled.h1`
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
+  z-index: 1;
 `
 
 const Hero = props => (
   <Wrapper>
     <BgImg
       height={props.height}
-      fluid={props.image.fluid}
+      image={props.image?.gatsbyImageData}
       backgroundColor={'#eeeeee'}
     />
     <Title>{props.title}</Title>
