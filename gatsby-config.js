@@ -1,6 +1,6 @@
 const config = require('./src/utils/siteConfig')
 let contentfulConfig
-let googleAnalyticsConfig = { production: null }
+let googleAnalyticsConfig = { production: { head: true } }
 
 /**
  * Contentful configs
@@ -29,7 +29,7 @@ try {
 } catch (e) {
   googleAnalyticsConfig.production.trackingId = process.env.GOOGLE_ANALYTICS
 } finally {
-  if (!googleAnalyticsConfig.production.trackingId)
+  if (!googleAnalyticsConfig.production?.trackingId)
     throw new Error('Google analytics tracking ID needs to be provided.')
 }
 
@@ -128,7 +128,7 @@ module.exports = {
           {
             serialize(ctx) {
               const rssMetadata = ctx.query.site.siteMetadata.rssMetadata
-              return ctx.query.allContentfulPost.edges.map(edge => ({
+              return ctx.query.allContentfulPost.edges.map((edge) => ({
                 date: edge.node.publishDate,
                 title: edge.node.title,
                 description: edge.node.body.childMarkdownRemark.excerpt,
@@ -160,7 +160,7 @@ module.exports = {
   }
 }`,
             output: '/rss.xml',
-            title: "Dominik Gronkiewicz RSS Feed",
+            title: 'Dominik Gronkiewicz RSS Feed',
           },
         ],
       },
