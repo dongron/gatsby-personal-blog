@@ -1,6 +1,16 @@
 const config = require('./src/utils/siteConfig')
 const path = require(`path`)
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type ContentfulPost implements Node {
+      tags: [ContentfulTag] @link(by: "id", from: "tags___NODE")
+    }
+  `
+  createTypes(typeDefs)
+}
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
