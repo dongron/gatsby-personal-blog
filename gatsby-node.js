@@ -15,16 +15,18 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const loadPosts = new Promise((resolve, reject) => {
-    graphql(`{
-  allContentfulPost(sort: {publishDate: DESC}, limit: 10000) {
-    edges {
-      node {
-        slug
-        publishDate
+    graphql(`
+      {
+        allContentfulPost(sort: { publishDate: DESC }, limit: 10000) {
+          edges {
+            node {
+              slug
+              publishDate
+            }
+          }
+        }
       }
-    }
-  }
-}`).then(result => {
+    `).then((result) => {
       const posts = result.data.allContentfulPost.edges
       const postsPerFirstPage = config.postsPerHomePage
       const postsPerPage = config.postsPerPage
@@ -74,8 +76,7 @@ exports.createPages = ({ graphql, actions }) => {
 
       // Create each individual post
       posts.forEach((edge, i) => {
-        if (!edge.node || !edge.node.slug)
-          return
+        if (!edge.node || !edge.node.slug) return
         const prev = i === 0 ? null : posts[i - 1].node
         const next = i === posts.length - 1 ? null : posts[i + 1].node
         createPage({
@@ -120,7 +121,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-    `).then(result => {
+    `).then((result) => {
       const tags = result.data.allContentfulTag.edges
       const postsPerPage = config.postsPerPage
 
@@ -158,7 +159,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-    `).then(result => {
+    `).then((result) => {
       const pages = result.data.allContentfulPage.edges
       pages.map(({ node }) => {
         createPage({
@@ -173,5 +174,16 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 
-  return Promise.all([loadPosts, loadTags, loadPages])
+  // Load portfolio page (no individual item pages - all content displayed on main portfolio page)
+  const loadPortfolio = new Promise((resolve, reject) => {
+    // Create portfolio index page
+    createPage({
+      path: `/portfolio/`,
+      component: path.resolve(`./src/templates/portfolio.js`),
+      context: {},
+    })
+    resolve()
+  })
+
+  return Promise.all([loadPosts, loadTags, loadPages, loadPortfolio])
 }

@@ -1,86 +1,81 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '../styles/theme'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PageTitle from './PageTitle'
+import config from '../utils/siteConfig'
 
 const Wrapper = styled.div`
-  width: 80vw;
-  min-height: 100vh;
+  width: 100%;
   color: #000;
-  margin: auto;
   text-align: center;
-  padding-top: 25vh;
-  padding-bottom: 15vh;
+  padding: ${props => props.theme.spacing.xxl} ${props => props.theme.spacing.md};
+  background: white;
+`
+
+const Inner = styled.div`
+  max-width: ${props => props.theme.sizes.maxWidth};
+  margin: 0 auto;
 `
 
 const IconContainer = styled.div`
-  padding-top: 8vh;
-  font-size: 45px;
-  line-height: 150%;
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  color: ${props => props.theme.colors.highlight};
 `
 
 const UsernameContainer = styled.div`
-  font-size: 22px;
-  line-height: 130%;
+  font-size: 1em;
+  color: gray;
 `
 
 const LinksContainer = styled.div`
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  grid-template-columns: repeat(3, 1fr);
-  @media (max-width: 1265px) {
-    grid-template-columns: repeat(2, 1fr);
-
-    @media (max-width: 1000px) {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  }
+  gap: 3em;
+  margin-top: 2em;
 `
 
 const ExternalLink = styled.a`
   text-decoration: none;
-  color: #000;
-`
+  color: ${props => props.theme.colors.base};
+  transition: all ${props => props.theme.transitions.default};
+  text-align: center;
 
-const githubUrl = 'https://github.com/dongron'
-const linkedInUrl = 'https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/'
-const mailtoUrl =
-  'mailto:me@dominikgronkiewicz.com?Subject=Mail%20from%20personal%20site'
+  &:hover {
+    color: ${props => props.theme.colors.highlight};
+  }
+`
 
 const Social = () => {
   return (
     <Wrapper>
-      <PageTitle> Contact & social media </PageTitle>
-      <LinksContainer className="socials-grid-1">
-        <div>
-          <ExternalLink href={githubUrl}>
+      <Inner>
+        <PageTitle small>Let's Connect</PageTitle>
+        <LinksContainer>
+          <ExternalLink href={config.githubUrl} target="_blank" rel="noopener noreferrer">
             <IconContainer>
               <FontAwesomeIcon icon={['fab', 'github']} />
             </IconContainer>
-            <UsernameContainer>@dongron</UsernameContainer>
+            <UsernameContainer>GitHub</UsernameContainer>
           </ExternalLink>
-        </div>
 
-        <div>
-          <ExternalLink href={linkedInUrl}>
+          <ExternalLink href={config.linkedInUrl} target="_blank" rel="noopener noreferrer">
             <IconContainer>
               <FontAwesomeIcon icon={['fab', 'linkedin']} />
             </IconContainer>
-            <UsernameContainer>@dominik-gronkiewicz-b696b950</UsernameContainer>
+            <UsernameContainer>LinkedIn</UsernameContainer>
           </ExternalLink>
-        </div>
 
-        <div>
-          <ExternalLink href={mailtoUrl}>
+          <ExternalLink href={`mailto:${config.email}`}>
             <IconContainer>
               <FontAwesomeIcon icon="envelope" />
             </IconContainer>
-            <UsernameContainer>me@dominikgronkiewicz.com</UsernameContainer>
+            <UsernameContainer>Email</UsernameContainer>
           </ExternalLink>
-        </div>
-      </LinksContainer>
+        </LinksContainer>
+      </Inner>
     </Wrapper>
   )
 }

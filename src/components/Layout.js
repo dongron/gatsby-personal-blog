@@ -14,10 +14,50 @@ import {
   faCoffee,
   faEnvelope,
   faAt,
+  faCode,
+  faHeartbeat,
+  faMobileAlt,
+  faComments,
+  faBars,
+  faTimes,
+  faArrowRight,
+  faLaptopCode,
+  faServer,
+  faTools,
+  faPaperPlane,
+  faUser,
+  faBuilding,
+  faDollarSign,
+  faGlobe,
+  faClock,
+  faMapMarkerAlt,
 } from '@fortawesome/free-solid-svg-icons'
 
 const Template = ({ children }) => {
-  library.add(fab, faCheckSquare, faCoffee, faEnvelope, faAt)
+  library.add(
+    fab,
+    faCheckSquare,
+    faCoffee,
+    faEnvelope,
+    faAt,
+    faCode,
+    faHeartbeat,
+    faMobileAlt,
+    faComments,
+    faBars,
+    faTimes,
+    faArrowRight,
+    faLaptopCode,
+    faServer,
+    faTools,
+    faPaperPlane,
+    faUser,
+    faBuilding,
+    faDollarSign,
+    faGlobe,
+    faClock,
+    faMapMarkerAlt
+  )
 
   return (
     <div className="siteRoot">

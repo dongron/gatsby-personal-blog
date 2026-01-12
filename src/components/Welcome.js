@@ -1,10 +1,9 @@
 import React from 'react'
-import styled, { ThemeProvider } from 'styled-components'
+import styled from 'styled-components'
 import backgrounImage from '../images/welcome-background.jpg'
 import theme from '../styles/theme'
-import Helmet from 'react-helmet'
-import PageTitle from './PageTitle'
-
+import Button from './Button'
+import config from '../utils/siteConfig'
 
 const Wrapper = styled.div`
   background: #000000;
@@ -18,18 +17,83 @@ const Image = styled.div`
   background-position: center center;
   text-align: center;
   color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.5em;
 `
 
-const WelcomeTopSpacer = styled.div`
-  height: 38vh;
+const Title = styled.h1`
+  font-size: 2.5em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  @media screen and (min-width: ${theme.responsive.small}) {
+    font-size: 3.5em;
+  }
+
+  @media screen and (min-width: ${theme.responsive.medium}) {
+    font-size: 4em;
+  }
+`
+
+const Subtitle = styled.p`
+  font-size: 1.1em;
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+  @media screen and (min-width: ${theme.responsive.small}) {
+    font-size: 1.25em;
+  }
+`
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
+const PrimaryButton = styled(Button)`
+  background: ${theme.colors.highlight};
+  border-color: ${theme.colors.highlight};
+
+  &:hover {
+    background: transparent;
+    color: white;
+    border-color: white;
+  }
+`
+
+const SecondaryButton = styled(Button)`
+  border-color: white;
+  color: white;
+
+  &:hover {
+    background: white;
+    color: ${theme.colors.base};
+  }
 `
 
 const Welcome = () => {
   return (
     <Wrapper>
       <Image>
-        <WelcomeTopSpacer />
-        <PageTitle>Welcome to my personal site </PageTitle>
+        <Title>{config.authorTitle}</Title>
+        <Subtitle>{config.authorTagline}</Subtitle>
+        <ButtonGroup>
+          <PrimaryButton to="/portfolio/" primary>
+            View My Work
+          </PrimaryButton>
+          <SecondaryButton to="/blog/">
+            Read Articles
+          </SecondaryButton>
+        </ButtonGroup>
       </Image>
     </Wrapper>
   )
