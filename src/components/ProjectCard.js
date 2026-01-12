@@ -68,10 +68,10 @@ const Tag = styled.span`
   color: ${props => props.theme.colors.base};
 `
 
-const ProjectCard = ({ slug, heroImage, title, description, technologies }) => {
+const ProjectCard = ({ heroImage, title, description, technologies }) => {
   return (
     <Project>
-      <Link to={`/portfolio/${slug}/`}>
+      <Link to="/portfolio/">
         {heroImage && heroImage.gatsbyImageData ? (
           <GatsbyImage
             image={heroImage.gatsbyImageData}
