@@ -56,7 +56,8 @@
     "lint:css": "stylelint 'src/**/*.js'",
     "check-pretty": "prettier -l {,src/**/}*.{js,jsx,json,css,scss}",
     "format": "prettier --write \"src/**/*.js\"",
-    "serve-local": "./node_modules/gatsby/dist/bin/gatsby.js serve"
+    "serve-local": "./node_modules/gatsby/dist/bin/gatsby.js serve",
+    "clean": "gatsby clean"
   },
   "devDependencies": {
     "eslint": "^8.45.0",
