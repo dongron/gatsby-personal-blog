@@ -85,6 +85,14 @@ module.exports = {
     },
     'gatsby-plugin-sitemap',
     {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: config.siteUrl,
+        sitemap: `${config.siteUrl}/sitemap/sitemap-index.xml`,
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: config.siteTitle,
