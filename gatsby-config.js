@@ -83,7 +83,17 @@ module.exports = {
           ? contentfulConfig.development
           : contentfulConfig.production,
     },
-    'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        excludes: [
+          '/404*',
+          '/dev-404-page',
+          '/blog/+([0-9])',
+          '/blog/+([0-9])/',
+        ],
+      },
+    },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {

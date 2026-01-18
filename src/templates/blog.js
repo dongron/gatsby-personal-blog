@@ -21,6 +21,7 @@ const Index = ({ data, pageContext }) => {
       {!isFirstPage && (
         <Helmet>
           <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
+          <meta name="robots" content="noindex, follow" />
         </Helmet>
       )}
       <Container>
