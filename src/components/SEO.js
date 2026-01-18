@@ -85,6 +85,7 @@ class SEO extends Component {
           name: title,
           alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
           headline: title,
+          description: description,
           image: {
             '@type': 'ImageObject',
             url: image,
@@ -95,14 +96,27 @@ class SEO extends Component {
             '@type': 'Person',
             name: config.author,
             url: config.authorUrl,
+            sameAs: [
+              'https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/',
+              'https://github.com/dongron',
+              'https://twitter.com/dgronkiewicz',
+            ],
           },
           publisher: {
             '@type': 'Organization',
             name: config.publisher,
             url: config.siteUrl,
+            logo: {
+              '@type': 'ImageObject',
+              url: config.siteUrl + config.siteLogo,
+            },
           },
           datePublished: postNode.publishDateISO,
-          mainEntityOfPage: pageUrl,
+          dateModified: postNode.updatedAt || postNode.publishDateISO,
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': pageUrl,
+          },
         }
       )
     }
@@ -123,6 +137,12 @@ class SEO extends Component {
         <meta name="image" content={image} />
         <meta name="description" content={description} />
 
+        {/* AI/LLM optimization tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+        <meta name="author" content={config.author} />
+        {postSEO && <meta name="article:author" content={config.author} />}
+        {postSEO && <meta name="article:published_time" content={postNode.publishDateISO} />}
+
         {/* Schema.org tags */}
         <script type="application/ld+json">
           {JSON.stringify(schemaOrgJSONLD)}
@@ -130,7 +150,10 @@ class SEO extends Component {
 
         {/* OpenGraph tags */}
         <meta property="og:title" content={title} />
+        <meta property="og:site_name" content={config.siteTitle} />
+        <meta property="og:locale" content="en_US" />
         {postSEO ? <meta property="og:type" content="article" /> : null}
+        {!postSEO && <meta property="og:type" content="website" />}
 
         <meta property="og:url" content={pageUrl} />
         <meta property="og:image" content={image} />

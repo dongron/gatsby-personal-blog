@@ -1,0 +1,42 @@
+# Dominik Gronkiewicz - Senior Web Developer
+
+> Senior Web Developer with 10 years of experience specializing in React, Next.js, TypeScript, and Node.js. Building scalable web applications for healthcare, finance, enterprise, and Web3 sectors. Based in Poland with fluent English, available for remote collaboration worldwide.
+
+Dominik Gronkiewicz is an independent frontend consultant and developer who helps companies build high-quality, scalable web applications. With a Master's degree in Computer Science from Częstochowa University of Technology, he combines strong academic foundations with extensive hands-on experience across diverse industries.
+
+## Core Expertise
+
+- Frontend Development: React, Redux, Next.js, TypeScript, Tailwind CSS
+- Full-Stack Capabilities: Node.js, Express.js, REST APIs, SSR/SSG
+- Modern Web: Progressive Web Apps (PWA), Web3/Blockchain, Nostr Protocol
+- CMS Integration: Sanity CMS, Contentful, Payload CMS
+- Testing & Quality: Jest, React Testing Library, Enzyme
+- Performance: SEO optimization, Core Web Vitals, A/B testing
+
+## Industry Experience
+
+Healthcare platforms including patient management systems and health diplomacy tools. Enterprise financial applications for global pharmaceutical companies. Sports and cultural CMS solutions for NBA teams, museums, and zoos. Web3 applications using Solana blockchain and decentralized protocols.
+
+## Services
+
+Available for frontend development consulting, React/Next.js application architecture, legacy codebase migration, code reviews, and technical mentorship. Works with startups, agencies, and enterprise clients on both short-term and long-term engagements.
+
+## Pages
+
+- [Home](https://dominikgronkiewicz.com): Main landing page with introduction and featured work
+- [Portfolio](https://dominikgronkiewicz.com/portfolio): Showcase of selected projects across healthcare, enterprise, and Web3
+- [Blog](https://dominikgronkiewicz.com/blog): Technical articles on React, Next.js, TypeScript, and frontend development
+- [About](https://dominikgronkiewicz.com/about): Professional background, skills, and approach to development
+- [Contact](https://dominikgronkiewicz.com/contact): Get in touch for project inquiries and collaboration
+
+## Contact
+
+- Email: dominikgronkiewicz@gmail.com
+- LinkedIn: linkedin.com/in/dominik-gronkiewicz-b696b950
+- Website: dominikgronkiewicz.com
+- GitHub: https://github.com/dongron
+- Twitter: @dgronkiewicz
+
+## Optional
+
+- [8bits.space](https://8bits.space): Team engagements and larger collaborative projects
