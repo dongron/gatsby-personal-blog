@@ -11,17 +11,20 @@ const Wrapper = styled.div`
 
 const Image = styled.div`
   width: 100%;
-  height: 100vh;
-  background-image: linear-gradient(${theme.colors.base} 5%, transparent 90%), url(${backgrounImage});
+  height: 100svh;
+  background-image:
+    linear-gradient(${theme.colors.base} 5%, transparent 90%),
+    url(${backgrounImage});
   background-size: cover;
   background-position: center center;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 1.5em;
+  padding-bottom: 5.5em;
 `
 
 const Title = styled.h1`
@@ -36,6 +39,7 @@ const Title = styled.h1`
 
   @media screen and (min-width: ${theme.responsive.medium}) {
     font-size: 4em;
+    padding-bottom: 0em;
   }
 `
 
@@ -84,15 +88,19 @@ const Welcome = () => {
   return (
     <Wrapper>
       <Image>
-        <Title>{config.authorTitle}</Title>
-        <Subtitle>{config.authorTagline}</Subtitle>
+        <Title>
+          {config.heroTitle} <br />
+          {config.heroTitle2}
+        </Title>
+        <Subtitle>
+          {config.heroTagline} <br />
+          {config.heroTagline2} <br />
+          {config.heroTagline3}
+        </Subtitle>
         <ButtonGroup>
-          <PrimaryButton to="/portfolio/" primary>
-            View My Work
+          <PrimaryButton to="/contact/" primary>
+            Let's Ship It!
           </PrimaryButton>
-          <SecondaryButton to="/blog/">
-            Read Articles
-          </SecondaryButton>
         </ButtonGroup>
       </Image>
     </Wrapper>

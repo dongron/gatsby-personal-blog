@@ -20,8 +20,14 @@ module.exports = {
   copyright: 'Copyright © 2019 Dominik Gronkiewicz', // Copyright string for the RSS feed
 
   // New fields for portfolio redesign
+  heroTitle: 'Your Business Is Ready to Scale.',
+  heroTitle2: 'Is Your Web App?',
+  heroTagline: 'Deals fall through. Competitors move faster. Growth stalls.',
+  heroTagline2: "The problem isn't your business - it's your software.",
+  heroTagline3: "That's what I build for.",
   authorTitle: 'Senior Frontend Developer',
-  authorTagline: '10 years building modern web applications with React, Next.js & TypeScript',
+  authorTagline:
+    '10 years building modern web applications with React, Next.js & TypeScript',
   availabilityStatus: true,
   availabilityText: 'Available for new projects',
   hoursPerWeek: '20-40 hours/week',
