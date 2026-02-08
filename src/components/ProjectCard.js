@@ -72,15 +72,6 @@ const ProjectCard = ({ heroImage, title, description, technologies }) => {
   return (
     <Project>
       <Link to="/portfolio/">
-        {heroImage && heroImage.gatsbyImageData ? (
-          <GatsbyImage
-            image={heroImage.gatsbyImageData}
-            backgroundColor={'#eeeeee'}
-            alt={title}
-          />
-        ) : (
-          <Placeholder />
-        )}
         <Title>{title}</Title>
         <Description>{description}</Description>
         {technologies && technologies.length > 0 && (
