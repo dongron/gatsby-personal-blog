@@ -46,6 +46,9 @@ export const query = graphql`
           slug
           description
           technologies
+          heroImage {
+            gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 600)
+          }
         }
       }
     }

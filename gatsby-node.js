@@ -6,6 +6,10 @@ exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
     type ContentfulPost implements Node {
       tags: [ContentfulTag] @link(by: "id", from: "tags___NODE")
+      heroImage: ContentfulAsset @link(by: "id", from: "heroImage___NODE")
+    }
+    type ContentfulPortfolioItem implements Node {
+      heroImage: ContentfulAsset @link(by: "id", from: "heroImage___NODE")
     }
   `
   createTypes(typeDefs)
