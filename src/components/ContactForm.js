@@ -9,7 +9,7 @@ import styled from 'styled-components'
 */
 
 const Form = styled.form`
-  max-width: ${props => props.theme.sizes.maxWidthCentered};
+  max-width: ${(props) => props.theme.sizes.maxWidthCentered};
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
@@ -21,8 +21,8 @@ const Form = styled.form`
     font-size: inherit;
     border: none;
     outline: none;
-    background: ${props => props.theme.colors.tertiary};
-    color: ${props => props.theme.colors.base};
+    background: ${(props) => props.theme.colors.tertiary};
+    color: ${(props) => props.theme.colors.base};
     border-radius: 2px;
     padding: 1em;
     &::-webkit-input-placeholder {
@@ -54,15 +54,15 @@ const Form = styled.form`
     left: 0;
     z-index: 1;
     transition: 0.2s all;
-    opacity: ${props => (props.overlay ? '.8' : '0')};
-    visibility: ${props => (props.overlay ? 'visible' : 'hidden')};
+    opacity: ${(props) => (props.overlay ? '.8' : '0')};
+    visibility: ${(props) => (props.overlay ? 'visible' : 'hidden')};
   }
 `
 
 const Name = styled.input`
   margin: 0 0 1em 0;
   width: 100%;
-  @media (min-width: ${props => props.theme.responsive.small}) {
+  @media (min-width: ${(props) => props.theme.responsive.small}) {
     width: 49%;
   }
 `
@@ -70,7 +70,7 @@ const Name = styled.input`
 const Email = styled.input`
   margin: 0 0 1em 0;
   width: 100%;
-  @media (min-width: ${props => props.theme.responsive.small}) {
+  @media (min-width: ${(props) => props.theme.responsive.small}) {
     width: 49%;
   }
 `
@@ -83,13 +83,45 @@ const Message = styled.textarea`
   resize: vertical;
 `
 
-const Submit = styled.input`
-  background: ${props => props.theme.colors.base} !important;
-  color: white !important;
+// todo: unify buttons
+const Submit = styled.button`
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+  background: ${(props) => props.theme.colors.base};
+  color: white;
+  border-radius: 2px;
+  padding: 1em;
   cursor: pointer;
   transition: 0.2s;
-  &:hover {
-    background: ${props => props.theme.colors.highlight} !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 75px;
+  min-height: 50px;
+  gap: 0.5em;
+  &:hover:not(:disabled) {
+    background: ${(props) => props.theme.colors.highlight};
+  }
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`
+
+const Spinner = styled.span`
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 `
 
@@ -108,9 +140,9 @@ const Modal = styled.div`
   flex-flow: column;
   align-items: flex-start;
   transition: 0.2s all;
-  opacity: ${props => (props.visible ? '1' : '0')};
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
+  opacity: ${(props) => (props.visible ? '1' : '0')};
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  @media screen and (min-width: ${(props) => props.theme.responsive.small}) {
     min-width: inherit;
     max-width: 400px;
   }
@@ -121,7 +153,7 @@ const Modal = styled.div`
 `
 
 const Button = styled.div`
-  background: ${props => props.theme.colors.base};
+  background: ${(props) => props.theme.colors.base};
   font-size: 1em;
   display: inline-block;
   margin: 0 auto;
@@ -138,15 +170,9 @@ const Button = styled.div`
     outline: none;
   }
   &:hover {
-    background: ${props => props.theme.colors.highlight};
+    background: ${(props) => props.theme.colors.highlight};
   }
 `
-
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
 
 class ContactForm extends React.Component {
   constructor(props) {
@@ -156,10 +182,11 @@ class ContactForm extends React.Component {
       email: '',
       message: '',
       showModal: false,
+      loading: false,
     }
   }
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const target = event.target
     const value = target.value
     const name = target.name
@@ -168,15 +195,26 @@ class ContactForm extends React.Component {
     })
   }
 
-  handleSubmit = event => {
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', ...this.state }),
-    })
-      .then(this.handleSuccess)
-      .catch(error => alert(error))
+  handleSubmit = (event) => {
     event.preventDefault()
+    this.setState({ loading: true })
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        message: this.state.message,
+      }),
+    })
+      .then((res) => {
+        console.log(res)
+        if (!res.ok) throw new Error('-Failed to send message')
+        return res.json()
+      })
+      .then(this.handleSuccess)
+      .catch((error) => console.error(error.message))
+      .finally(() => this.setState({ loading: false }))
   }
 
   handleSuccess = () => {
@@ -197,19 +235,9 @@ class ContactForm extends React.Component {
       <Form
         name="contact"
         onSubmit={this.handleSubmit}
-        data-netlify="true"
-        data-netlify-honeypot="bot"
         overlay={this.state.showModal}
         onClick={this.closeModal}
       >
-        <input type="hidden" name="form-name" value="contact" />
-        <p hidden>
-          <label>
-            Don’t fill this out:{' '}
-            <input name="bot" onChange={this.handleInputChange} />
-          </label>
-        </p>
-
         <Name
           name="name"
           type="text"
@@ -234,14 +262,16 @@ class ContactForm extends React.Component {
           onChange={this.handleInputChange}
           required
         />
-        <Submit name="submit" type="submit" value="Send" />
+        <Submit type="submit" disabled={this.state.loading}>
+          {this.state.loading ? <Spinner /> : 'Send'}
+        </Submit>
 
         <Modal visible={this.state.showModal}>
           <p>
             Thank you for reaching out. I will get back to you as soon as
             possible.
           </p>
-          <Button onClick={this.closeModal}>Okay</Button>
+          <Button onClick={this.closeModal}>Ok</Button>
         </Modal>
       </Form>
     )
