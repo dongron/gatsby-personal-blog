@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import config from '../utils/siteConfig'
 
 /*
   ⚠️ This is an example of a contact form powered with Netlify form handling.
@@ -182,6 +183,7 @@ class ContactForm extends React.Component {
       email: '',
       message: '',
       showModal: false,
+      status: null,
       loading: false,
     }
   }
@@ -213,7 +215,10 @@ class ContactForm extends React.Component {
         return res.json()
       })
       .then(this.handleSuccess)
-      .catch((error) => console.error(error.message))
+      .catch((error) => {
+        console.error(error.message)
+        this.setState({ showModal: true, status: 'error' })
+      })
       .finally(() => this.setState({ loading: false }))
   }
 
@@ -223,11 +228,21 @@ class ContactForm extends React.Component {
       email: '',
       message: '',
       showModal: true,
+      status: 'success',
     })
   }
 
   closeModal = () => {
-    this.setState({ showModal: false })
+    this.setState({ showModal: false, status: null })
+  }
+
+  buildMailtoHref = () => {
+    const { name, email, message } = this.state
+    const subject = `Contact from ${name || 'your website'}`
+    const body = `${message}\n\n— ${name}${email ? ` <${email}>` : ''}`
+    return `mailto:${config.email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`
   }
 
   render() {
@@ -235,7 +250,10 @@ class ContactForm extends React.Component {
       <Form
         name="contact"
         onSubmit={this.handleSubmit}
-        overlay={this.state.showModal}
+        overlay={
+          this.state.showModal &&
+          (this.state.status === 'error' || this.state.status === 'success')
+        }
         onClick={this.closeModal}
       >
         <Name
@@ -266,12 +284,37 @@ class ContactForm extends React.Component {
           {this.state.loading ? <Spinner /> : 'Send'}
         </Submit>
 
-        <Modal visible={this.state.showModal}>
-          <p>
-            Thank you for reaching out. I will get back to you as soon as
-            possible.
-          </p>
-          <Button onClick={this.closeModal}>Ok</Button>
+        <Modal
+          visible={
+            this.state.showModal &&
+            (this.state.status === 'error' || this.state.status === 'success')
+          }
+        >
+          {this.state.status === 'error' ? (
+            <>
+              <p>
+                Something went wrong sending your message. You can email me
+                directly at <strong>{config.email}</strong> instead.
+              </p>
+              <Button
+                as="a"
+                href={this.buildMailtoHref()}
+                onClick={this.closeModal}
+              >
+                Open email
+              </Button>
+            </>
+          ) : this.state.status === 'success' ? (
+            <>
+              <p>
+                Thank you for reaching out. I will get back to you as soon as
+                possible.
+              </p>
+              <Button onClick={this.closeModal}>Ok</Button>
+            </>
+          ) : (
+            <></>
+          )}
         </Modal>
       </Form>
     )
