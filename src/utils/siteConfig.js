@@ -33,6 +33,22 @@ module.exports = {
   hoursPerWeek: '20-40 hours/week',
   timezone: 'CET (Poland)',
   email: 'me@dominikgronkiewicz.com',
+  phone: '+48508252823',
   linkedInUrl: 'https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/',
   githubUrl: 'https://github.com/dongron',
+  address: {
+    streetAddress: 'Sosnowa 17/19',
+    addressLocality: 'Częstochowa',
+    postalCode: '42-216',
+    addressCountry: 'PL',
+  },
+  addressCountryLabel: 'Poland',
+  formattedAddress: 'Sosnowa 17/19, 42-216 Częstochowa, Poland',
+  serviceArea: 'Worldwide',
+  availableLanguages: ['English', 'Polish'],
+  contactPageDescription:
+    'Contact Dominik Gronkiewicz about React, Next.js and TypeScript projects. Based in Częstochowa, Poland and available for remote collaboration worldwide.',
+  remoteAvailabilityText: 'Available for remote work worldwide.',
+  preferredContactText: 'The contact form below is the preferred way to reach me.',
+  contactPointDescription: 'Use the contact form or email for new project inquiries.',
 }

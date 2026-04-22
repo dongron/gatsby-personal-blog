@@ -2,6 +2,41 @@ import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import config from '../utils/siteConfig'
 
+const twitterProfileUrl = config.userTwitter
+  ? `https://twitter.com/${config.userTwitter.replace(/^@/, '')}`
+  : null
+
+const sameAsProfiles = [
+  config.linkedInUrl,
+  config.githubUrl,
+  twitterProfileUrl,
+].filter(Boolean)
+
+const organizationId = `${config.siteUrl}/#organization`
+const personId = `${config.siteUrl}/#person`
+const contactPageUrl = `${config.siteUrl}/contact/`
+
+const postalAddress = config.address
+  ? {
+      '@type': 'PostalAddress',
+      streetAddress: config.address.streetAddress,
+      addressLocality: config.address.addressLocality,
+      postalCode: config.address.postalCode,
+      addressCountry: config.address.addressCountry,
+    }
+  : undefined
+
+const organizationContactPoint = {
+  '@type': 'ContactPoint',
+  contactType: 'sales',
+  email: config.email,
+  telephone: config.phone,
+  areaServed: config.serviceArea,
+  availableLanguage: config.availableLanguages,
+  description: config.contactPointDescription,
+  url: contactPageUrl,
+}
+
 class SEO extends Component {
   render() {
     const { postNode, pagePath, postSEO, pageSEO, customTitle } = this.props
@@ -11,6 +46,7 @@ class SEO extends Component {
     let imgWidth
     let imgHeight
     let pageUrl
+    let pageType = 'WebPage'
 
     // Set Default OpenGraph Parameters for Fallback
     title = config.siteTitle
@@ -23,6 +59,7 @@ class SEO extends Component {
     if (customTitle) {
       title = postNode.title
       pageUrl = config.siteUrl + '/' + pagePath + '/'
+      description = postNode.description || description
     }
 
     // Replace with Page Parameters if post or page
@@ -45,19 +82,58 @@ class SEO extends Component {
     // Default Website Schema
     const schemaOrgJSONLD = [
       {
-        '@context': 'http://schema.org',
+        '@context': 'https://schema.org',
         '@type': 'WebSite',
+        '@id': `${config.siteUrl}/#website`,
         url: config.siteUrl,
         name: config.siteTitle,
         alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
       },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        '@id': personId,
+        name: config.author,
+        url: config.authorUrl,
+        image: config.siteUrl + config.siteLogo,
+        jobTitle: config.authorTitle,
+        sameAs: sameAsProfiles,
+        worksFor: {
+          '@id': organizationId,
+        },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        '@id': organizationId,
+        name: config.publisher,
+        url: config.siteUrl,
+        description: config.siteDescription,
+        logo: {
+          '@type': 'ImageObject',
+          url: config.siteUrl + config.siteLogo,
+        },
+        email: config.email,
+        telephone: config.phone,
+        sameAs: sameAsProfiles,
+        founder: {
+          '@id': personId,
+        },
+        address: postalAddress,
+        areaServed: config.serviceArea,
+        contactPoint: [organizationContactPoint],
+      },
     ]
+
+    if (pagePath === 'contact') {
+      pageType = 'ContactPage'
+    }
 
     // Blog Post Schema
     if (postSEO) {
       schemaOrgJSONLD.push(
         {
-          '@context': 'http://schema.org',
+          '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             {
@@ -79,7 +155,7 @@ class SEO extends Component {
           ],
         },
         {
-          '@context': 'http://schema.org',
+          '@context': 'https://schema.org',
           '@type': 'BlogPosting',
           url: pageUrl,
           name: title,
@@ -93,23 +169,10 @@ class SEO extends Component {
             height: imgHeight,
           },
           author: {
-            '@type': 'Person',
-            name: config.author,
-            url: config.authorUrl,
-            sameAs: [
-              'https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/',
-              'https://github.com/dongron',
-              'https://twitter.com/dgronkiewicz',
-            ],
+            '@id': personId,
           },
           publisher: {
-            '@type': 'Organization',
-            name: config.publisher,
-            url: config.siteUrl,
-            logo: {
-              '@type': 'ImageObject',
-              url: config.siteUrl + config.siteLogo,
-            },
+            '@id': organizationId,
           },
           datePublished: postNode.publishDateISO,
           dateModified: postNode.updatedAt || postNode.publishDateISO,
@@ -122,18 +185,32 @@ class SEO extends Component {
     }
 
     // Page SEO Schema
-    if (pageSEO) {
-      schemaOrgJSONLD.push({
-        '@context': 'http://schema.org',
-        '@type': 'WebPage',
+    if (pageSEO || customTitle) {
+      const pageSchema = {
+        '@context': 'https://schema.org',
+        '@type': pageType,
+        '@id': `${pageUrl}#webpage`,
         url: pageUrl,
         name: title,
-      })
+        description: description,
+      }
+
+      if (pageType === 'ContactPage') {
+        pageSchema.mainEntity = {
+          '@id': organizationId,
+        }
+        pageSchema.about = {
+          '@id': personId,
+        }
+      }
+
+      schemaOrgJSONLD.push(pageSchema)
     }
 
     return (
       <Helmet>
         {/* General tags */}
+        <link rel="canonical" href={pageUrl} />
         <meta name="image" content={image} />
         <meta name="description" content={description} />
 

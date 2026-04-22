@@ -105,6 +105,7 @@ const ContactLink = styled.a`
 const Contact = ({ data }) => {
   const postNode = {
     title: `Contact - ${config.siteTitle}`,
+    description: config.contactPageDescription,
   }
 
   return (

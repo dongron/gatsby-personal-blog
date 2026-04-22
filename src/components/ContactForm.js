@@ -84,6 +84,13 @@ const Message = styled.textarea`
   resize: vertical;
 `
 
+const FormNote = styled.p`
+  width: 100%;
+  margin: 0 0 1.5em 0;
+  line-height: 1.7;
+  color: gray;
+`
+
 // todo: unify buttons
 const Submit = styled.button`
   font-family: inherit;
@@ -256,6 +263,9 @@ class ContactForm extends React.Component {
         }
         onClick={this.closeModal}
       >
+        <FormNote>
+          {config.remoteAvailabilityText} {config.preferredContactText}
+        </FormNote>
         <Name
           name="name"
           type="text"

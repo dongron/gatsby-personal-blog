@@ -4,6 +4,25 @@ import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import config from '../utils/siteConfig'
 
+const ContactMeta = styled.address`
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  color: gray;
+  font-style: normal;
+  line-height: 1.6;
+
+  svg {
+    margin-top: 0.2em;
+    flex-shrink: 0;
+  }
+`
+
+const ContactMetaLines = styled.span`
+  display: flex;
+  flex-direction: column;
+`
+
 const Wrapper = styled.footer`
   display: flex;
   flex-flow: row wrap;
@@ -107,6 +126,18 @@ const Footer = () => (
             <a href={config.githubUrl} target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={['fab', 'github']} /> GitHub
             </a>
+          </li>
+          <li>
+            <ContactMeta>
+              <FontAwesomeIcon icon="map-marker-alt" />
+              <ContactMetaLines>
+                <span>{config.address.streetAddress},</span>
+                <span>
+                  {config.address.postalCode} {config.address.addressLocality},
+                </span>
+                <span>{config.addressCountryLabel}</span>
+              </ContactMetaLines>
+            </ContactMeta>
           </li>
         </ul>
       </Column>
