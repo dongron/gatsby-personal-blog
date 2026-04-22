@@ -5,22 +5,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import config from '../utils/siteConfig'
 
 const ContactMeta = styled.address`
+  && {
+    align-items: flex-start;
+  }
+
   display: inline-flex;
   align-items: flex-start;
   gap: 0.5em;
   color: gray;
   font-style: normal;
-  line-height: 1.6;
+  line-height: 1.2;
 
   svg {
-    margin-top: 0.2em;
+    align-self: flex-start;
+    margin-top: 0;
     flex-shrink: 0;
   }
 `
 
-const ContactMetaLines = styled.span`
-  display: flex;
-  flex-direction: column;
+const ContactMetaLines = styled.span``
+
+const ContactMetaLine = styled.span`
+  display: block;
 `
 
 const Wrapper = styled.footer`
@@ -29,7 +35,7 @@ const Wrapper = styled.footer`
   justify-content: space-between;
   align-items: flex-start;
   margin: 0 auto;
-  max-width: ${props => props.theme.sizes.maxWidth};
+  max-width: ${(props) => props.theme.sizes.maxWidth};
 `
 
 const List = styled.div`
@@ -38,12 +44,12 @@ const List = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  border-top: 1px solid ${props => props.theme.colors.secondary};
+  border-top: 1px solid ${(props) => props.theme.colors.secondary};
   padding: 2em 0;
   margin: 0 1.5em;
   gap: 2em;
 
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.small}) {
     flex-wrap: nowrap;
   }
 `
@@ -55,7 +61,7 @@ const Column = styled.div`
   h4 {
     font-weight: 600;
     margin-bottom: 1em;
-    color: ${props => props.theme.colors.base};
+    color: ${(props) => props.theme.colors.base};
   }
 
   ul {
@@ -75,7 +81,7 @@ const Column = styled.div`
     gap: 0.5em;
 
     &:hover {
-      color: ${props => props.theme.colors.highlight};
+      color: ${(props) => props.theme.colors.highlight};
     }
   }
 `
@@ -88,7 +94,7 @@ const BottomRow = styled.div`
   font-size: 0.9em;
 
   a {
-    color: ${props => props.theme.colors.highlight};
+    color: ${(props) => props.theme.colors.highlight};
     text-decoration: none;
   }
 `
@@ -101,11 +107,21 @@ const Footer = () => (
       <Column>
         <h4>Navigation</h4>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/portfolio/">Portfolio</Link></li>
-          <li><Link to="/blog/">Blog</Link></li>
-          <li><Link to="/about/">About</Link></li>
-          <li><Link to="/contact/">Contact</Link></li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/portfolio/">Portfolio</Link>
+          </li>
+          <li>
+            <Link to="/blog/">Blog</Link>
+          </li>
+          <li>
+            <Link to="/about/">About</Link>
+          </li>
+          <li>
+            <Link to="/contact/">Contact</Link>
+          </li>
         </ul>
       </Column>
 
@@ -113,29 +129,58 @@ const Footer = () => (
         <h4>Connect</h4>
         <ul>
           <li>
-            <a href={`mailto:${config.email}`}>
-              <FontAwesomeIcon icon="envelope" /> Email
-            </a>
+            <ContactMeta as="a" href={`mailto:${config.email}`}>
+              <ContactMetaLine>
+                <FontAwesomeIcon icon="envelope" />
+              </ContactMetaLine>
+              <ContactMetaLine>Email</ContactMetaLine>
+            </ContactMeta>
           </li>
           <li>
-            <a href={config.linkedInUrl} target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={['fab', 'linkedin']} /> LinkedIn
-            </a>
+            <ContactMeta
+              as="a"
+              href={config.linkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ContactMetaLine>
+                <FontAwesomeIcon icon={['fab', 'linkedin']} />
+              </ContactMetaLine>
+              <ContactMetaLine>LinkedIn</ContactMetaLine>
+            </ContactMeta>
           </li>
           <li>
-            <a href={config.githubUrl} target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={['fab', 'github']} /> GitHub
-            </a>
+            <ContactMeta
+              as="a"
+              href={config.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ContactMetaLine>
+                <FontAwesomeIcon icon={['fab', 'github']} />
+              </ContactMetaLine>
+              <ContactMetaLine>GitHub</ContactMetaLine>
+            </ContactMeta>
           </li>
           <li>
-            <ContactMeta>
-              <FontAwesomeIcon icon="map-marker-alt" />
+            <ContactMeta
+              as="a"
+              href={config.googleMapsProfileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${config.formattedAddress} in Google Maps`}
+            >
+              <ContactMetaLine>
+                <FontAwesomeIcon icon="map-marker-alt" />
+              </ContactMetaLine>
               <ContactMetaLines>
-                <span>{config.address.streetAddress},</span>
-                <span>
+                <ContactMetaLine>
+                  {config.address.streetAddress},
+                </ContactMetaLine>
+                <ContactMetaLine>
                   {config.address.postalCode} {config.address.addressLocality},
-                </span>
-                <span>{config.addressCountryLabel}</span>
+                </ContactMetaLine>
+                <ContactMetaLine>{config.addressCountryLabel}</ContactMetaLine>
               </ContactMetaLines>
             </ContactMeta>
           </li>
@@ -146,7 +191,11 @@ const Footer = () => (
         <h4>Team Projects</h4>
         <ul>
           <li>
-            <a href="https://8bits.space" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://8bits.space"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               8bits.space →
             </a>
           </li>

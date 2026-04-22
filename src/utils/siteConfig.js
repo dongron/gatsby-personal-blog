@@ -36,6 +36,7 @@ module.exports = {
   phone: '+48508252823',
   linkedInUrl: 'https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/',
   githubUrl: 'https://github.com/dongron',
+  googleMapsProfileUrl: 'https://maps.app.goo.gl/7wkHhQqDMADXzij3A',
   address: {
     streetAddress: 'Sosnowa 17/19',
     addressLocality: 'Częstochowa',
