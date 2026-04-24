@@ -1,6 +1,6 @@
 module.exports = {
   siteTitle: 'Dominik Gronkiewicz',
-  siteTitleAlt: 'Dominik Gronkiewicz Personal Site And Blog', // This allows an alternative site title for SEO schema.
+  siteTitleAlt: 'Software Development Dominik Gronkiewicz - audyt WCAG', // This allows an alternative site title for SEO schema.
   publisher: 'Software Development Dominik Gronkiewicz', // Organization name used for SEO schema
   siteDescription:
     'Senior Frontend Developer with 10 years building modern web applications with React, Next.js & TypeScript. Portfolio, blog, and contact.',
