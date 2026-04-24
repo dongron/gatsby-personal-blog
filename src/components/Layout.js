@@ -31,6 +31,7 @@ import {
   faGlobe,
   faClock,
   faMapMarkerAlt,
+  faPhone,
 } from '@fortawesome/free-solid-svg-icons'
 
 const Template = ({ children }) => {
@@ -56,7 +57,8 @@ const Template = ({ children }) => {
     faDollarSign,
     faGlobe,
     faClock,
-    faMapMarkerAlt
+    faMapMarkerAlt,
+    faPhone
   )
 
   return (

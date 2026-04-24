@@ -29,6 +29,9 @@ const ContactMetaLine = styled.span`
   display: block;
 `
 
+const formatPhoneNumber = (phoneNumber) =>
+  phoneNumber.replace(/^(\+\d{2})(\d{3})(\d{3})(\d{3})$/, '$1 $2 $3 $4')
+
 const Wrapper = styled.footer`
   display: flex;
   flex-flow: row wrap;
@@ -175,6 +178,10 @@ const Footer = () => (
               </ContactMetaLine>
               <ContactMetaLines>
                 <ContactMetaLine>
+                  {config.publisher.split(' ').slice(0, 2).join(' ')} <br />
+                  {config.publisher.split(' ').slice(2, 4).join(' ')}
+                </ContactMetaLine>
+                <ContactMetaLine>
                   {config.address.streetAddress},
                 </ContactMetaLine>
                 <ContactMetaLine>
@@ -182,6 +189,16 @@ const Footer = () => (
                 </ContactMetaLine>
                 <ContactMetaLine>{config.addressCountryLabel}</ContactMetaLine>
               </ContactMetaLines>
+            </ContactMeta>
+          </li>
+          <li>
+            <ContactMeta as="a" href={`tel:${config.phone}`}>
+              <ContactMetaLine>
+                <FontAwesomeIcon icon="phone" />
+              </ContactMetaLine>
+              <ContactMetaLine>
+                {formatPhoneNumber(config.phone)}
+              </ContactMetaLine>
             </ContactMeta>
           </li>
         </ul>
