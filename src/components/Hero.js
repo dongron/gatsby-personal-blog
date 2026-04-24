@@ -13,7 +13,7 @@ const BgImg = styled(GatsbyImage)`
   left: 0;
   width: 100%;
   z-index: -1;
-  min-height: 300px;
+  min-height: 360px;
   height: auto;
   display: contents;
   @media (min-width: ${(props) => props.theme.responsive.small}) {
@@ -25,7 +25,7 @@ const BgImg = styled(GatsbyImage)`
   }
   &::before {
     content: '';
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 0;
     left: 0;
