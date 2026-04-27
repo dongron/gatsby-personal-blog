@@ -78,10 +78,8 @@ const Template = ({ children }) => {
 
       <ThemeProvider theme={theme}>
         <GlobalStyleComponent>
-          <div className="siteContent">
-            <Menu />
-            {children}
-          </div>
+          <Menu />
+          <main className="siteContent">{children}</main>
           <Footer />
         </GlobalStyleComponent>
       </ThemeProvider>
