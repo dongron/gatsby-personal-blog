@@ -1,6 +1,27 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 require('prismjs/themes/prism.css')
+
+const sectionSpacing = css`
+  margin: 0 0 2em 0;
+`
+
+const headingStyles = css`
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 1rem 0;
+  text-transform: capitalize;
+`
+
+const listItemStyles = css`
+  list-style-position: outside;
+  line-height: 1.5;
+  margin-bottom: 0.5em;
+
+  &:last-child {
+    margin: 0;
+  }
+`
 
 const Body = styled.div`
   margin: 0 auto;
@@ -10,10 +31,7 @@ const Body = styled.div`
   h1,
   h2,
   h3 {
-    font-weight: 600;
-    line-height: 1.25;
-    margin: 0 0 1rem 0;
-    text-transform: capitalize;
+    ${headingStyles}
   }
 
   h1 {
@@ -27,8 +45,8 @@ const Body = styled.div`
   }
 
   p {
+    ${sectionSpacing}
     line-height: 1.5;
-    margin: 0 0 2em 0;
   }
 
   a {
@@ -51,36 +69,30 @@ const Body = styled.div`
 
   ul,
   ol {
-    margin: 0 0 2em 0;
+    ${sectionSpacing}
+    padding-left: 1.5em;
+
+    li {
+      ${listItemStyles}
+    }
   }
 
   ul {
     li {
       list-style: disc;
-      list-style-position: inside;
-      line-height: 1.5;
-      margin-bottom: 1em;
-      &:last-child {
-        margin: 0;
-      }
     }
   }
 
   ol {
     li {
       list-style: decimal;
-      list-style-position: inside;
-      line-height: 1.25;
-      &:last-child {
-        margin: 0;
-      }
     }
   }
 
   hr {
     border-style: solid;
     border-color: ${(props) => props.theme.colors.secondary};
-    margin: 0 0 2em 0;
+    ${sectionSpacing}
   }
 
   blockquote {
@@ -90,7 +102,7 @@ const Body = styled.div`
   }
 
   pre {
-    margin: 0 0 2em 0;
+    ${sectionSpacing}
     border-radius: 2px;
     background: ${(props) => props.theme.colors.secondary} !important;
     span {
