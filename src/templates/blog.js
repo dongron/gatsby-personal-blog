@@ -14,16 +14,25 @@ const Index = ({ data, pageContext }) => {
   const featuredPost = posts[0].node
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1
+  const pageTitle = isFirstPage
+    ? `Blog - ${config.siteTitle}`
+    : `${config.siteTitle} - Page ${currentPage}`
+  const pagePath = isFirstPage ? 'blog' : `blog/${currentPage}`
 
   return (
     <Layout>
-      <SEO />
-      {!isFirstPage && (
-        <Helmet>
-          <title>{`${config.siteTitle} - Page ${currentPage}`}</title>
-          <meta name="robots" content="noindex, follow" />
-        </Helmet>
-      )}
+      <SEO
+        pagePath={pagePath}
+        customTitle
+        noIndex={!isFirstPage}
+        postNode={{
+          title: pageTitle,
+          description: config.siteDescription,
+        }}
+      />
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
       <Container>
         {isFirstPage ? (
           <CardList>

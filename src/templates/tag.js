@@ -9,6 +9,7 @@ import CardList from '../components/CardList'
 import PageTitle from '../components/PageTitle'
 import Pagination from '../components/Pagination'
 import Container from '../components/Container'
+import SEO from '../components/SEO'
 
 const TagTemplate = ({ data, pageContext }) => {
   const posts = sortBy(data.contentfulTag.post, 'publishDate').reverse()
@@ -19,30 +20,24 @@ const TagTemplate = ({ data, pageContext }) => {
   const limit = pageContext.limit
   const currentPage = pageContext.currentPage
   const isFirstPage = currentPage === 1
-
-  console.log(posts)
+  const pageTitle = isFirstPage
+    ? `Tag: ${title} - ${config.siteTitle}`
+    : `Tag: ${title} - Page ${currentPage} - ${config.siteTitle}`
+  const pagePath = isFirstPage ? `tag/${slug}` : `tag/${slug}/${currentPage}`
 
   return (
     <Layout>
-      {isFirstPage ? (
-        <Helmet>
-          <title>{`Tag: ${title} - ${config.siteTitle}`}</title>
-          <meta
-            property="og:title"
-            content={`Tag: ${title} - ${config.siteTitle}`}
-          />
-          <meta property="og:url" content={`${config.siteUrl}/tag/${slug}/`} />
-        </Helmet>
-      ) : (
-        <Helmet>
-          <title>{`Tag: ${title} - Page ${currentPage} - ${config.siteTitle}`}</title>
-          <meta
-            property="og:title"
-            content={`Tag: ${title} - Page ${currentPage} - ${config.siteTitle}`}
-          />
-          <meta property="og:url" content={`${config.siteUrl}/tag/${slug}/`} />
-        </Helmet>
-      )}
+      <SEO
+        pagePath={pagePath}
+        customTitle
+        postNode={{
+          title: pageTitle,
+          description: `Browse ${numberOfPosts} posts tagged ${title} on ${config.siteTitle}.`,
+        }}
+      />
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
 
       <Container>
         <PageTitle small>

@@ -14,12 +14,20 @@ const Index = ({ data, pageContext }) => {
   const isFirstPage = currentPage === 1
   let photoPosts = extractPhotoPosts(data)
   // todo: pagination
+  const pageTitle = `${config.siteTitle} - Photoblogs`
 
   return (
     <Layout>
-      <SEO />
+      <SEO
+        pagePath="photoblog"
+        customTitle
+        postNode={{
+          title: pageTitle,
+          description: config.siteDescription,
+        }}
+      />
       <Helmet>
-        <title>{`${config.siteTitle} - Photoblogs`}</title>
+        <title>{pageTitle}</title>
       </Helmet>
       <Container>
         {photoPosts.map((photoPost, index) => (

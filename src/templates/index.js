@@ -19,7 +19,7 @@ const Index = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <SEO />
+      <SEO pagePath="" />
       <Helmet>
         <title>{config.siteTitle}</title>
       </Helmet>

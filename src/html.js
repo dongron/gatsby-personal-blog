@@ -1,11 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Affiliates from './components/Affiliates'
+import config from './utils/siteConfig'
 
 export default class HTML extends React.Component {
   render() {
+    const htmlAttributes = {
+      lang: config.htmlLanguage,
+      ...this.props.htmlAttributes,
+    }
+
     return (
-      <html {...this.props.htmlAttributes}>
+      <html {...htmlAttributes}>
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />

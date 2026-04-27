@@ -2,6 +2,16 @@ import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import config from '../utils/siteConfig'
 
+const buildPageUrl = (pagePath = '') => {
+  const normalizedPath = String(pagePath || '').replace(/^\/+|\/+$/g, '')
+
+  if (!normalizedPath) {
+    return `${config.siteUrl}/`
+  }
+
+  return `${config.siteUrl}/${normalizedPath}/`
+}
+
 const twitterProfileUrl = config.userTwitter
   ? `https://twitter.com/${config.userTwitter.replace(/^@/, '')}`
   : null
@@ -39,7 +49,7 @@ const organizationContactPoint = {
 
 class SEO extends Component {
   render() {
-    const { postNode, pagePath, postSEO, pageSEO, customTitle } = this.props
+    const { postNode, pagePath, postSEO, pageSEO, customTitle, noIndex } = this.props
     let title
     let description
     let image
@@ -54,11 +64,10 @@ class SEO extends Component {
     image = config.siteUrl + config.shareImage
     imgWidth = config.shareImageWidth
     imgHeight = config.shareImageHeight
-    pageUrl = config.siteUrl
+    pageUrl = buildPageUrl(pagePath)
 
     if (customTitle) {
       title = postNode.title
-      pageUrl = config.siteUrl + '/' + pagePath + '/'
       description = postNode.description || description
     }
 
@@ -70,7 +79,7 @@ class SEO extends Component {
           ? postNode.body.childMarkdownRemark.excerpt
           : postNode.metaDescription.internal.content
 
-      pageUrl = config.siteUrl + '/' + pagePath + '/'
+      pageUrl = buildPageUrl(pagePath)
     }
     // Use Hero Image for OpenGraph
     if (postSEO) {
@@ -211,11 +220,22 @@ class SEO extends Component {
       <Helmet>
         {/* General tags */}
         <link rel="canonical" href={pageUrl} />
+        {!noIndex && <link rel="alternate" hrefLang={config.hreflang} href={pageUrl} />}
+        {!noIndex && (
+          <link rel="alternate" hrefLang={config.xDefaultHreflang} href={pageUrl} />
+        )}
         <meta name="image" content={image} />
         <meta name="description" content={description} />
 
         {/* AI/LLM optimization tags */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+        <meta
+          name="robots"
+          content={
+            noIndex
+              ? 'noindex, follow'
+              : 'index, follow, max-image-preview:large, max-snippet:-1'
+          }
+        />
         <meta name="author" content={config.author} />
         {postSEO && <meta name="article:author" content={config.author} />}
         {postSEO && <meta name="article:published_time" content={postNode.publishDateISO} />}
@@ -228,7 +248,7 @@ class SEO extends Component {
         {/* OpenGraph tags */}
         <meta property="og:title" content={title} />
         <meta property="og:site_name" content={config.siteTitle} />
-        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale" content={config.openGraphLocale} />
         {postSEO ? <meta property="og:type" content="article" /> : null}
         {!postSEO && <meta property="og:type" content="website" />}
 

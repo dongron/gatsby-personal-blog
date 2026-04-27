@@ -46,7 +46,11 @@ module.exports = {
   addressCountryLabel: 'Poland',
   formattedAddress: 'Sosnowa 17/19, 42-216 Częstochowa, Poland',
   serviceArea: 'Worldwide',
-  availableLanguages: ['English', 'Polish'],
+  htmlLanguage: 'en',
+  openGraphLocale: 'en_US',
+  hreflang: 'en',
+  xDefaultHreflang: 'x-default',
+  availableLanguages: ['English'],
   contactPageDescription:
     'Contact Dominik Gronkiewicz about React, Next.js and TypeScript projects. Based in Częstochowa, Poland and available for remote collaboration worldwide.',
   remoteAvailabilityText: 'Available for remote work worldwide.',
