@@ -23,10 +23,6 @@ export default class HTML extends React.Component {
           <Affiliates />
         </head>
         <body {...this.props.bodyAttributes}>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          />
           {this.props.preBodyComponents}
           <div
             key={`body`}
