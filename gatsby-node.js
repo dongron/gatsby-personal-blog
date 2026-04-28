@@ -16,7 +16,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 }
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
 
   const loadPosts = new Promise((resolve, reject) => {
     graphql(`
@@ -29,9 +29,30 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+        allContentfulPage {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
       }
     `).then((result) => {
       const posts = result.data.allContentfulPost.edges
+      const contentfulPages = result.data.allContentfulPage
+        ? result.data.allContentfulPage.edges
+        : []
+      const reservedTopLevelSlugs = new Set([
+        '404',
+        'blog',
+        'contact',
+        'photoblog',
+        'portfolio',
+        'tag',
+        ...contentfulPages
+          .map(({ node }) => (node && node.slug ? node.slug : null))
+          .filter(Boolean),
+      ])
       const postsPerFirstPage = config.postsPerHomePage
       const postsPerPage = config.postsPerPage
       const numPages = Math.ceil(
@@ -92,6 +113,14 @@ exports.createPages = ({ graphql, actions }) => {
             next,
           },
         })
+
+        if (!reservedTopLevelSlugs.has(edge.node.slug)) {
+          createRedirect({
+            fromPath: `/${edge.node.slug}/`,
+            toPath: `/blog/${edge.node.slug}/`,
+            isPermanent: true,
+          })
+        }
       })
 
       // Main photoblog page

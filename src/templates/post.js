@@ -24,7 +24,7 @@ const PostTemplate = ({ data, pageContext }) => {
       <Helmet>
         <title>{`${title} - ${config.siteTitle}`}</title>
       </Helmet>
-      <SEO pagePath={slug} postNode={postNode} postSEO />
+      <SEO pagePath={`blog/${slug}`} postNode={postNode} postSEO />
 
       <Hero title={title} image={heroImage} height={'50vh'} />
 
