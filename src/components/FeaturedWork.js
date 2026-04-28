@@ -41,7 +41,7 @@ const CenterWrapper = styled.div`
 
 const EmptyState = styled.p`
   text-align: center;
-  color: gray;
+  color: ${props => props.theme.colors.textSecondary};
   margin: 2em 0;
 `
 

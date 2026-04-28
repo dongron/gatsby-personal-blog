@@ -12,7 +12,7 @@ const ContactMeta = styled.address`
   display: inline-flex;
   align-items: flex-start;
   gap: 0.5em;
-  color: gray;
+  color: ${(props) => props.theme.colors.text};
   font-style: normal;
   line-height: 1.2;
 
@@ -76,7 +76,7 @@ const Column = styled.div`
   }
 
   a {
-    color: gray;
+    color: ${(props) => props.theme.colors.text};
     text-decoration: none;
     transition: all 0.2s;
     display: inline-flex;
@@ -93,7 +93,7 @@ const BottomRow = styled.div`
   width: 100%;
   text-align: center;
   padding: 1em 1.5em 2em;
-  color: gray;
+  color: ${(props) => props.theme.colors.text};
   font-size: 0.9em;
 
   a {

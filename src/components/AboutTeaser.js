@@ -62,7 +62,7 @@ const Title = styled.h2`
 const Description = styled.p`
   font-size: 1.1em;
   line-height: 1.7;
-  color: gray;
+  color: ${props => props.theme.colors.text};
   margin-bottom: 1.5rem;
 `
 

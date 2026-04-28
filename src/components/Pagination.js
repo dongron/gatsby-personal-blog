@@ -31,7 +31,7 @@ const NextLink = styled(Link)`
 `
 
 const PageIndicator = styled.span`
-  color: gray;
+  color: ${props => props.theme.colors.text};
   position: absolute;
   width: 100%;
   text-align: center;

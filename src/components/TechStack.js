@@ -28,7 +28,7 @@ const Category = styled.div`
   h3 {
     font-size: 0.9em;
     text-transform: uppercase;
-    color: gray;
+    color: ${props => props.theme.colors.text};
     margin-bottom: 1em;
     font-weight: 600;
     display: flex;

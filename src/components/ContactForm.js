@@ -27,16 +27,16 @@ const Form = styled.form`
     border-radius: 2px;
     padding: 1em;
     &::-webkit-input-placeholder {
-      color: gray;
+      color: ${(props) => props.theme.colors.text};
     }
     &::-moz-placeholder {
-      color: gray;
+      color: ${(props) => props.theme.colors.text};
     }
     &:-ms-input-placeholder {
-      color: gray;
+      color: ${(props) => props.theme.colors.text};
     }
     &:-moz-placeholder {
-      color: gray;
+      color: ${(props) => props.theme.colors.text};
     }
     &:required {
       box-shadow: none;
@@ -88,7 +88,7 @@ const FormNote = styled.p`
   width: 100%;
   margin: 0 0 1.5em 0;
   line-height: 1.7;
-  color: gray;
+  color: ${(props) => props.theme.colors.text};
 `
 
 // todo: unify buttons

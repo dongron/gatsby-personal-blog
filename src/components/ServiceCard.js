@@ -30,7 +30,7 @@ const Title = styled.h3`
 
 const Description = styled.p`
   font-size: 0.95em;
-  color: gray;
+  color: ${props => props.theme.colors.text};
   line-height: 1.6;
   margin: 0;
 `

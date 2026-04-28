@@ -50,7 +50,7 @@ const Title = styled.h2`
 const Description = styled.p`
   margin: 0 1rem 0.5rem 1rem;
   line-height: 1.6;
-  color: gray;
+  color: ${props => props.theme.colors.text};
 `
 
 const TechTags = styled.div`

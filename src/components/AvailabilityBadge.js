@@ -11,7 +11,7 @@ const Badge = styled.div`
   border-radius: 2px;
   font-size: 0.85em;
   font-weight: 600;
-  color: ${props => props.available ? props.theme.colors.success : 'gray'};
+  color: ${props => props.available ? props.theme.colors.success : props.theme.colors.textMuted};
   white-space: nowrap;
 `
 

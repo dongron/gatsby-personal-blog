@@ -25,7 +25,7 @@ const IconContainer = styled.div`
 
 const UsernameContainer = styled.div`
   font-size: 1em;
-  color: gray;
+  color: ${props => props.theme.colors.text};
 `
 
 const LinksContainer = styled.div`

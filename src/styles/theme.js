@@ -1,12 +1,13 @@
 const theme = {
   colors: {
-    base: '#121212', // Black
+    base: '#111111', // Black
     secondary: '#e9e9e9', // Medium Gray
-    tertiary: '#f3f3f3', // Light Gray
-    highlight: '#2f6fe4', // Accessible Blue
+    tertiary: '#fbfbfb', // Light Gray
+    highlight: '#1e4ca8', // Accessible Blue
     white: '#ffffff',
     success: '#4caf50', // Green for availability indicator
-    text: '#333333', // Dark gray for body text
+    text: '#222222', // Dark gray for body text
+    textMuted: '#666666', // Secondary text on white, ~4.54:1 contrast
   },
   sizes: {
     maxWidth: '1050px',

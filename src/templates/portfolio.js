@@ -95,7 +95,7 @@ const ProjectMeta = styled.div`
   gap: 1.5em;
   margin-bottom: 1em;
   font-size: 0.9em;
-  color: gray;
+  color: ${(props) => props.theme.colors.text};
 `
 
 const MetaItem = styled.div`
@@ -108,7 +108,7 @@ const MetaItem = styled.div`
 const ProjectDescription = styled.p`
   font-size: 1.1em;
   line-height: 1.6;
-  color: gray;
+  color: ${(props) => props.theme.colors.text};
   margin-bottom: 1em;
 `
 
@@ -216,7 +216,7 @@ const ProjectBody = styled.div`
     border-left: 3px solid ${(props) => props.theme.colors.highlight};
     padding-left: 1em;
     margin: 1em 0;
-    color: gray;
+    color: ${(props) => props.theme.colors.text};
     font-style: italic;
   }
 `
@@ -254,13 +254,13 @@ const Intro = styled.p`
   max-width: ${(props) => props.theme.sizes.maxWidthCentered};
   margin: 0 auto 2em;
   line-height: 1.7;
-  color: gray;
+  color: ${(props) => props.theme.colors.text};
 `
 
 const EmptyState = styled.div`
   text-align: center;
   padding: 3em 0;
-  color: gray;
+  color: ${(props) => props.theme.colors.text};
 
   h3 {
     font-size: 1.5em;
