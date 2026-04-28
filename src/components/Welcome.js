@@ -12,8 +12,7 @@ const Wrapper = styled.div`
 const Image = styled.div`
   width: 100%;
   height: 100svh;
-  background-image:
-    linear-gradient(${theme.colors.base} 5%, transparent 90%),
+  background-image: linear-gradient(${theme.colors.base} 5%, transparent 90%),
     url(${backgrounImage});
   background-size: cover;
   background-position: center center;
@@ -63,27 +62,6 @@ const ButtonGroup = styled.div`
   justify-content: center;
 `
 
-const PrimaryButton = styled(Button)`
-  background: ${theme.colors.highlight};
-  border-color: ${theme.colors.highlight};
-
-  &:hover {
-    background: transparent;
-    color: white;
-    border-color: white;
-  }
-`
-
-const SecondaryButton = styled(Button)`
-  border-color: white;
-  color: white;
-
-  &:hover {
-    background: white;
-    color: ${theme.colors.base};
-  }
-`
-
 const Welcome = () => {
   return (
     <Wrapper>
@@ -98,9 +76,9 @@ const Welcome = () => {
           {config.heroTagline3}
         </Subtitle>
         <ButtonGroup>
-          <PrimaryButton to="/contact/" primary>
+          <Button to="/contact/" primary onDark>
             Let's Ship It!
-          </PrimaryButton>
+          </Button>
         </ButtonGroup>
       </Image>
     </Wrapper>
