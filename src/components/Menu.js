@@ -4,14 +4,14 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Header = styled.header`
-  background: ${props => props.theme.colors.base};
+  background: ${(props) => props.theme.colors.base};
   width: 100%;
   padding: 1.5em 0;
 `
 
 const Nav = styled.nav`
   width: 100%;
-  max-width: ${props => props.theme.sizes.maxWidth};
+  max-width: ${(props) => props.theme.sizes.maxWidth};
   margin: 0 auto;
   padding: 0 1.5em;
 
@@ -36,7 +36,7 @@ const Nav = styled.nav`
     color: DarkGray;
     font-weight: 600;
     transition: all 0.2s;
-    border-bottom: 2px solid ${props => props.theme.colors.base};
+    border-bottom: 2px solid ${(props) => props.theme.colors.base};
     &:hover {
       color: white;
     }
@@ -48,8 +48,16 @@ const DesktopMenu = styled.div`
   align-items: center;
   gap: 0.5em;
 
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     display: flex;
+  }
+`
+
+const MobileMenu = styled.div`
+  display: flex;
+  justify-content: space-between;
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
+    display: none;
   }
 `
 
@@ -69,15 +77,15 @@ const MobileMenuButton = styled.button`
     color: white;
   }
 
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     display: none;
   }
 `
 
 const MobileNav = styled.div`
-  display: ${props => props.isOpen ? 'flex' : 'none'};
+  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
   flex-direction: column;
-  background: ${props => props.theme.colors.base};
+  background: ${(props) => props.theme.colors.base};
   position: absolute;
   top: 100%;
   left: 0;
@@ -86,7 +94,7 @@ const MobileNav = styled.div`
   z-index: 1000;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     display: none;
   }
 
@@ -103,6 +111,15 @@ const MobileNav = styled.div`
       color: white;
     }
   }
+`
+
+const UlFullWidth = styled.ul`
+  width: 100%;
+  display: flex;
+`
+
+const HomeLi = styled.li`
+  margin-right: auto;
 `
 
 const HeaderWrapper = styled.div`
@@ -128,13 +145,13 @@ const Menu = () => {
     <HeaderWrapper>
       <Header>
         <Nav>
-          <ul>
-            <li>
-              <Link to="/" activeStyle={activeLinkStyle}>
-                Home
-              </Link>
-            </li>
-            <DesktopMenu>
+          <DesktopMenu>
+            <UlFullWidth>
+              <li>
+                <Link to="/" activeStyle={activeLinkStyle}>
+                  Home
+                </Link>
+              </li>
               <li>
                 <Link to="/portfolio/" activeStyle={activeLinkStyle}>
                   Portfolio
@@ -155,29 +172,60 @@ const Menu = () => {
                   Contact
                 </Link>
               </li>
-            </DesktopMenu>
-            <li>
-              <MobileMenuButton onClick={toggleMobileMenu} aria-label="Toggle menu">
-                <FontAwesomeIcon icon={mobileMenuOpen ? 'times' : 'bars'} />
-              </MobileMenuButton>
-            </li>
-          </ul>
+            </UlFullWidth>
+          </DesktopMenu>
+
+          <MobileMenu>
+            <UlFullWidth>
+              <li>
+                <Link to="/" activeStyle={activeLinkStyle}>
+                  Home
+                </Link>
+              </li>
+
+              <li>
+                <MobileMenuButton
+                  onClick={toggleMobileMenu}
+                  aria-label="Toggle menu"
+                >
+                  <FontAwesomeIcon icon={mobileMenuOpen ? 'times' : 'bars'} />
+                </MobileMenuButton>
+              </li>
+            </UlFullWidth>
+          </MobileMenu>
         </Nav>
+
+        <MobileNav isOpen={mobileMenuOpen}>
+          <Link
+            to="/portfolio/"
+            activeStyle={activeLinkStyle}
+            onClick={closeMobileMenu}
+          >
+            Portfolio
+          </Link>
+          <Link
+            to="/blog/"
+            activeStyle={activeLinkStyle}
+            onClick={closeMobileMenu}
+          >
+            Blog
+          </Link>
+          <Link
+            to="/about/"
+            activeStyle={activeLinkStyle}
+            onClick={closeMobileMenu}
+          >
+            About
+          </Link>
+          <Link
+            to="/contact/"
+            activeStyle={activeLinkStyle}
+            onClick={closeMobileMenu}
+          >
+            Contact
+          </Link>
+        </MobileNav>
       </Header>
-      <MobileNav isOpen={mobileMenuOpen}>
-        <Link to="/portfolio/" activeStyle={activeLinkStyle} onClick={closeMobileMenu}>
-          Portfolio
-        </Link>
-        <Link to="/blog/" activeStyle={activeLinkStyle} onClick={closeMobileMenu}>
-          Blog
-        </Link>
-        <Link to="/about/" activeStyle={activeLinkStyle} onClick={closeMobileMenu}>
-          About
-        </Link>
-        <Link to="/contact/" activeStyle={activeLinkStyle} onClick={closeMobileMenu}>
-          Contact
-        </Link>
-      </MobileNav>
     </HeaderWrapper>
   )
 }
