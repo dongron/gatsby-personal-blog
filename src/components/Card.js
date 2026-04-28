@@ -11,11 +11,11 @@ const Post = styled.li`
   width: 100%;
   transition: background 0.2s;
   @media screen and (min-width: ${(props) => props.theme.responsive.small}) {
-    flex: ${(props) => (props.featured ? '0 0 100%' : '0 0 49%')};
+    flex: ${(props) => (props.$featured ? '0 0 100%' : '0 0 49%')};
     margin: 0 0 2vw 0;
   }
   @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
-    flex: ${(props) => (props.featured ? '0 0 100%' : '0 0 32%')};
+    flex: ${(props) => (props.$featured ? '0 0 100%' : '0 0 32%')};
   }
   &:hover {
     background: ${(props) => props.theme.colors.tertiary};
@@ -32,7 +32,7 @@ const Post = styled.li`
       padding-bottom: 60%;
       @media screen and (min-width: ${(props) =>
           props.theme.responsive.small}) {
-        padding-bottom: ${(props) => (props.featured ? '40%' : '60%')};
+        padding-bottom: ${(props) => (props.$featured ? '40%' : '60%')};
       }
     }
   }
@@ -45,7 +45,7 @@ const Title = styled.h2`
   margin: 1rem 1rem 0.5rem 1rem;
 `
 
-const Date = styled.h3`
+const Date = styled.p`
   margin: 0 1rem 1.5rem 1rem;
   color: ${(props) => props.theme.colors.text};
 `
@@ -55,9 +55,9 @@ const Excerpt = styled.p`
   line-height: 1.6;
 `
 
-const Card = ({ slug, heroImage, title, publishDate, body, ...props }) => {
+const Card = ({ slug, heroImage, title, publishDate, body, featured, headingAs = 'h2' }) => {
   return (
-    <Post featured={props.featured}>
+    <Post $featured={featured}>
       <Link to={`/blog/${slug}/`}>
         {heroImage && heroImage.gatsbyImageData ? (
           <GatsbyImage
@@ -68,7 +68,7 @@ const Card = ({ slug, heroImage, title, publishDate, body, ...props }) => {
         ) : (
           <div />
         )}
-        <Title>{title}</Title>
+        <Title as={headingAs}>{title}</Title>
         <Date>{publishDate}</Date>
         {body && body.childMarkdownRemark ? (
           <Excerpt

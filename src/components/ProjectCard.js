@@ -40,7 +40,7 @@ const Placeholder = styled.div`
   background: ${props => props.theme.colors.secondary};
 `
 
-const Title = styled.h2`
+const Title = styled.h3`
   font-size: 1.5em;
   font-weight: 600;
   text-transform: capitalize;

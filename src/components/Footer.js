@@ -4,6 +4,18 @@ import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import config from '../utils/siteConfig'
 
+const FooterTitle = styled.h2`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`
+
 const ContactMeta = styled.address`
   && {
     align-items: flex-start;
@@ -33,6 +45,7 @@ const formatPhoneNumber = (phoneNumber) =>
   phoneNumber.replace(/^(\+\d{2})(\d{3})(\d{3})(\d{3})$/, '$1 $2 $3 $4')
 
 const Wrapper = styled.footer`
+  position: relative;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -57,15 +70,9 @@ const List = styled.div`
   }
 `
 
-const Column = styled.div`
+const Column = styled.section`
   flex: 1;
   min-width: 150px;
-
-  h4 {
-    font-weight: 600;
-    margin-bottom: 1em;
-    color: ${(props) => props.theme.colors.base};
-  }
 
   ul {
     list-style: none;
@@ -89,6 +96,12 @@ const Column = styled.div`
   }
 `
 
+const ColumnTitle = styled.h3`
+  font-weight: 600;
+  margin-bottom: 1em;
+  color: ${(props) => props.theme.colors.base};
+`
+
 const BottomRow = styled.div`
   width: 100%;
   text-align: center;
@@ -106,9 +119,10 @@ const getCurrentYear = () => new Date().getFullYear()
 
 const Footer = () => (
   <Wrapper>
+    <FooterTitle>Site Footer</FooterTitle>
     <List>
-      <Column>
-        <h4>Navigation</h4>
+      <Column as="nav" aria-labelledby="footer-navigation-title">
+        <ColumnTitle id="footer-navigation-title">Navigation</ColumnTitle>
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -128,8 +142,8 @@ const Footer = () => (
         </ul>
       </Column>
 
-      <Column>
-        <h4>Connect</h4>
+      <Column aria-labelledby="footer-connect-title">
+        <ColumnTitle id="footer-connect-title">Connect</ColumnTitle>
         <ul>
           <li>
             <ContactMeta as="a" href={`mailto:${config.email}`}>
@@ -204,8 +218,8 @@ const Footer = () => (
         </ul>
       </Column>
 
-      <Column>
-        <h4>Team Projects</h4>
+      <Column as="nav" aria-labelledby="footer-team-projects-title">
+        <ColumnTitle id="footer-team-projects-title">Team Projects</ColumnTitle>
         <ul>
           <li>
             <a

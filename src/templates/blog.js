@@ -5,6 +5,7 @@ import CardList from '../components/CardList'
 import Card from '../components/Card'
 import Helmet from 'react-helmet'
 import Container from '../components/Container'
+import PageTitle from '../components/PageTitle'
 import Pagination from '../components/Pagination'
 import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
@@ -16,7 +17,8 @@ const Index = ({ data, pageContext }) => {
   const isFirstPage = currentPage === 1
   const pageTitle = isFirstPage
     ? `Blog - ${config.siteTitle}`
-    : `${config.siteTitle} - Page ${currentPage}`
+    : `Blog - Page ${currentPage} - ${config.siteTitle}`
+  const visibleTitle = isFirstPage ? 'Blog' : `Blog, Page ${currentPage}`
   const pagePath = isFirstPage ? 'blog' : `blog/${currentPage}`
 
   return (
@@ -34,6 +36,7 @@ const Index = ({ data, pageContext }) => {
         <title>{pageTitle}</title>
       </Helmet>
       <Container>
+        <PageTitle small>{visibleTitle}</PageTitle>
         {isFirstPage ? (
           <CardList>
             <Card {...featuredPost} featured />

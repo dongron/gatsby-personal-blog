@@ -54,7 +54,7 @@ const Services = () => {
   return (
     <Wrapper>
       <Inner>
-        <PageTitle small>What I Do</PageTitle>
+        <PageTitle as="h2" small>What I Do</PageTitle>
         <Grid>
           {services.map((service, index) => (
             <ServiceCard key={index} {...service} />

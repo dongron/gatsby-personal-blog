@@ -51,7 +51,7 @@ const FeaturedWork = ({ projects }) => {
   return (
     <Wrapper>
       <Inner>
-        <PageTitle small>Selected Projects</PageTitle>
+        <PageTitle as="h2" small>Selected Projects</PageTitle>
         {hasProjects ? (
           <ProjectList>
             {projects.map(({ node }) => (

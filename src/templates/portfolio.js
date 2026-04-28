@@ -413,7 +413,7 @@ const Portfolio = ({ data }) => {
           </>
         ) : (
           <EmptyState>
-            <h3>Projects Coming Soon</h3>
+            <h2>Projects Coming Soon</h2>
             <p>
               I'm currently adding case studies for my recent projects. In the
               meantime, check out my{' '}

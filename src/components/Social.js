@@ -52,7 +52,7 @@ const Social = () => {
   return (
     <Wrapper>
       <Inner>
-        <PageTitle small>Let's Connect</PageTitle>
+        <PageTitle as="h2" small>Let's Connect</PageTitle>
         <LinksContainer>
           <ExternalLink href={config.githubUrl} target="_blank" rel="noopener noreferrer">
             <IconContainer>

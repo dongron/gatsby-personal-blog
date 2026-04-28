@@ -51,12 +51,13 @@ const LatestArticles = ({ posts }) => {
   return (
     <Wrapper>
       <Inner>
-        <PageTitle small>Latest Articles</PageTitle>
+        <PageTitle as="h2" small>Latest Articles</PageTitle>
         {hasPosts ? (
           <PostList>
             {posts.map(({ node }) => (
               <Card
                 key={node.slug}
+                headingAs="h3"
                 slug={node.slug}
                 heroImage={node.heroImage}
                 title={node.title}
