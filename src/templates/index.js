@@ -3,32 +3,51 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Helmet from 'react-helmet'
 import SEO from '../components/SEO'
-import config from '../utils/siteConfig'
 import Welcome from '../components/Welcome'
-import Social from '../components/Social'
 import Services from '../components/Services'
 import FeaturedWork from '../components/FeaturedWork'
 import LatestArticles from '../components/LatestArticles'
 import AboutTeaser from '../components/AboutTeaser'
 import AvailabilityBanner from '../components/AvailabilityBanner'
+import { getLandingPageContent } from '../utils/landingPageContent'
 
 
 const Index = ({ data, pageContext }) => {
+  const locale = pageContext.locale || 'en'
+  const landingPageContent = getLandingPageContent(locale)
   const featuredProjects = data.allContentfulPortfolioItem?.edges || []
   const latestPosts = data.allContentfulPost?.edges || []
 
   return (
-    <Layout>
-      <SEO pagePath="" />
+    <Layout
+      navigationVariant={landingPageContent.layout.navigationVariant}
+      menuContent={landingPageContent.menu}
+      footerVariant={landingPageContent.layout.footerVariant}
+      footerContent={landingPageContent.footer}
+    >
+      <SEO
+        pagePath={landingPageContent.seo.pagePath}
+        customTitle
+        postNode={{
+          title: landingPageContent.seo.title,
+          description: landingPageContent.seo.description,
+        }}
+        localeConfig={landingPageContent.locale}
+        alternates={pageContext.seoAlternates}
+      />
       <Helmet>
-        <title>{config.siteTitle}</title>
+        <title>{landingPageContent.seo.title}</title>
       </Helmet>
-      <Welcome />
-      <Services />
-      <FeaturedWork projects={featuredProjects} />
-      <LatestArticles posts={latestPosts} />
-      <AboutTeaser />
-      <AvailabilityBanner />
+      <Welcome content={landingPageContent.welcome} />
+      <Services content={landingPageContent.services} />
+      {landingPageContent.sections.showFeaturedWork && (
+        <FeaturedWork projects={featuredProjects} />
+      )}
+      {landingPageContent.sections.showLatestArticles && (
+        <LatestArticles posts={latestPosts} />
+      )}
+      <AboutTeaser content={landingPageContent.about} />
+      <AvailabilityBanner content={landingPageContent.availability} />
     </Layout>
   )
 }

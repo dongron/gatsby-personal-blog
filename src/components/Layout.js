@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 import favicon from '../images/favicon.ico'
 import GlobalStyleComponent from '../styles/global'
 import theme from '../styles/theme'
-import config from '../utils/siteConfig'
 import Menu from '../components/Menu'
 import Footer from '../components/Footer'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -34,7 +33,13 @@ import {
   faPhone,
 } from '@fortawesome/free-solid-svg-icons'
 
-const Template = ({ children }) => {
+const Template = ({
+  children,
+  navigationVariant = 'default',
+  menuContent,
+  footerVariant = 'default',
+  footerContent,
+}) => {
   library.add(
     fab,
     faCheckSquare,
@@ -64,23 +69,16 @@ const Template = ({ children }) => {
   return (
     <div className="siteRoot">
       <Helmet>
-        <title>{config.siteTitle}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={favicon} />
-        <meta name="description" content={config.siteDescription} />
-        <meta property="og:title" content={config.siteTitle} />
-        <meta property="og:url" content={config.siteUrl} />
-        <meta property="og:locale" content={config.openGraphLocale} />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={config.siteTitle} />
       </Helmet>
 
       <ThemeProvider theme={theme}>
         <GlobalStyleComponent>
-          <Menu />
+          <Menu variant={navigationVariant} content={menuContent} />
           <main className="siteContent">{children}</main>
-          <Footer />
+          <Footer variant={footerVariant} content={footerContent} />
         </GlobalStyleComponent>
       </ThemeProvider>
     </div>

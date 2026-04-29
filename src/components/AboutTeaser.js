@@ -1,9 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
 import Button from './Button'
 import config from '../utils/siteConfig'
 import profileImage from '../images/profile-picture.jpg'
+
+const defaultContent = {
+  title: 'About Me',
+  description: `I'm ${config.author}, a ${config.authorTitle} with ${config.authorTagline.toLowerCase()}. I specialize in building scalable web applications for healthcare, enterprise, and startups. My approach combines technical excellence with clear communication and a focus on delivering real business value.`,
+  primaryCta: {
+    label: 'Learn More About Me',
+    to: '/about/',
+  },
+  secondaryCta: {
+    label: 'Get In Touch',
+    to: '/contact/',
+  },
+}
 
 const Wrapper = styled.section`
   width: 100%;
@@ -77,7 +89,14 @@ const ButtonGroup = styled.div`
   }
 `
 
-const AboutTeaser = () => {
+const AboutTeaser = ({ content = defaultContent }) => {
+  const {
+    title = defaultContent.title,
+    description = defaultContent.description,
+    primaryCta = defaultContent.primaryCta,
+    secondaryCta = defaultContent.secondaryCta,
+  } = content
+
   return (
     <Wrapper>
       <Inner>
@@ -85,19 +104,14 @@ const AboutTeaser = () => {
           <Photo src={profileImage} alt={config.author} />
         </PhotoWrapper>
         <Content>
-          <Title>About Me</Title>
-          <Description>
-            I'm {config.author}, a {config.authorTitle} with {config.authorTagline.toLowerCase()}.
-            I specialize in building scalable web applications for healthcare, enterprise,
-            and startups. My approach combines technical excellence with clear communication
-            and a focus on delivering real business value.
-          </Description>
+          <Title>{title}</Title>
+          <Description>{description}</Description>
           <ButtonGroup>
-            <Button to="/about/" primary>
-              Learn More About Me
+            <Button to={primaryCta.to} primary>
+              {primaryCta.label}
             </Button>
-            <Button to="/contact/">
-              Get In Touch
+            <Button to={secondaryCta.to}>
+              {secondaryCta.label}
             </Button>
           </ButtonGroup>
         </Content>

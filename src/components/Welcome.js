@@ -5,6 +5,24 @@ import theme from '../styles/theme'
 import Button from './Button'
 import config from '../utils/siteConfig'
 
+const defaultContent = {
+  titleLines: [config.heroTitle, config.heroTitle2],
+  subtitleLines: [config.heroTagline, config.heroTagline2, config.heroTagline3],
+  primaryCta: {
+    label: "Let's Ship It!",
+    to: '/contact/',
+  },
+}
+
+const renderLines = (lines = []) => {
+  return lines.map((line, index) => (
+    <React.Fragment key={`${line}-${index}`}>
+      {index > 0 && <br />}
+      {line}
+    </React.Fragment>
+  ))
+}
+
 const Wrapper = styled.div`
   background: #000000;
 `
@@ -62,22 +80,21 @@ const ButtonGroup = styled.div`
   justify-content: center;
 `
 
-const Welcome = () => {
+const Welcome = ({ content = defaultContent }) => {
+  const {
+    titleLines = defaultContent.titleLines,
+    subtitleLines = defaultContent.subtitleLines,
+    primaryCta = defaultContent.primaryCta,
+  } = content
+
   return (
     <Wrapper>
       <Image>
-        <Title>
-          {config.heroTitle} <br />
-          {config.heroTitle2}
-        </Title>
-        <Subtitle>
-          {config.heroTagline} <br />
-          {config.heroTagline2} <br />
-          {config.heroTagline3}
-        </Subtitle>
+        <Title>{renderLines(titleLines)}</Title>
+        <Subtitle>{renderLines(subtitleLines)}</Subtitle>
         <ButtonGroup>
-          <Button to="/contact/" primary onDark>
-            Let's Ship It!
+          <Button to={primaryCta.to} primary onDark>
+            {primaryCta.label}
           </Button>
         </ButtonGroup>
       </Image>

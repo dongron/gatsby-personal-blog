@@ -36,20 +36,42 @@ const postalAddress = config.address
     }
   : undefined
 
-const organizationContactPoint = {
-  '@type': 'ContactPoint',
-  contactType: 'sales',
-  email: config.email,
-  telephone: config.phone,
-  areaServed: config.serviceArea,
-  availableLanguage: config.availableLanguages,
-  description: config.contactPointDescription,
-  url: contactPageUrl,
+const resolveLocaleConfig = (localeConfig = {}) => {
+  return {
+    htmlLanguage: localeConfig.htmlLanguage || config.htmlLanguage,
+    openGraphLocale: localeConfig.openGraphLocale || config.openGraphLocale,
+    hreflang: localeConfig.hreflang || config.hreflang,
+    xDefaultHreflang:
+      localeConfig.xDefaultHreflang || config.xDefaultHreflang,
+    availableLanguages:
+      localeConfig.availableLanguages || config.availableLanguages,
+  }
+}
+
+const buildAlternateHref = (alternate = {}) => {
+  if (alternate.href) {
+    return alternate.href
+  }
+
+  if (typeof alternate.path === 'string') {
+    return buildPageUrl(alternate.path)
+  }
+
+  return null
 }
 
 class SEO extends Component {
   render() {
-    const { postNode, pagePath, postSEO, pageSEO, customTitle, noIndex } = this.props
+    const {
+      postNode,
+      pagePath,
+      postSEO,
+      pageSEO,
+      customTitle,
+      noIndex,
+      localeConfig,
+      alternates,
+    } = this.props
     let title
     let description
     let image
@@ -57,6 +79,7 @@ class SEO extends Component {
     let imgHeight
     let pageUrl
     let pageType = 'WebPage'
+    const pageLocale = resolveLocaleConfig(localeConfig)
 
     // Set Default OpenGraph Parameters for Fallback
     title = config.siteTitle
@@ -88,6 +111,60 @@ class SEO extends Component {
       imgHeight = postNode.heroImage.ogimg.height
     }
 
+    const organizationContactPoint = {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: config.email,
+      telephone: config.phone,
+      areaServed: config.serviceArea,
+      availableLanguage: pageLocale.availableLanguages,
+      description: config.contactPointDescription,
+      url: contactPageUrl,
+    }
+
+    const alternateLinks = noIndex
+      ? []
+      : (alternates || [])
+          .map((alternate) => {
+            const href = buildAlternateHref(alternate)
+
+            if (!href || !alternate.hrefLang) {
+              return null
+            }
+
+            return {
+              href,
+              hrefLang: alternate.hrefLang,
+              openGraphLocale: alternate.openGraphLocale,
+            }
+          })
+          .filter(Boolean)
+
+    if (alternateLinks.length === 0 && !noIndex) {
+      alternateLinks.push(
+        {
+          href: pageUrl,
+          hrefLang: pageLocale.hreflang,
+          openGraphLocale: pageLocale.openGraphLocale,
+        },
+        {
+          href: pageUrl,
+          hrefLang: pageLocale.xDefaultHreflang,
+        }
+      )
+    }
+
+    const openGraphAlternateLocales = Array.from(
+      new Set(
+        alternateLinks
+          .map((alternate) => alternate.openGraphLocale)
+          .filter(
+            (alternateLocale) =>
+              alternateLocale && alternateLocale !== pageLocale.openGraphLocale
+          )
+      )
+    )
+
     // Default Website Schema
     const schemaOrgJSONLD = [
       {
@@ -97,6 +174,7 @@ class SEO extends Component {
         url: config.siteUrl,
         name: config.siteTitle,
         alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
+        inLanguage: pageLocale.availableLanguages,
       },
       {
         '@context': 'https://schema.org',
@@ -185,6 +263,7 @@ class SEO extends Component {
           },
           datePublished: postNode.publishDateISO,
           dateModified: postNode.updatedAt || postNode.publishDateISO,
+          inLanguage: pageLocale.htmlLanguage,
           mainEntityOfPage: {
             '@type': 'WebPage',
             '@id': pageUrl,
@@ -202,6 +281,7 @@ class SEO extends Component {
         url: pageUrl,
         name: title,
         description: description,
+        inLanguage: pageLocale.htmlLanguage,
       }
 
       if (pageType === 'ContactPage') {
@@ -217,13 +297,18 @@ class SEO extends Component {
     }
 
     return (
-      <Helmet>
+      <Helmet htmlAttributes={{ lang: pageLocale.htmlLanguage }}>
         {/* General tags */}
         <link rel="canonical" href={pageUrl} />
-        {!noIndex && <link rel="alternate" hrefLang={config.hreflang} href={pageUrl} />}
-        {!noIndex && (
-          <link rel="alternate" hrefLang={config.xDefaultHreflang} href={pageUrl} />
-        )}
+        {!noIndex &&
+          alternateLinks.map((alternate) => (
+            <link
+              key={`${alternate.hrefLang}-${alternate.href}`}
+              rel="alternate"
+              hrefLang={alternate.hrefLang}
+              href={alternate.href}
+            />
+          ))}
         <meta name="image" content={image} />
         <meta name="description" content={description} />
 
@@ -248,7 +333,14 @@ class SEO extends Component {
         {/* OpenGraph tags */}
         <meta property="og:title" content={title} />
         <meta property="og:site_name" content={config.siteTitle} />
-        <meta property="og:locale" content={config.openGraphLocale} />
+        <meta property="og:locale" content={pageLocale.openGraphLocale} />
+        {openGraphAlternateLocales.map((alternateLocale) => (
+          <meta
+            key={alternateLocale}
+            property="og:locale:alternate"
+            content={alternateLocale}
+          />
+        ))}
         {postSEO ? <meta property="og:type" content="article" /> : null}
         {!postSEO && <meta property="og:type" content="website" />}
 

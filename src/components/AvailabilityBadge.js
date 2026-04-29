@@ -35,13 +35,22 @@ const Dot = styled.span`
   }
 `
 
-const AvailabilityBadge = ({ compact }) => {
+const AvailabilityBadge = ({
+  compact,
+  label = config.availabilityText,
+  compactAvailableLabel = 'Available',
+  compactBusyLabel = 'Busy',
+}) => {
   const available = config.availabilityStatus
 
   return (
     <Badge available={available}>
       <Dot available={available} />
-      {compact ? (available ? 'Available' : 'Busy') : config.availabilityText}
+      {compact
+        ? available
+          ? compactAvailableLabel
+          : compactBusyLabel
+        : label}
     </Badge>
   )
 }

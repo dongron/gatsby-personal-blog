@@ -27,36 +27,45 @@ const Grid = styled.div`
   }
 `
 
-const services = [
+const defaultServices = [
   {
     icon: 'code',
     title: 'Modern Web Apps',
-    description: 'React, Next.js, TypeScript applications built for performance and scalability.'
+    description:
+      'React, Next.js, TypeScript applications built for performance and scalability.',
   },
   {
     icon: 'heartbeat',
     title: 'Healthcare & Enterprise',
-    description: 'Secure, compliant solutions for healthcare and large organizations.'
+    description:
+      'Secure, compliant solutions for healthcare and large organizations.',
   },
   {
     icon: 'mobile-alt',
     title: 'Progressive Web Apps',
-    description: 'Offline-first applications with native-like experiences.'
+    description: 'Offline-first applications with native-like experiences.',
   },
   {
     icon: 'comments',
     title: 'Technical Consulting',
-    description: 'Architecture review, code audits, and technology guidance.'
-  }
+    description: 'Architecture review, code audits, and technology guidance.',
+  },
 ]
 
-const Services = () => {
+const defaultContent = {
+  title: 'What I Do',
+  items: defaultServices,
+}
+
+const Services = ({ content = defaultContent }) => {
+  const { title = defaultContent.title, items = defaultContent.items } = content
+
   return (
     <Wrapper>
       <Inner>
-        <PageTitle as="h2" small>What I Do</PageTitle>
+        <PageTitle as="h2" small>{title}</PageTitle>
         <Grid>
-          {services.map((service, index) => (
+          {items.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
         </Grid>

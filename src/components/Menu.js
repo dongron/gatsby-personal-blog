@@ -3,6 +3,29 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+const defaultMenuItems = [
+  {
+    label: 'Home',
+    to: '/',
+  },
+  {
+    label: 'Portfolio',
+    to: '/portfolio/',
+  },
+  {
+    label: 'Blog',
+    to: '/blog/',
+  },
+  {
+    label: 'About',
+    to: '/about/',
+  },
+  {
+    label: 'Contact',
+    to: '/contact/',
+  },
+]
+
 const Header = styled.header`
   background: ${(props) => props.theme.colors.base};
   width: 100%;
@@ -24,6 +47,7 @@ const Nav = styled.nav`
   li {
     display: inline-block;
     margin-left: 1em;
+
     &:first-child {
       position: relative;
       margin: 0;
@@ -37,6 +61,7 @@ const Nav = styled.nav`
     font-weight: 600;
     transition: all 0.2s;
     border-bottom: 2px solid ${(props) => props.theme.colors.base};
+
     &:hover {
       color: white;
     }
@@ -56,6 +81,7 @@ const DesktopMenu = styled.div`
 const MobileMenu = styled.div`
   display: flex;
   justify-content: space-between;
+
   @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     display: none;
   }
@@ -118,20 +144,40 @@ const UlFullWidth = styled.ul`
   display: flex;
 `
 
-const HomeLi = styled.li`
-  margin-right: auto;
-`
-
 const HeaderWrapper = styled.div`
   position: relative;
+`
+
+const SimpleMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+`
+
+const LanguageSwitch = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: DarkGray;
+  font-weight: 600;
+`
+
+const LanguageCurrent = styled.span`
+  color: white;
+`
+
+const LanguageDivider = styled.span`
+  color: rgba(255, 255, 255, 0.45);
 `
 
 const activeLinkStyle = {
   color: 'white',
 }
 
-const Menu = () => {
+const Menu = ({ variant = 'default', content = {} }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const menuItems = content.items || defaultMenuItems
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
@@ -141,37 +187,56 @@ const Menu = () => {
     setMobileMenuOpen(false)
   }
 
+  if (variant === 'polishLanding') {
+    const homeLabel = content.homeLabel || 'Home'
+    const homePath = content.homePath || '/pl/'
+    const languageSwitch = content.languageSwitch || []
+
+    return (
+      <HeaderWrapper>
+        <Header>
+          <Nav>
+            <SimpleMenu>
+              <Link to={homePath} activeStyle={activeLinkStyle}>
+                {homeLabel}
+              </Link>
+
+              {languageSwitch.length > 0 && (
+                <LanguageSwitch aria-label="Language switch">
+                  {languageSwitch.map((item, index) => (
+                    <React.Fragment key={`${item.label}-${item.to || index}`}>
+                      {index > 0 && <LanguageDivider>/</LanguageDivider>}
+                      {item.current ? (
+                        <LanguageCurrent aria-current="true">
+                          {item.label}
+                        </LanguageCurrent>
+                      ) : (
+                        <Link to={item.to}>{item.label}</Link>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </LanguageSwitch>
+              )}
+            </SimpleMenu>
+          </Nav>
+        </Header>
+      </HeaderWrapper>
+    )
+  }
+
   return (
     <HeaderWrapper>
       <Header>
         <Nav>
           <DesktopMenu>
             <UlFullWidth>
-              <li>
-                <Link to="/" activeStyle={activeLinkStyle}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/portfolio/" activeStyle={activeLinkStyle}>
-                  Portfolio
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog/" activeStyle={activeLinkStyle}>
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/about/" activeStyle={activeLinkStyle}>
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact/" activeStyle={activeLinkStyle}>
-                  Contact
-                </Link>
-              </li>
+              {menuItems.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} activeStyle={activeLinkStyle}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </UlFullWidth>
           </DesktopMenu>
 
@@ -196,34 +261,16 @@ const Menu = () => {
         </Nav>
 
         <MobileNav isOpen={mobileMenuOpen}>
-          <Link
-            to="/portfolio/"
-            activeStyle={activeLinkStyle}
-            onClick={closeMobileMenu}
-          >
-            Portfolio
-          </Link>
-          <Link
-            to="/blog/"
-            activeStyle={activeLinkStyle}
-            onClick={closeMobileMenu}
-          >
-            Blog
-          </Link>
-          <Link
-            to="/about/"
-            activeStyle={activeLinkStyle}
-            onClick={closeMobileMenu}
-          >
-            About
-          </Link>
-          <Link
-            to="/contact/"
-            activeStyle={activeLinkStyle}
-            onClick={closeMobileMenu}
-          >
-            Contact
-          </Link>
+          {menuItems.slice(1).map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              activeStyle={activeLinkStyle}
+              onClick={closeMobileMenu}
+            >
+              {item.label}
+            </Link>
+          ))}
         </MobileNav>
       </Header>
     </HeaderWrapper>

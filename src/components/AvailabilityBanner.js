@@ -4,6 +4,16 @@ import AvailabilityBadge from './AvailabilityBadge'
 import Button from './Button'
 import config from '../utils/siteConfig'
 
+const defaultContent = {
+  badgeLabel: config.availabilityText,
+  compactAvailableLabel: 'Available',
+  compactBusyLabel: 'Busy',
+  hoursText: config.hoursPerWeek,
+  timezoneText: config.timezone,
+  ctaLabel: 'Start a Project',
+  ctaTo: '/contact/',
+}
+
 const Banner = styled.section`
   width: 100%;
   padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.md};
@@ -50,22 +60,36 @@ const Text = styled.p`
   }
 `
 
-const AvailabilityBanner = () => {
+const AvailabilityBanner = ({ content = defaultContent }) => {
   if (!config.availabilityStatus) {
     return null
   }
+
+  const {
+    badgeLabel = defaultContent.badgeLabel,
+    compactAvailableLabel = defaultContent.compactAvailableLabel,
+    compactBusyLabel = defaultContent.compactBusyLabel,
+    hoursText = defaultContent.hoursText,
+    timezoneText = defaultContent.timezoneText,
+    ctaLabel = defaultContent.ctaLabel,
+    ctaTo = defaultContent.ctaTo,
+  } = content
 
   return (
     <Banner>
       <Inner>
         <Content>
-          <AvailabilityBadge />
+          <AvailabilityBadge
+            label={badgeLabel}
+            compactAvailableLabel={compactAvailableLabel}
+            compactBusyLabel={compactBusyLabel}
+          />
           <Text>
-            <strong>{config.hoursPerWeek}</strong> • {config.timezone}
+            <strong>{hoursText}</strong> • {timezoneText}
           </Text>
         </Content>
-        <Button to="/contact/" primary>
-          Start a Project
+        <Button to={ctaTo} primary>
+          {ctaLabel}
         </Button>
       </Inner>
     </Banner>

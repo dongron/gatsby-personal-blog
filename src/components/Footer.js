@@ -4,6 +4,18 @@ import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import config from '../utils/siteConfig'
 
+const defaultContent = {
+  footerTitle: 'Site Footer',
+  navigationTitle: 'Navigation',
+  connectTitle: 'Connect',
+  teamProjectsTitle: 'Team Projects',
+  emailLabel: 'Email',
+  linkedInLabel: 'LinkedIn',
+  githubLabel: 'GitHub',
+  addressCountryLabel: config.addressCountryLabel,
+  builtWithText: 'Built with Gatsby & Contentful.',
+}
+
 const FooterTitle = styled.h2`
   position: absolute;
   width: 1px;
@@ -117,127 +129,146 @@ const BottomRow = styled.div`
 
 const getCurrentYear = () => new Date().getFullYear()
 
-const Footer = () => (
-  <Wrapper>
-    <FooterTitle>Site Footer</FooterTitle>
-    <List>
-      <Column as="nav" aria-labelledby="footer-navigation-title">
-        <ColumnTitle id="footer-navigation-title">Navigation</ColumnTitle>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/portfolio/">Portfolio</Link>
-          </li>
-          <li>
-            <Link to="/blog/">Blog</Link>
-          </li>
-          <li>
-            <Link to="/about/">About</Link>
-          </li>
-          <li>
-            <Link to="/contact/">Contact</Link>
-          </li>
-        </ul>
-      </Column>
+const Footer = ({ variant = 'default', content = defaultContent }) => {
+  const footerContent = {
+    ...defaultContent,
+    ...content,
+  }
+  const showNavigation = variant !== 'polishLanding'
 
-      <Column aria-labelledby="footer-connect-title">
-        <ColumnTitle id="footer-connect-title">Connect</ColumnTitle>
-        <ul>
-          <li>
-            <ContactMeta as="a" href={`mailto:${config.email}`}>
-              <ContactMetaLine>
-                <FontAwesomeIcon icon="envelope" />
-              </ContactMetaLine>
-              <ContactMetaLine>Email</ContactMetaLine>
-            </ContactMeta>
-          </li>
-          <li>
-            <ContactMeta
-              as="a"
-              href={config.linkedInUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ContactMetaLine>
-                <FontAwesomeIcon icon={['fab', 'linkedin']} />
-              </ContactMetaLine>
-              <ContactMetaLine>LinkedIn</ContactMetaLine>
-            </ContactMeta>
-          </li>
-          <li>
-            <ContactMeta
-              as="a"
-              href={config.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ContactMetaLine>
-                <FontAwesomeIcon icon={['fab', 'github']} />
-              </ContactMetaLine>
-              <ContactMetaLine>GitHub</ContactMetaLine>
-            </ContactMeta>
-          </li>
-          <li>
-            <ContactMeta
-              as="a"
-              href={config.googleMapsProfileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${config.formattedAddress} in Google Maps`}
-            >
-              <ContactMetaLine>
-                <FontAwesomeIcon icon="map-marker-alt" />
-              </ContactMetaLine>
-              <ContactMetaLines>
+  return (
+    <Wrapper>
+      <FooterTitle>{footerContent.footerTitle}</FooterTitle>
+      <List>
+        {showNavigation && (
+          <Column as="nav" aria-labelledby="footer-navigation-title">
+            <ColumnTitle id="footer-navigation-title">
+              {footerContent.navigationTitle}
+            </ColumnTitle>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/portfolio/">Portfolio</Link>
+                <Link to="/blog/">Blog</Link>
+              </li>
+              <li>
+                <Link to="/about/">About</Link>
+              </li>
+              <li>
+                <Link to="/contact/">Contact</Link>
+              </li>
+            </ul>
+          </Column>
+        )}
+
+        <Column aria-labelledby="footer-connect-title">
+          <ColumnTitle id="footer-connect-title">
+            {footerContent.connectTitle}
+          </ColumnTitle>
+          <ul>
+            <li>
+              <ContactMeta as="a" href={`mailto:${config.email}`}>
                 <ContactMetaLine>
-                  {config.publisher.split(' ').slice(0, 2).join(' ')} <br />
-                  {config.publisher.split(' ').slice(2, 4).join(' ')}
+                  <FontAwesomeIcon icon="envelope" />
+                </ContactMetaLine>
+                <ContactMetaLine>{footerContent.emailLabel}</ContactMetaLine>
+              </ContactMeta>
+            </li>
+            <li>
+              <ContactMeta
+                as="a"
+                href={config.linkedInUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ContactMetaLine>
+                  <FontAwesomeIcon icon={['fab', 'linkedin']} />
+                </ContactMetaLine>
+                <ContactMetaLine>{footerContent.linkedInLabel}</ContactMetaLine>
+              </ContactMeta>
+            </li>
+            <li>
+              <ContactMeta
+                as="a"
+                href={config.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ContactMetaLine>
+                  <FontAwesomeIcon icon={['fab', 'github']} />
+                </ContactMetaLine>
+                <ContactMetaLine>{footerContent.githubLabel}</ContactMetaLine>
+              </ContactMeta>
+            </li>
+            <li>
+              <ContactMeta
+                as="a"
+                href={config.googleMapsProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${config.formattedAddress} in Google Maps`}
+              >
+                <ContactMetaLine>
+                  <FontAwesomeIcon icon="map-marker-alt" />
+                </ContactMetaLine>
+                <ContactMetaLines>
+                  <ContactMetaLine>
+                    {config.publisher.split(' ').slice(0, 2).join(' ')} <br />
+                    {config.publisher.split(' ').slice(2, 4).join(' ')}
+                  </ContactMetaLine>
+                  <ContactMetaLine>
+                    {config.address.streetAddress},
+                  </ContactMetaLine>
+                  <ContactMetaLine>
+                    {config.address.postalCode} {config.address.addressLocality}
+                    ,
+                  </ContactMetaLine>
+                  <ContactMetaLine>
+                    {footerContent.addressCountryLabel}
+                  </ContactMetaLine>
+                </ContactMetaLines>
+              </ContactMeta>
+            </li>
+            <li>
+              <ContactMeta as="a" href={`tel:${config.phone}`}>
+                <ContactMetaLine>
+                  <FontAwesomeIcon icon="phone" />
                 </ContactMetaLine>
                 <ContactMetaLine>
-                  {config.address.streetAddress},
+                  {formatPhoneNumber(config.phone)}
                 </ContactMetaLine>
-                <ContactMetaLine>
-                  {config.address.postalCode} {config.address.addressLocality},
-                </ContactMetaLine>
-                <ContactMetaLine>{config.addressCountryLabel}</ContactMetaLine>
-              </ContactMetaLines>
-            </ContactMeta>
-          </li>
-          <li>
-            <ContactMeta as="a" href={`tel:${config.phone}`}>
-              <ContactMetaLine>
-                <FontAwesomeIcon icon="phone" />
-              </ContactMetaLine>
-              <ContactMetaLine>
-                {formatPhoneNumber(config.phone)}
-              </ContactMetaLine>
-            </ContactMeta>
-          </li>
-        </ul>
-      </Column>
+              </ContactMeta>
+            </li>
+          </ul>
+        </Column>
 
-      <Column as="nav" aria-labelledby="footer-team-projects-title">
-        <ColumnTitle id="footer-team-projects-title">Team Projects</ColumnTitle>
-        <ul>
-          <li>
-            <a
-              href="https://8bits.space"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              8bits.space →
-            </a>
-          </li>
-        </ul>
-      </Column>
-    </List>
+        {footerContent.teamProjectsTitle && (
+          <Column as="nav" aria-labelledby="footer-team-projects-title">
+            <ColumnTitle id="footer-team-projects-title">
+              {footerContent.teamProjectsTitle}
+            </ColumnTitle>
+            <ul>
+              <li>
+                <a
+                  href="https://8bits.space"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  8bits.space →
+                </a>
+              </li>
+            </ul>
+          </Column>
+        )}
+      </List>
 
-    <BottomRow>
-      © {getCurrentYear()} {config.author}. Built with Gatsby & Contentful.
-    </BottomRow>
-  </Wrapper>
-)
+      <BottomRow>
+        © {getCurrentYear()} {config.author}. {footerContent.builtWithText}
+      </BottomRow>
+    </Wrapper>
+  )
+}
 
 export default Footer

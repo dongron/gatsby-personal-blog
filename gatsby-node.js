@@ -17,6 +17,22 @@ exports.createSchemaCustomization = ({ actions }) => {
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
+  const homeAlternates = [
+    {
+      hrefLang: 'en',
+      path: '',
+      openGraphLocale: 'en_US',
+    },
+    {
+      hrefLang: 'pl',
+      path: 'pl',
+      openGraphLocale: 'pl_PL',
+    },
+    {
+      hrefLang: 'x-default',
+      path: '',
+    },
+  ]
 
   const loadPosts = new Promise((resolve, reject) => {
     graphql(`
@@ -64,6 +80,21 @@ exports.createPages = ({ graphql, actions }) => {
         path: `/`,
         component: path.resolve(`./src/templates/index.js`),
         context: {
+          locale: 'en',
+          seoAlternates: homeAlternates,
+          limit: postsPerFirstPage,
+          skip: 0,
+          numPages: numPages + 1,
+          currentPage: 1,
+        },
+      })
+
+      createPage({
+        path: `/pl/`,
+        component: path.resolve(`./src/templates/index.js`),
+        context: {
+          locale: 'pl',
+          seoAlternates: homeAlternates,
           limit: postsPerFirstPage,
           skip: 0,
           numPages: numPages + 1,
