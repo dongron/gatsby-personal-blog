@@ -301,6 +301,28 @@ class ContactForm extends React.Component {
   }
 
   handleSuccess = () => {
+    // Fire Google Ads / GA4 conversion event on successful submission.
+    // Reads `?ref=` from the current URL so we can attribute leads to a
+    // specific landing page (e.g. ?ref=wcag-audit, ?ref=audyt-wcag).
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      let ref = null
+      try {
+        ref = new URLSearchParams(window.location.search).get('ref')
+      } catch (e) {
+        ref = null
+      }
+      window.gtag('event', 'contact_form_submit', {
+        event_category: 'lead',
+        event_label: ref || 'contact',
+        ref: ref || null,
+        page_path: window.location.pathname,
+      })
+      // Optional Google Ads conversion (uncomment + replace when ID is set):
+      // window.gtag('event', 'conversion', {
+      //   send_to: 'AW-XXXXXXXX/YYYYYYYYYYYY',
+      //   event_label: ref || 'contact',
+      // })
+    }
     this.setState({
       name: '',
       email: '',

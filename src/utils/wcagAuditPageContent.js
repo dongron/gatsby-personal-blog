@@ -15,7 +15,7 @@ const wcagAuditPageContent = {
       title:
         'Audyt WCAG dla e-commerce | Zgodność z EAA i ADA | Dominik Gronkiewicz',
       description:
-        'Audyt WCAG 2.1 AA dla sklepów internetowych. EAA obowiązuje od 28 czerwca 2025. 95,9% stron nie spełnia wymogów. Uniknij kar i pozwów - wycena bezpłatna.',
+        'Audyt WCAG 2.1 AA dla sklepów internetowych. EAA obowiązuje już od czerwca 2025 - egzekucja trwa. 95,9% stron nie spełnia wymogów (WebAIM 2024). Audyty od 2 000 EUR.',
       schemaFaq: [
         {
           question: 'Czym jest audyt WCAG dla e-commerce?',
@@ -25,7 +25,7 @@ const wcagAuditPageContent = {
         {
           question: 'Czy mój sklep musi spełniać wymogi WCAG?',
           answer:
-            'Jeśli sprzedajesz do klientów w UE, Europejski Akt o Dostępności (EAA, Dyrektywa 2019/882) obowiązuje od 28 czerwca 2025. Niespełnienie wymogów grozi karami finansowymi ustalonymi przez każde państwo członkowskie z osobna. W USA ustawa ADA Title III jest podstawą tysięcy pozwów rocznie - w 2025 roku złożono 3948 spraw.',
+            'Jeśli sprzedajesz do klientów w UE, Europejski Akt o Dostępności (EAA, Dyrektywa 2019/882) obowiązuje od 28 czerwca 2025 - od ponad roku trwa aktywna egzekucja. Niespełnienie wymogów grozi karami finansowymi ustalonymi przez każde państwo członkowskie z osobna. W USA ustawa ADA Title III jest podstawą tysięcy pozwów rocznie - w 2025 roku złożono 3948 spraw.',
         },
         {
           question: 'Jak długo trwa audyt?',
@@ -45,7 +45,7 @@ const wcagAuditPageContent = {
         {
           question: 'Jaka jest cena audytu?',
           answer:
-            'Cena zależy od wielkości sklepu, liczby szablonów stron i zakresu audytu. Skontaktuj się, aby omówić szczegóły i otrzymać wycenę.',
+            'Audyty zaczynają się od 2 000 EUR. Cena końcowa zależy od wielkości sklepu, liczby szablonów stron i zakresu audytu (np. checkout, formularze, panel klienta). Skontaktuj się, aby otrzymać dokładną wycenę w ciągu 24 godzin.',
         },
       ],
     },
@@ -70,17 +70,20 @@ const wcagAuditPageContent = {
     },
     hero: {
       eyebrow: 'Audyt WCAG dla e-commerce',
-      headline: ['Twój sklep może być niezgodny z prawem.', 'Sprawdźmy to.'],
+      headline: [
+        'Audyt WCAG dla sklepu internetowego.',
+        'Sprawdź zgodność z EAA i ADA.',
+      ],
       subheadline:
-        'Europejski Akt o Dostępności obowiązuje od 28 czerwca 2025. 95,9% stron nie spełnia wymogów WCAG. Audyt wskazuje dokładnie, co naprawić - zanim urząd lub pozew zmusi Cię do działania.',
+        'Europejski Akt o Dostępności obowiązuje już od czerwca 2025 - pierwsze kontrole i kary administracyjne są w toku. 95,9% sklepów wciąż nie spełnia WCAG (źródło: WebAIM 2024). Audyt pokaże dokładnie, co naprawić i w jakiej kolejności.',
       cta: {
-        label: 'Zamów audyt',
-        to: '/pl/contact/',
+        label: 'Zamów audyt - od 2 000 EUR',
+        to: '/pl/contact/?ref=audyt-wcag',
       },
       trustBadges: [
-        { icon: 'gavel', text: 'EAA obowiązuje od 28.06.2025' },
-        { icon: 'chart-bar', text: '95,9% stron nie spełnia WCAG' },
-        { icon: 'balance-scale', text: '3948 pozwów ADA w 2025 roku' },
+        { icon: 'gavel', text: 'EAA w mocy od czerwca 2025' },
+        { icon: 'chart-bar', text: '95,9% sklepów nie spełnia WCAG' },
+        { icon: 'balance-scale', text: '3 948 pozwów ADA w 2025 roku' },
       ],
     },
     problem: {
@@ -184,10 +187,10 @@ const wcagAuditPageContent = {
     },
     finalCta: {
       title: 'Gotowy sprawdzić, gdzie stoi Twój sklep?',
-      body: 'Prześlij URL i opisz zakres. Odpowiem z wyceną i terminem w ciągu 24 godzin.',
+      body: 'Prześlij URL i opisz zakres. Odpowiem z wyceną (od 2 000 EUR) i terminem w ciągu 24 godzin.',
       cta: {
-        label: 'Skontaktuj się',
-        to: '/pl/contact/',
+        label: 'Zamów audyt',
+        to: '/pl/contact/?ref=audyt-wcag',
       },
     },
     about: {
@@ -239,7 +242,7 @@ const wcagAuditPageContent = {
       title:
         'WCAG Audit for E-commerce | EAA & ADA Compliance | Dominik Gronkiewicz',
       description:
-        'WCAG 2.1 AA audit for online stores. EAA in force since June 28, 2025. 95.9% of sites fail. Get a detailed report before regulators or lawsuits act.',
+        'WCAG 2.1 AA audit for online stores. EAA in force since June 2025 - enforcement underway. 95.9% of sites fail (WebAIM 2024). Audits from €2,000.',
       schemaFaq: [
         {
           question: 'What is a WCAG audit for e-commerce?',
@@ -249,7 +252,7 @@ const wcagAuditPageContent = {
         {
           question: 'Does my store need to comply with WCAG?',
           answer:
-            'If you sell to customers in the EU, the European Accessibility Act (EAA, Directive 2019/882) has been enforceable since June 28, 2025. Non-compliance carries financial penalties set by each member state. In the US, ADA Title III is the basis for thousands of lawsuits each year - 3,948 were filed in 2025.',
+            'If you sell to customers in the EU, the European Accessibility Act (EAA, Directive 2019/882) has been enforceable since June 28, 2025 - active enforcement has been underway for over a year. Non-compliance carries financial penalties set by each member state. In the US, ADA Title III is the basis for thousands of lawsuits each year - 3,948 were filed in 2025.',
         },
         {
           question: 'How long does an audit take?',
@@ -269,7 +272,7 @@ const wcagAuditPageContent = {
         {
           question: 'How much does the audit cost?',
           answer:
-            'Pricing depends on the size of your store, the number of page templates, and the audit scope. Get in touch to discuss the details and receive a quote.',
+            'Audits start at €2,000. Final pricing depends on the size of your store, the number of page templates, and the audit scope (e.g. checkout, forms, customer dashboard). Get in touch for an exact quote within 24 hours.',
         },
       ],
     },
@@ -294,16 +297,19 @@ const wcagAuditPageContent = {
     },
     hero: {
       eyebrow: 'WCAG Audit for E-commerce',
-      headline: ['Your store may already be non-compliant.', "Let's find out."],
+      headline: [
+        'WCAG Audit for Your Online Store.',
+        'Check EAA and ADA Compliance.',
+      ],
       subheadline:
-        'The European Accessibility Act has been enforceable since June 28, 2025. 95.9% of websites fail WCAG. A professional audit tells you exactly what to fix — before a regulator or lawsuit forces your hand.',
+        'The European Accessibility Act has been in force since June 2025 - first audits and administrative penalties are already underway. 95.9% of online stores still fail WCAG (source: WebAIM 2024). A professional audit tells you exactly what to fix and in what order.',
       cta: {
-        label: 'Request an Audit',
-        to: '/contact/',
+        label: 'Request an Audit - from €2,000',
+        to: '/contact/?ref=wcag-audit',
       },
       trustBadges: [
-        { icon: 'gavel', text: 'EAA enforceable since 28 June 2025' },
-        { icon: 'chart-bar', text: '95.9% of sites fail WCAG' },
+        { icon: 'gavel', text: 'EAA in force since June 2025' },
+        { icon: 'chart-bar', text: '95.9% of stores fail WCAG' },
         { icon: 'balance-scale', text: '3,948 ADA lawsuits in 2025' },
       ],
     },
@@ -406,10 +412,10 @@ const wcagAuditPageContent = {
     },
     finalCta: {
       title: 'Ready to find out where your store stands?',
-      body: 'Send your URL and describe the scope. I will reply with a quote and timeline within 24 hours.',
+      body: 'Send your URL and describe the scope. I will reply with a quote (from €2,000) and timeline within 24 hours.',
       cta: {
-        label: 'Get in Touch',
-        to: '/contact/',
+        label: 'Request an Audit',
+        to: '/contact/?ref=wcag-audit',
       },
     },
     about: {

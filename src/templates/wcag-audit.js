@@ -430,11 +430,40 @@ const FinalCtaBody = styled.p`
   margin: 0 0 2.25em;
 `
 
+// ─── Sticky mobile CTA ──────────────────────────────────────────────────
+
+const StickyMobileCta = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  padding: 0.75em ${(props) => props.theme.spacing.md}
+    calc(0.75em + env(safe-area-inset-bottom));
+  background: ${(props) => props.theme.colors.base};
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.18);
+  display: flex;
+  justify-content: center;
+
+  a {
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
+    display: none;
+  }
+`
+
 // ─── Template ──────────────────────────────────────────────────────────────────
 
 const WcagAuditTemplate = ({ pageContext }) => {
   const locale = pageContext.locale || 'en'
   const content = getWcagAuditPageContent(locale)
+  const contactUrl = `${config.siteUrl}${content.hero.cta.to}`
+  const pageUrl = `${config.siteUrl}/${content.seo.pagePath}/`
 
   const serviceSchema = {
     '@context': 'https://schema.org',
@@ -449,10 +478,33 @@ const WcagAuditTemplate = ({ pageContext }) => {
       name: config.author,
       url: config.siteUrl,
     },
-    areaServed: 'Worldwide',
+    areaServed: [
+      { '@type': 'Place', name: 'European Union' },
+      { '@type': 'Place', name: 'United States' },
+      { '@type': 'Place', name: 'Worldwide' },
+    ],
+    audience: {
+      '@type': 'BusinessAudience',
+      audienceType:
+        locale === 'pl'
+          ? 'Sklepy internetowe, platformy SaaS, marketplace'
+          : 'Online stores, SaaS platforms, marketplaces',
+    },
     serviceType:
       locale === 'pl' ? 'Audyt dostępności WCAG' : 'WCAG Accessibility Audit',
-    url: `${config.siteUrl}/${content.seo.pagePath}/`,
+    url: pageUrl,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'EUR',
+      price: '2500',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: 'EUR',
+        minPrice: '2500',
+      },
+      availability: 'https://schema.org/InStock',
+      url: contactUrl,
+    },
   }
 
   const faqSchema = {
@@ -468,6 +520,28 @@ const WcagAuditTemplate = ({ pageContext }) => {
     })),
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: locale === 'pl' ? 'Strona główna' : 'Home',
+        item: `${config.siteUrl}${content.menu.homePath}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name:
+          locale === 'pl'
+            ? 'Audyt WCAG dla e-commerce'
+            : 'WCAG Audit for E-commerce',
+        item: pageUrl,
+      },
+    ],
+  }
+
   return (
     <Layout
       navigationVariant={content.layout.navigationVariant}
@@ -481,6 +555,9 @@ const WcagAuditTemplate = ({ pageContext }) => {
           {JSON.stringify(serviceSchema)}
         </script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
       </Helmet>
       <SEO
         pagePath={content.seo.pagePath}
@@ -651,7 +728,11 @@ const WcagAuditTemplate = ({ pageContext }) => {
           </Button>
         </FinalCtaInner>
       </FinalCtaSection>
-    </Layout>
+      <StickyMobileCta>
+        <Button to={content.hero.cta.to} primary onDark>
+          {content.hero.cta.label}
+        </Button>
+      </StickyMobileCta>    </Layout>
   )
 }
 
