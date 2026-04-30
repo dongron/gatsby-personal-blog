@@ -136,6 +136,41 @@ exports.createPages = ({ graphql, actions }) => {
         },
       })
 
+      const wcagAuditAlternates = [
+        {
+          hrefLang: 'pl',
+          path: 'pl/audyt-wcag-ecommerce',
+          openGraphLocale: 'pl_PL',
+        },
+        {
+          hrefLang: 'en',
+          path: 'wcag-audit-ecommerce',
+          openGraphLocale: 'en_US',
+        },
+        {
+          hrefLang: 'x-default',
+          path: 'wcag-audit-ecommerce',
+        },
+      ]
+
+      createPage({
+        path: `/pl/audyt-wcag-ecommerce/`,
+        component: path.resolve(`./src/templates/wcag-audit.js`),
+        context: {
+          locale: 'pl',
+          seoAlternates: wcagAuditAlternates,
+        },
+      })
+
+      createPage({
+        path: `/wcag-audit-ecommerce/`,
+        component: path.resolve(`./src/templates/wcag-audit.js`),
+        context: {
+          locale: 'en',
+          seoAlternates: wcagAuditAlternates,
+        },
+      })
+
       // Main blog page
       createPage({
         path: `/blog/`,

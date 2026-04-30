@@ -31,6 +31,16 @@ import {
   faClock,
   faMapMarkerAlt,
   faPhone,
+  faGavel,
+  faChartBar,
+  faBalanceScale,
+  faUserTimes,
+  faExclamationTriangle,
+  faFileAlt,
+  faTasks,
+  faShieldAlt,
+  faExternalLinkAlt,
+  faChevronDown,
 } from '@fortawesome/free-solid-svg-icons'
 
 const Template = ({
@@ -63,7 +73,17 @@ const Template = ({
     faGlobe,
     faClock,
     faMapMarkerAlt,
-    faPhone
+    faPhone,
+    faGavel,
+    faChartBar,
+    faBalanceScale,
+    faUserTimes,
+    faExclamationTriangle,
+    faFileAlt,
+    faTasks,
+    faShieldAlt,
+    faExternalLinkAlt,
+    faChevronDown,
   )
 
   return (

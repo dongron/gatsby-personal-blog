@@ -8,6 +8,7 @@ const theme = {
     success: '#4caf50', // Green for availability indicator
     text: '#222222', // Dark gray for body text
     textMuted: '#666666', // Secondary text on white, ~4.54:1 contrast
+    lightBlue: '#7eb8f7', // Light blue for text/icons on dark backgrounds
   },
   sizes: {
     maxWidth: '1050px',
