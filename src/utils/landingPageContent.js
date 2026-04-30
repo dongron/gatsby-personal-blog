@@ -178,7 +178,7 @@ const landingPageContent = {
       ],
       primaryCta: {
         label: 'Dowieźmy To Razem!',
-        to: '/contact/',
+        to: '/pl/contact/',
       },
     },
     services: {
@@ -192,10 +192,11 @@ const landingPageContent = {
       primaryCta: {
         label: 'Poznaj Mnie Lepiej',
         to: '/about/',
+        hidden: true,
       },
       secondaryCta: {
         label: 'Skontaktuj Się',
-        to: '/contact/',
+        to: '/pl/contact/',
       },
     },
     availability: {
@@ -205,7 +206,7 @@ const landingPageContent = {
       hoursText: '20-40 godzin tygodniowo',
       timezoneText: 'CET (Polska)',
       ctaLabel: 'Rozpocznij Projekt',
-      ctaTo: '/contact/',
+      ctaTo: '/pl/contact/',
     },
     footer: {
       footerTitle: 'Stopka strony',

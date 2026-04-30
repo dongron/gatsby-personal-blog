@@ -33,6 +33,22 @@ exports.createPages = ({ graphql, actions }) => {
       path: '',
     },
   ]
+  const contactAlternates = [
+    {
+      hrefLang: 'en',
+      path: 'contact',
+      openGraphLocale: 'en_US',
+    },
+    {
+      hrefLang: 'pl',
+      path: 'pl/contact',
+      openGraphLocale: 'pl_PL',
+    },
+    {
+      hrefLang: 'x-default',
+      path: 'contact',
+    },
+  ]
 
   const loadPosts = new Promise((resolve, reject) => {
     graphql(`
@@ -99,6 +115,24 @@ exports.createPages = ({ graphql, actions }) => {
           skip: 0,
           numPages: numPages + 1,
           currentPage: 1,
+        },
+      })
+
+      createPage({
+        path: `/contact/`,
+        component: path.resolve(`./src/templates/contact.js`),
+        context: {
+          locale: 'en',
+          seoAlternates: contactAlternates,
+        },
+      })
+
+      createPage({
+        path: `/pl/contact/`,
+        component: path.resolve(`./src/templates/contact.js`),
+        context: {
+          locale: 'pl',
+          seoAlternates: contactAlternates,
         },
       })
 

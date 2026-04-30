@@ -63,17 +63,11 @@ const Form = styled.form`
 const Name = styled.input`
   margin: 0 0 1em 0;
   width: 100%;
-  @media (min-width: ${(props) => props.theme.responsive.small}) {
-    width: 49%;
-  }
 `
 
 const Email = styled.input`
   margin: 0 0 1em 0;
   width: 100%;
-  @media (min-width: ${(props) => props.theme.responsive.small}) {
-    width: 49%;
-  }
 `
 
 const Message = styled.textarea`
@@ -84,11 +78,34 @@ const Message = styled.textarea`
   resize: vertical;
 `
 
+const FieldGroupContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+  width: 100%;
+`
+
+const FieldGroup = styled.div`
+  width: 100%;
+
+  @media (min-width: ${(props) => props.theme.responsive.small}) {
+    width: ${(props) => (props.$half ? '49%' : '100%')};
+  }
+`
+
+const Label = styled.label`
+  display: block;
+  margin: 0 0 0.5em 0;
+  color: ${(props) => props.theme.colors.base};
+  font-weight: 600;
+`
+
 const FormNote = styled.p`
   width: 100%;
   margin: 0 0 1.5em 0;
   line-height: 1.7;
   color: ${(props) => props.theme.colors.text};
+  margin-bottom: 3em;
 `
 
 // todo: unify buttons
@@ -160,7 +177,27 @@ const Modal = styled.div`
   }
 `
 
-const Button = styled.div`
+const ActionButton = styled.button`
+  background: ${(props) => props.theme.colors.base};
+  font-family: inherit;
+  font-size: 1em;
+  display: inline-block;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  padding: 1em;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: 0.2s;
+  z-index: 99;
+  &:hover {
+    background: ${(props) => props.theme.colors.highlight};
+  }
+`
+
+const ActionLink = styled.a`
   background: ${(props) => props.theme.colors.base};
   font-size: 1em;
   display: inline-block;
@@ -174,17 +211,51 @@ const Button = styled.div`
   text-decoration: none;
   transition: 0.2s;
   z-index: 99;
-  &:focus {
-    outline: none;
-  }
   &:hover {
     background: ${(props) => props.theme.colors.highlight};
   }
 `
 
+const defaultContent = {
+  note: `${config.remoteAvailabilityText} ${config.preferredContactText}`,
+  fields: {
+    name: {
+      label: 'Full Name',
+      placeholder: 'Full Name',
+    },
+    email: {
+      label: 'Email',
+      placeholder: 'Email',
+    },
+    message: {
+      label: 'Message',
+      placeholder: 'Message',
+    },
+  },
+  submitLabel: 'Send',
+  loadingLabel: 'Sending...',
+  modal: {
+    success: {
+      title: 'Success',
+      message:
+        'Thank you for reaching out. I will get back to you as soon as possible.',
+      closeLabel: 'Ok',
+    },
+    error: {
+      title: 'Error',
+      message:
+        'Something went wrong sending your message. You can email me directly at',
+      actionLabel: 'Open email',
+    },
+  },
+}
+
 class ContactForm extends React.Component {
   constructor(props) {
     super(props)
+    this.modalRef = React.createRef()
+    this.closeButtonRef = React.createRef()
+    this.lastFocusedElement = null
     this.state = {
       name: '',
       email: '',
@@ -239,6 +310,37 @@ class ContactForm extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const isDialogOpen =
+      this.state.showModal &&
+      (this.state.status === 'error' || this.state.status === 'success')
+    const wasDialogOpen =
+      prevState.showModal &&
+      (prevState.status === 'error' || prevState.status === 'success')
+
+    if (!wasDialogOpen && isDialogOpen) {
+      this.lastFocusedElement = document.activeElement
+      if (this.closeButtonRef.current) {
+        this.closeButtonRef.current.focus()
+      }
+    }
+
+    if (wasDialogOpen && !isDialogOpen && this.lastFocusedElement) {
+      this.lastFocusedElement.focus()
+      this.lastFocusedElement = null
+    }
+  }
+
+  handleDialogKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      this.closeModal()
+    }
+  }
+
+  stopPropagation = (event) => {
+    event.stopPropagation()
+  }
+
   closeModal = () => {
     this.setState({ showModal: false, status: null })
   }
@@ -253,74 +355,142 @@ class ContactForm extends React.Component {
   }
 
   render() {
+    const mergedContent = {
+      ...defaultContent,
+      ...this.props.content,
+      fields: {
+        ...defaultContent.fields,
+        ...(this.props.content && this.props.content.fields),
+      },
+      modal: {
+        ...defaultContent.modal,
+        ...(this.props.content && this.props.content.modal),
+        success: {
+          ...defaultContent.modal.success,
+          ...(this.props.content &&
+            this.props.content.modal &&
+            this.props.content.modal.success),
+        },
+        error: {
+          ...defaultContent.modal.error,
+          ...(this.props.content &&
+            this.props.content.modal &&
+            this.props.content.modal.error),
+        },
+      },
+    }
+    const dialogVisible =
+      this.state.showModal &&
+      (this.state.status === 'error' || this.state.status === 'success')
+    const dialogDescriptionId =
+      this.state.status === 'error'
+        ? 'contact-form-modal-description-error'
+        : 'contact-form-modal-description-success'
+
     return (
       <Form
         name="contact"
         onSubmit={this.handleSubmit}
-        overlay={
-          this.state.showModal &&
-          (this.state.status === 'error' || this.state.status === 'success')
-        }
-        onClick={this.closeModal}
+        overlay={dialogVisible}
+        onClick={dialogVisible ? this.closeModal : undefined}
       >
-        <FormNote>
-          {config.remoteAvailabilityText} {config.preferredContactText}
-        </FormNote>
-        <Name
-          name="name"
-          type="text"
-          placeholder="Full Name"
-          value={this.state.name}
-          onChange={this.handleInputChange}
-          required
-        />
-        <Email
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={this.state.email}
-          onChange={this.handleInputChange}
-          required
-        />
-        <Message
-          name="message"
-          type="text"
-          placeholder="Message"
-          value={this.state.message}
-          onChange={this.handleInputChange}
-          required
-        />
+        <FormNote>{mergedContent.note}</FormNote>
+        <FieldGroupContainer>
+          <FieldGroup $half>
+            <Label htmlFor="contact-name">
+              {mergedContent.fields.name.label}
+            </Label>
+            <Name
+              id="contact-name"
+              name="name"
+              type="text"
+              placeholder={mergedContent.fields.name.placeholder}
+              value={this.state.name}
+              onChange={this.handleInputChange}
+              required
+            />
+          </FieldGroup>
+          <FieldGroup $half>
+            <Label htmlFor="contact-email">
+              {mergedContent.fields.email.label}
+            </Label>
+            <Email
+              id="contact-email"
+              name="email"
+              type="email"
+              placeholder={mergedContent.fields.email.placeholder}
+              value={this.state.email}
+              onChange={this.handleInputChange}
+              required
+            />
+          </FieldGroup>
+        </FieldGroupContainer>
+        <FieldGroup>
+          <Label htmlFor="contact-message">
+            {mergedContent.fields.message.label}
+          </Label>
+          <Message
+            id="contact-message"
+            name="message"
+            type="text"
+            placeholder={mergedContent.fields.message.placeholder}
+            value={this.state.message}
+            onChange={this.handleInputChange}
+            required
+          />
+        </FieldGroup>
         <Submit type="submit" disabled={this.state.loading}>
-          {this.state.loading ? <Spinner /> : 'Send'}
+          {this.state.loading ? (
+            <>
+              <Spinner aria-hidden="true" />
+              <span>{mergedContent.loadingLabel}</span>
+            </>
+          ) : (
+            mergedContent.submitLabel
+          )}
         </Submit>
 
         <Modal
-          visible={
-            this.state.showModal &&
-            (this.state.status === 'error' || this.state.status === 'success')
-          }
+          ref={this.modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="contact-form-modal-title"
+          aria-describedby={dialogDescriptionId}
+          visible={dialogVisible}
+          onClick={this.stopPropagation}
+          onKeyDown={this.handleDialogKeyDown}
         >
+          <h2 id="contact-form-modal-title" style={{ margin: '0 0 0.5em 0' }}>
+            {this.state.status === 'error'
+              ? mergedContent.modal.error.title
+              : mergedContent.modal.success.title}
+          </h2>
           {this.state.status === 'error' ? (
             <>
-              <p>
-                Something went wrong sending your message. You can email me
-                directly at <strong>{config.email}</strong> instead.
+              <p id="contact-form-modal-description-error">
+                {mergedContent.modal.error.message}{' '}
+                <strong>{config.email}</strong>.
               </p>
-              <Button
-                as="a"
+              <ActionLink
                 href={this.buildMailtoHref()}
                 onClick={this.closeModal}
+                ref={this.closeButtonRef}
               >
-                Open email
-              </Button>
+                {mergedContent.modal.error.actionLabel}
+              </ActionLink>
             </>
           ) : this.state.status === 'success' ? (
             <>
-              <p>
-                Thank you for reaching out. I will get back to you as soon as
-                possible.
+              <p id="contact-form-modal-description-success">
+                {mergedContent.modal.success.message}
               </p>
-              <Button onClick={this.closeModal}>Ok</Button>
+              <ActionButton
+                type="button"
+                onClick={this.closeModal}
+                ref={this.closeButtonRef}
+              >
+                {mergedContent.modal.success.closeLabel}
+              </ActionButton>
             </>
           ) : (
             <></>
@@ -333,6 +503,37 @@ class ContactForm extends React.Component {
 
 ContactForm.propTypes = {
   data: PropTypes.object,
+  content: PropTypes.shape({
+    note: PropTypes.string,
+    fields: PropTypes.shape({
+      name: PropTypes.shape({
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+      }),
+      email: PropTypes.shape({
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+      }),
+      message: PropTypes.shape({
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+      }),
+    }),
+    submitLabel: PropTypes.string,
+    loadingLabel: PropTypes.string,
+    modal: PropTypes.shape({
+      success: PropTypes.shape({
+        title: PropTypes.string,
+        message: PropTypes.string,
+        closeLabel: PropTypes.string,
+      }),
+      error: PropTypes.shape({
+        title: PropTypes.string,
+        message: PropTypes.string,
+        actionLabel: PropTypes.string,
+      }),
+    }),
+  }),
 }
 
 export default ContactForm

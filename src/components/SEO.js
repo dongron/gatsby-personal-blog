@@ -24,7 +24,6 @@ const sameAsProfiles = [
 
 const organizationId = `${config.siteUrl}/#organization`
 const personId = `${config.siteUrl}/#person`
-const contactPageUrl = `${config.siteUrl}/contact/`
 
 const postalAddress = config.address
   ? {
@@ -80,6 +79,7 @@ class SEO extends Component {
     let pageUrl
     let pageType = 'WebPage'
     const pageLocale = resolveLocaleConfig(localeConfig)
+    const normalizedPagePath = String(pagePath || '').replace(/^\/+|\/+$/g, '')
 
     // Set Default OpenGraph Parameters for Fallback
     title = config.siteTitle
@@ -110,6 +110,10 @@ class SEO extends Component {
       imgWidth = postNode.heroImage.ogimg.width
       imgHeight = postNode.heroImage.ogimg.height
     }
+
+    const contactPageUrl = normalizedPagePath.includes('contact')
+      ? buildPageUrl(normalizedPagePath)
+      : `${config.siteUrl}/contact/`
 
     const organizationContactPoint = {
       '@type': 'ContactPoint',
@@ -212,7 +216,7 @@ class SEO extends Component {
       },
     ]
 
-    if (pagePath === 'contact') {
+    if (normalizedPagePath.includes('contact')) {
       pageType = 'ContactPage'
     }
 

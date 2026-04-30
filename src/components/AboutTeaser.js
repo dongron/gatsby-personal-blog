@@ -6,7 +6,9 @@ import profileImage from '../images/profile-picture.jpg'
 
 const defaultContent = {
   title: 'About Me',
-  description: `I'm ${config.author}, a ${config.authorTitle} with ${config.authorTagline.toLowerCase()}. I specialize in building scalable web applications for healthcare, enterprise, and startups. My approach combines technical excellence with clear communication and a focus on delivering real business value.`,
+  description: `I'm ${config.author}, a ${
+    config.authorTitle
+  } with ${config.authorTagline.toLowerCase()}. I specialize in building scalable web applications for healthcare, enterprise, and startups. My approach combines technical excellence with clear communication and a focus on delivering real business value.`,
   primaryCta: {
     label: 'Learn More About Me',
     to: '/about/',
@@ -19,19 +21,20 @@ const defaultContent = {
 
 const Wrapper = styled.section`
   width: 100%;
-  padding: ${props => props.theme.spacing.xxl} ${props => props.theme.spacing.md};
-  background: ${props => props.theme.colors.tertiary};
+  padding: ${(props) => props.theme.spacing.xxl}
+    ${(props) => props.theme.spacing.md};
+  background: ${(props) => props.theme.colors.tertiary};
 `
 
 const Inner = styled.div`
-  max-width: ${props => props.theme.sizes.maxWidth};
+  max-width: ${(props) => props.theme.sizes.maxWidth};
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2em;
 
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     flex-direction: row;
     align-items: center;
   }
@@ -46,10 +49,10 @@ const Photo = styled.img`
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid ${props => props.theme.colors.white};
+  border: 4px solid ${(props) => props.theme.colors.white};
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     width: 250px;
     height: 250px;
   }
@@ -59,7 +62,7 @@ const Content = styled.div`
   flex: 1;
   text-align: center;
 
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     text-align: left;
   }
 `
@@ -68,13 +71,13 @@ const Title = styled.h2`
   font-size: 2em;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: ${props => props.theme.colors.base};
+  color: ${(props) => props.theme.colors.base};
 `
 
 const Description = styled.p`
   font-size: 1.1em;
   line-height: 1.7;
-  color: ${props => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
   margin-bottom: 1.5rem;
 `
 
@@ -84,7 +87,7 @@ const ButtonGroup = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     justify-content: flex-start;
   }
 `
@@ -107,12 +110,12 @@ const AboutTeaser = ({ content = defaultContent }) => {
           <Title>{title}</Title>
           <Description>{description}</Description>
           <ButtonGroup>
-            <Button to={primaryCta.to} primary>
-              {primaryCta.label}
-            </Button>
-            <Button to={secondaryCta.to}>
-              {secondaryCta.label}
-            </Button>
+            {!primaryCta.hidden && (
+              <Button to={primaryCta.to} primary>
+                {primaryCta.label}
+              </Button>
+            )}
+            <Button to={secondaryCta.to}>{secondaryCta.label}</Button>
           </ButtonGroup>
         </Content>
       </Inner>

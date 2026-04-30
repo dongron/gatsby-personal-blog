@@ -1,6 +1,5 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import config from '../utils/siteConfig'
 import Layout from '../components/Layout'
 import Container from '../components/Container'
 import PageTitle from '../components/PageTitle'
@@ -9,6 +8,9 @@ import SEO from '../components/SEO'
 import AvailabilityBadge from '../components/AvailabilityBadge'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import config from '../utils/siteConfig'
+import { getLandingPageContent } from '../utils/landingPageContent'
+import { getContactPageContent } from '../utils/contactPageContent'
 
 const Intro = styled.div`
   max-width: ${props => props.theme.sizes.maxWidthCentered};
@@ -22,7 +24,7 @@ const Intro = styled.div`
   }
 `
 
-const StatusSection = styled.div`
+const StatusSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,12 +47,13 @@ const StatusInfo = styled.div`
   margin-top: 0.5em;
 `
 
-const StatusItem = styled.div`
+const StatusItem = styled.p`
   display: flex;
   align-items: center;
   gap: 0.5em;
   color: ${props => props.theme.colors.base};
   font-size: 0.95em;
+  margin: 0;
 
   svg {
     color: ${props => props.theme.colors.highlight};
@@ -102,67 +105,89 @@ const ContactLink = styled.a`
   }
 `
 
-const Contact = ({ data }) => {
-  const postNode = {
-    title: `Contact - ${config.siteTitle}`,
-    description: config.contactPageDescription,
-  }
+const ContactTemplate = ({ pageContext }) => {
+  const locale = pageContext.locale || 'en'
+  const landingPageContent = getLandingPageContent(locale)
+  const contactPageContent = getContactPageContent(locale)
+  const isPolish = locale === 'pl'
+
+  const menuContent = isPolish
+    ? {
+        ...landingPageContent.menu,
+        ...contactPageContent.menu,
+      }
+    : undefined
 
   return (
-    <Layout>
+    <Layout
+      navigationVariant={landingPageContent.layout.navigationVariant}
+      menuContent={menuContent}
+      footerVariant={landingPageContent.layout.footerVariant}
+      footerContent={landingPageContent.footer}
+    >
       <Helmet>
-        <title>{`Contact - ${config.siteTitle}`}</title>
+        <title>{contactPageContent.seo.title}</title>
       </Helmet>
-      <SEO postNode={postNode} pagePath="contact" customTitle />
+      <SEO
+        postNode={{
+          title: contactPageContent.seo.title,
+          description: contactPageContent.seo.description,
+        }}
+        pagePath={contactPageContent.seo.pagePath}
+        customTitle
+        localeConfig={landingPageContent.locale}
+        alternates={pageContext.seoAlternates}
+      />
 
       <Container>
-        <PageTitle>Get In Touch</PageTitle>
+        <PageTitle>{contactPageContent.page.title}</PageTitle>
 
         <Intro>
-          <p>
-            Have a project in mind or want to discuss how I can help?
-            Fill out the form below and I'll get back to you within 24-48 hours.
-          </p>
+          <p>{contactPageContent.page.intro}</p>
         </Intro>
 
-        <StatusSection>
-          <AvailabilityBadge />
+        <StatusSection aria-label={landingPageContent.availability.badgeLabel}>
+          <AvailabilityBadge
+            label={landingPageContent.availability.badgeLabel}
+            compactAvailableLabel={landingPageContent.availability.compactAvailableLabel}
+            compactBusyLabel={landingPageContent.availability.compactBusyLabel}
+          />
           <StatusInfo>
             <StatusItem>
-              <FontAwesomeIcon icon="clock" />
-              {config.hoursPerWeek}
+              <FontAwesomeIcon icon="clock" aria-hidden="true" />
+              {landingPageContent.availability.hoursText}
             </StatusItem>
             <StatusItem>
-              <FontAwesomeIcon icon="map-marker-alt" />
-              {config.timezone}
+              <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
+              {landingPageContent.availability.timezoneText}
             </StatusItem>
           </StatusInfo>
         </StatusSection>
 
-        <ContactForm />
+        <ContactForm content={contactPageContent.form} />
 
         <AlternativeContact>
-          <AlternativeTitle>Prefer Another Way?</AlternativeTitle>
+          <AlternativeTitle>{contactPageContent.page.alternativeTitle}</AlternativeTitle>
           <ContactLinks>
             <ContactLink href={`mailto:${config.email}`}>
-              <FontAwesomeIcon icon="envelope" />
-              <span>Email Me</span>
+              <FontAwesomeIcon icon="envelope" aria-hidden="true" />
+              <span>{contactPageContent.page.links.email}</span>
             </ContactLink>
             <ContactLink
               href={config.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={['fab', 'linkedin']} />
-              <span>LinkedIn</span>
+              <FontAwesomeIcon icon={['fab', 'linkedin']} aria-hidden="true" />
+              <span>{contactPageContent.page.links.linkedIn}</span>
             </ContactLink>
             <ContactLink
               href={config.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={['fab', 'github']} />
-              <span>GitHub</span>
+              <FontAwesomeIcon icon={['fab', 'github']} aria-hidden="true" />
+              <span>{contactPageContent.page.links.github}</span>
             </ContactLink>
           </ContactLinks>
         </AlternativeContact>
@@ -171,4 +196,4 @@ const Contact = ({ data }) => {
   )
 }
 
-export default Contact
+export default ContactTemplate
