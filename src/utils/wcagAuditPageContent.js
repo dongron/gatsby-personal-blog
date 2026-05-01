@@ -15,12 +15,12 @@ const wcagAuditPageContent = {
       title:
         'Audyt WCAG dla e-commerce | Zgodność z EAA i ADA | Dominik Gronkiewicz',
       description:
-        'Audyt WCAG 2.1 AA dla sklepów internetowych. EAA obowiązuje już od czerwca 2025 - egzekucja trwa. 95,9% stron nie spełnia wymogów (WebAIM 2024). Audyty od 2 000 EUR.',
+        'Audyt WCAG 2.2 AA dla sklepów internetowych. EAA obowiązuje już od czerwca 2025 - egzekucja trwa. 95,9% stron nie spełnia wymogów (WebAIM 2024). Audyty od 2 000 EUR.',
       schemaFaq: [
         {
           question: 'Czym jest audyt WCAG dla e-commerce?',
           answer:
-            'Audyt WCAG to szczegółowa analiza techniczna sklepu internetowego pod kątem spełnienia standardu WCAG 2.1 AA. Każda znaleziona niezgodność jest przypisana do konkretnego kryterium WCAG i opisana z priorytetem naprawy. Wynikiem jest raport gotowy do przekazania zespołowi deweloperskiemu.',
+            'Audyt WCAG to szczegółowa analiza techniczna sklepu internetowego pod kątem spełnienia standardu WCAG 2.2 AA. Każda znaleziona niezgodność jest przypisana do konkretnego kryterium WCAG i opisana z priorytetem naprawy. Wynikiem jest raport gotowy do przekazania zespołowi deweloperskiemu.',
         },
         {
           question: 'Czy mój sklep musi spełniać wymogi WCAG?',
@@ -35,7 +35,7 @@ const wcagAuditPageContent = {
         {
           question: 'Co dostaję po audycie?',
           answer:
-            'Otrzymujesz: (1) szczegółowy raport z listą niezgodności przypisanych do kryteriów WCAG 2.1, (2) priorytetyzowaną listę napraw z oceną trudności wdrożenia, (3) podsumowanie statusu zgodności z EAA i ADA, (4) zalecenia dotyczące zapobiegania przyszłym naruszeniom.',
+            'Otrzymujesz: (1) szczegółowy raport z listą niezgodności przypisanych do kryteriów WCAG 2.2, (2) priorytetyzowaną listę napraw z oceną trudności wdrożenia, (3) podsumowanie statusu zgodności z EAA i ADA, (4) zalecenia dotyczące zapobiegania przyszłym naruszeniom.',
         },
         {
           question: 'Czy audyt obejmuje poprawki w kodzie?',
@@ -127,7 +127,7 @@ const wcagAuditPageContent = {
         {
           icon: 'file-alt',
           title: 'Raport z listą niezgodności',
-          body: 'Każda znaleziona niezgodność jest przypisana do konkretnego kryterium WCAG 2.1 AA. Widzisz dokładnie, co jest zepsute, gdzie to jest i dlaczego narusza standard.',
+          body: 'Każda znaleziona niezgodność jest przypisana do konkretnego kryterium WCAG 2.2 AA. Widzisz dokładnie, co jest zepsute, gdzie to jest i dlaczego narusza standard.',
         },
         {
           icon: 'tasks',
@@ -242,12 +242,12 @@ const wcagAuditPageContent = {
       title:
         'WCAG Audit for E-commerce | EAA & ADA Compliance | Dominik Gronkiewicz',
       description:
-        'WCAG 2.1 AA audit for online stores. EAA in force since June 2025 - enforcement underway. 95.9% of sites fail (WebAIM 2024). Audits from €2,000.',
+        'WCAG 2.2 AA audit for online stores. EAA in force since June 2025 - enforcement underway. 95.9% of sites fail (WebAIM 2024). Audits from €2,000.',
       schemaFaq: [
         {
           question: 'What is a WCAG audit for e-commerce?',
           answer:
-            'A WCAG audit is a detailed technical review of your online store against the WCAG 2.1 AA standard. Every finding is mapped to a specific success criterion with a fix priority. You receive a report ready to hand to your development team.',
+            'A WCAG audit is a detailed technical review of your online store against the WCAG 2.2 AA standard. Every finding is mapped to a specific success criterion with a fix priority. You receive a report ready to hand to your development team.',
         },
         {
           question: 'Does my store need to comply with WCAG?',
@@ -262,7 +262,7 @@ const wcagAuditPageContent = {
         {
           question: 'What do I receive after the audit?',
           answer:
-            'You receive: (1) a detailed report mapping every failure to a WCAG 2.1 success criterion, (2) a prioritised fix list with implementation difficulty ratings, (3) an EAA and ADA compliance summary, and (4) preventive recommendations to avoid regressions.',
+            'You receive: (1) a detailed report mapping every failure to a WCAG 2.2 success criterion, (2) a prioritised fix list with implementation difficulty ratings, (3) an EAA and ADA compliance summary, and (4) preventive recommendations to avoid regressions.',
         },
         {
           question: 'Does the audit include code fixes?',
@@ -354,7 +354,7 @@ const wcagAuditPageContent = {
         {
           icon: 'file-alt',
           title: 'Failure Report Mapped to WCAG Criteria',
-          body: 'Every finding is mapped to a specific WCAG 2.1 AA success criterion. You see exactly what is broken, where it is, and why it violates the standard.',
+          body: 'Every finding is mapped to a specific WCAG 2.2 AA success criterion. You see exactly what is broken, where it is, and why it violates the standard.',
         },
         {
           icon: 'tasks',
