@@ -21,14 +21,14 @@ const PageTemplate = ({ data }) => {
 
       <Container>
         <PageTitle>{title}</PageTitle>
-        <PageBody body={body} page />
+        <PageBody body={body} page $noMaxWidth />
       </Container>
     </Layout>
   )
 }
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     contentfulPage(slug: { eq: $slug }) {
       title
       slug
