@@ -47,10 +47,22 @@ const ContactMeta = styled.address`
   }
 `
 
-const ContactMetaLines = styled.span``
-
 const ContactMetaLine = styled.span`
   display: block;
+`
+
+const PositioningLine = styled.p`
+  margin: 0 0 0.75em;
+  color: ${(props) => props.theme.colors.base};
+  font-weight: 600;
+`
+
+const LegalFinePrint = styled.p`
+  margin: 0.35em auto 0;
+  max-width: ${(props) => props.theme.sizes.maxWidthCentered};
+  color: ${(props) => props.theme.colors.text};
+  font-size: 0.8em;
+  line-height: 1.5;
 `
 
 const formatPhoneNumber = (phoneNumber) =>
@@ -203,35 +215,6 @@ const Footer = ({ variant = 'default', content = defaultContent }) => {
               </ContactMeta>
             </li>
             <li>
-              <ContactMeta
-                as="a"
-                href={config.googleMapsProfileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open ${config.formattedAddress} in Google Maps`}
-              >
-                <ContactMetaLine>
-                  <FontAwesomeIcon icon="map-marker-alt" />
-                </ContactMetaLine>
-                <ContactMetaLines>
-                  <ContactMetaLine>
-                    {config.publisher.split(' ').slice(0, 2).join(' ')} <br />
-                    {config.publisher.split(' ').slice(2, 4).join(' ')}
-                  </ContactMetaLine>
-                  <ContactMetaLine>
-                    {config.address.streetAddress},
-                  </ContactMetaLine>
-                  <ContactMetaLine>
-                    {config.address.postalCode} {config.address.addressLocality}
-                    ,
-                  </ContactMetaLine>
-                  <ContactMetaLine>
-                    {footerContent.addressCountryLabel}
-                  </ContactMetaLine>
-                </ContactMetaLines>
-              </ContactMeta>
-            </li>
-            <li>
               <ContactMeta as="a" href={`tel:${config.phone}`}>
                 <ContactMetaLine>
                   <FontAwesomeIcon icon="phone" />
@@ -265,7 +248,11 @@ const Footer = ({ variant = 'default', content = defaultContent }) => {
       </List>
 
       <BottomRow>
+        <PositioningLine>
+          {config.serviceAreaText} {config.workingHoursText}
+        </PositioningLine>
         © {getCurrentYear()} {config.author}. {footerContent.builtWithText}
+        <LegalFinePrint>{config.legalFooterText}</LegalFinePrint>
       </BottomRow>
     </Wrapper>
   )

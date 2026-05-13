@@ -13,7 +13,7 @@ const contactPageContent = {
     page: {
       title: 'Get In Touch',
       intro:
-        "Do you have a project in mind or want to discuss how I can assist you? Fill out the form below, and I'll respond within 24–48 hours.",
+        "Do you have a project in mind or want to discuss how I can assist you? Fill out the form below, and I'll respond within 24-48 hours.",
       alternativeTitle: 'Prefer Another Way?',
       links: {
         email: 'Email Me',
@@ -22,7 +22,7 @@ const contactPageContent = {
       },
     },
     form: {
-      note: `${config.remoteAvailabilityText} ${config.preferredContactText}`,
+      note: `${config.remoteAvailabilityText} ${config.workingHoursText} ${config.preferredContactText}`,
       fields: {
         name: {
           label: 'Full Name',

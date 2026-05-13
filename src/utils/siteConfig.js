@@ -31,7 +31,7 @@ module.exports = {
   availabilityStatus: true,
   availabilityText: 'Available for new projects',
   hoursPerWeek: '20-40 hours/week',
-  timezone: 'CET (Poland)',
+  timezone: 'Remote, overlapping EU/AU hours',
   email: 'me@dominikgronkiewicz.com',
   phone: '+48508252823',
   linkedInUrl: 'https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/',
@@ -45,15 +45,27 @@ module.exports = {
   },
   addressCountryLabel: 'Poland',
   formattedAddress: 'Sosnowa 17/19, 42-216 Częstochowa, Poland',
-  serviceArea: 'Worldwide',
+  serviceAreaText: 'Serving clients in Australia, Switzerland and the EU.',
+  workingHoursText: 'Remote, overlapping AU/EU hours.',
+  legalFooterText:
+    'Registered in Poland. Software Development Dominik Gronkiewicz, Sosnowa 17/19, 42-216 Częstochowa, Poland.',
+  serviceArea: [
+    { '@type': 'Country', name: 'Australia' },
+    { '@type': 'Country', name: 'Switzerland' },
+    { '@type': 'AdministrativeArea', name: 'European Union' },
+  ],
   htmlLanguage: 'en',
   openGraphLocale: 'en_US',
   hreflang: 'en',
   xDefaultHreflang: 'x-default',
   availableLanguages: ['English'],
+  serviceLanguages: ['English', 'Polish'],
   contactPageDescription:
-    'Contact Dominik Gronkiewicz about React, Next.js and TypeScript projects. Based in Częstochowa, Poland and available for remote collaboration worldwide.',
-  remoteAvailabilityText: 'Available for remote work worldwide.',
-  preferredContactText: 'The contact form below is the preferred way to reach me.',
-  contactPointDescription: 'Use the contact form or email for new project inquiries.',
+    'Contact Dominik Gronkiewicz about React, Next.js and TypeScript projects. Remote, overlapping AU/EU hours for clients in Australia, Switzerland and the EU.',
+  remoteAvailabilityText:
+    'Available for remote work with clients in Australia, Switzerland and the EU.',
+  preferredContactText:
+    'The contact form below is the preferred way to reach me.',
+  contactPointDescription:
+    'Use the contact form or email for new project inquiries.',
 }

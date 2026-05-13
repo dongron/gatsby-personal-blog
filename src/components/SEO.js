@@ -24,6 +24,7 @@ const sameAsProfiles = [
 
 const organizationId = `${config.siteUrl}/#organization`
 const personId = `${config.siteUrl}/#person`
+const businessId = `${config.siteUrl}/#business`
 
 const postalAddress = config.address
   ? {
@@ -40,8 +41,7 @@ const resolveLocaleConfig = (localeConfig = {}) => {
     htmlLanguage: localeConfig.htmlLanguage || config.htmlLanguage,
     openGraphLocale: localeConfig.openGraphLocale || config.openGraphLocale,
     hreflang: localeConfig.hreflang || config.hreflang,
-    xDefaultHreflang:
-      localeConfig.xDefaultHreflang || config.xDefaultHreflang,
+    xDefaultHreflang: localeConfig.xDefaultHreflang || config.xDefaultHreflang,
     availableLanguages:
       localeConfig.availableLanguages || config.availableLanguages,
   }
@@ -188,6 +188,7 @@ class SEO extends Component {
         url: config.authorUrl,
         image: config.siteUrl + config.siteLogo,
         jobTitle: config.authorTitle,
+        address: postalAddress,
         sameAs: sameAsProfiles,
         worksFor: {
           '@id': organizationId,
@@ -213,6 +214,29 @@ class SEO extends Component {
         address: postalAddress,
         areaServed: config.serviceArea,
         contactPoint: [organizationContactPoint],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ProfessionalService',
+        '@id': businessId,
+        name: config.publisher,
+        url: config.siteUrl,
+        image: config.siteUrl + config.shareImage,
+        description: config.contactPageDescription || config.siteDescription,
+        email: config.email,
+        telephone: config.phone,
+        sameAs: sameAsProfiles,
+        address: postalAddress,
+        areaServed: config.serviceArea,
+        availableLanguage: config.serviceLanguages,
+        priceRange: '€€€',
+        contactPoint: [organizationContactPoint],
+        founder: {
+          '@id': personId,
+        },
+        parentOrganization: {
+          '@id': organizationId,
+        },
       },
     ]
 
@@ -290,7 +314,7 @@ class SEO extends Component {
 
       if (pageType === 'ContactPage') {
         pageSchema.mainEntity = {
-          '@id': organizationId,
+          '@id': businessId,
         }
         pageSchema.about = {
           '@id': personId,
@@ -327,7 +351,12 @@ class SEO extends Component {
         />
         <meta name="author" content={config.author} />
         {postSEO && <meta name="article:author" content={config.author} />}
-        {postSEO && <meta name="article:published_time" content={postNode.publishDateISO} />}
+        {postSEO && (
+          <meta
+            name="article:published_time"
+            content={postNode.publishDateISO}
+          />
+        )}
 
         {/* Schema.org tags */}
         <script type="application/ld+json">

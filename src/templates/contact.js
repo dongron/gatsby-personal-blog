@@ -13,14 +13,14 @@ import { getLandingPageContent } from '../utils/landingPageContent'
 import { getContactPageContent } from '../utils/contactPageContent'
 
 const Intro = styled.div`
-  max-width: ${props => props.theme.sizes.maxWidthCentered};
+  max-width: ${(props) => props.theme.sizes.maxWidthCentered};
   margin: 0 auto 3em;
   text-align: center;
 
   p {
     font-size: 1.1em;
     line-height: 1.8;
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
   }
 `
 
@@ -31,10 +31,10 @@ const StatusSection = styled.section`
   gap: 1em;
   margin-bottom: 3em;
   padding: 2em;
-  background: ${props => props.theme.colors.tertiary};
+  background: ${(props) => props.theme.colors.tertiary};
   border-radius: 2px;
   text-align: center;
-  max-width: ${props => props.theme.sizes.maxWidthCentered};
+  max-width: ${(props) => props.theme.sizes.maxWidthCentered};
   margin-left: auto;
   margin-right: auto;
 `
@@ -51,27 +51,27 @@ const StatusItem = styled.p`
   display: flex;
   align-items: center;
   gap: 0.5em;
-  color: ${props => props.theme.colors.base};
+  color: ${(props) => props.theme.colors.base};
   font-size: 0.95em;
   margin: 0;
 
   svg {
-    color: ${props => props.theme.colors.highlight};
+    color: ${(props) => props.theme.colors.highlight};
   }
 `
 
 const AlternativeContact = styled.section`
-  max-width: ${props => props.theme.sizes.maxWidthCentered};
+  max-width: ${(props) => props.theme.sizes.maxWidthCentered};
   margin: 3em auto 0;
   padding-top: 3em;
-  border-top: 1px solid ${props => props.theme.colors.secondary};
+  border-top: 1px solid ${(props) => props.theme.colors.secondary};
 `
 
 const AlternativeTitle = styled.h2`
   font-size: 1.25em;
   font-weight: 600;
   margin-bottom: 1em;
-  color: ${props => props.theme.colors.base};
+  color: ${(props) => props.theme.colors.base};
   text-align: center;
 `
 
@@ -86,22 +86,22 @@ const ContactLink = styled.a`
   display: flex;
   align-items: center;
   gap: 0.75em;
-  color: ${props => props.theme.colors.base};
+  color: ${(props) => props.theme.colors.base};
   text-decoration: none;
   font-weight: 600;
   transition: all 0.2s;
   padding: 1em;
-  border: 1px solid ${props => props.theme.colors.secondary};
+  border: 1px solid ${(props) => props.theme.colors.secondary};
   border-radius: 2px;
 
   svg {
     font-size: 1.5em;
-    color: ${props => props.theme.colors.highlight};
+    color: ${(props) => props.theme.colors.highlight};
   }
 
   &:hover {
-    border-color: ${props => props.theme.colors.highlight};
-    color: ${props => props.theme.colors.highlight};
+    border-color: ${(props) => props.theme.colors.highlight};
+    color: ${(props) => props.theme.colors.highlight};
   }
 `
 
@@ -149,7 +149,9 @@ const ContactTemplate = ({ pageContext }) => {
         <StatusSection aria-label={landingPageContent.availability.badgeLabel}>
           <AvailabilityBadge
             label={landingPageContent.availability.badgeLabel}
-            compactAvailableLabel={landingPageContent.availability.compactAvailableLabel}
+            compactAvailableLabel={
+              landingPageContent.availability.compactAvailableLabel
+            }
             compactBusyLabel={landingPageContent.availability.compactBusyLabel}
           />
           <StatusInfo>
@@ -158,7 +160,7 @@ const ContactTemplate = ({ pageContext }) => {
               {landingPageContent.availability.hoursText}
             </StatusItem>
             <StatusItem>
-              <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
+              <FontAwesomeIcon icon="globe" aria-hidden="true" />
               {landingPageContent.availability.timezoneText}
             </StatusItem>
           </StatusInfo>
@@ -167,7 +169,9 @@ const ContactTemplate = ({ pageContext }) => {
         <ContactForm content={contactPageContent.form} />
 
         <AlternativeContact>
-          <AlternativeTitle>{contactPageContent.page.alternativeTitle}</AlternativeTitle>
+          <AlternativeTitle>
+            {contactPageContent.page.alternativeTitle}
+          </AlternativeTitle>
           <ContactLinks>
             <ContactLink href={`mailto:${config.email}`}>
               <FontAwesomeIcon icon="envelope" aria-hidden="true" />
