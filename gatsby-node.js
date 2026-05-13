@@ -8,6 +8,9 @@ exports.createSchemaCustomization = ({ actions }) => {
       tags: [ContentfulTag] @link(by: "id", from: "tags___NODE")
       heroImage: ContentfulAsset @link(by: "id", from: "heroImage___NODE")
     }
+    type ContentfulTag implements Node {
+      post: [ContentfulPost] @link(by: "id", from: "tags___NODE")
+    }
     type ContentfulPortfolioItem implements Node {
       heroImage: ContentfulAsset @link(by: "id", from: "heroImage___NODE")
     }
@@ -241,34 +244,53 @@ exports.createPages = ({ graphql, actions }) => {
   })
 
   const loadTags = new Promise((resolve, reject) => {
+    // Query all posts with their tags to build reverse relationship
     graphql(`
       {
-        allContentfulTag {
+        allContentfulPost(sort: { publishDate: DESC }) {
           edges {
             node {
-              slug
-              post {
-                id
+              id
+              tags {
+                slug
+                title
               }
             }
           }
         }
       }
     `).then((result) => {
-      const tags = result.data.allContentfulTag.edges
       const postsPerPage = config.postsPerPage
-
-      // Create tag pages with pagination if needed
-      tags.map(({ node }) => {
-        const totalPosts = (node.post && node.post.length) || 0
+      
+      // Build a map of tag slugs to posts
+      const tagPostsMap = {}
+      
+      result.data.allContentfulPost.edges.forEach(({ node }) => {
+        if (node.tags && node.tags.length > 0) {
+          node.tags.forEach((tag) => {
+            if (!tagPostsMap[tag.slug]) {
+              tagPostsMap[tag.slug] = {
+                title: tag.title,
+                posts: []
+              }
+            }
+            tagPostsMap[tag.slug].posts.push(node.id)
+          })
+        }
+      })
+      
+      // Create tag pages with pagination
+      Object.entries(tagPostsMap).forEach(([slug, { title, posts }]) => {
+        const totalPosts = posts.length
         const numPages = Math.ceil(totalPosts / postsPerPage)
+        
         Array.from({ length: numPages }).forEach((_, i) => {
           createPage({
             path:
-              i === 0 ? `/tag/${node.slug}/` : `/tag/${node.slug}/${i + 1}/`,
+              i === 0 ? `/tag/${slug}/` : `/tag/${slug}/${i + 1}/`,
             component: path.resolve(`./src/templates/tag.js`),
             context: {
-              slug: node.slug,
+              slug: slug,
               limit: postsPerPage,
               skip: i * postsPerPage,
               numPages: numPages,

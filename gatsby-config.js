@@ -92,13 +92,44 @@ module.exports = {
           '/blog/+([0-9])',
           '/blog/+([0-9])/',
         ],
+        serialize: ({ path }) => {
+          let changefreq = 'weekly'
+          let priority = 0.7
+
+          // Homepage
+          if (path === '/') {
+            changefreq = 'weekly'
+            priority = 1.0
+          }
+          // Blog posts (updated rarely, approximately yearly)
+          else if (path.startsWith('/blog/') && !path.endsWith('/')) {
+            changefreq = 'yearly'
+            priority = 0.8
+          }
+          // Tag pages (updated when new posts are added)
+          else if (path.startsWith('/tag/')) {
+            changefreq = 'weekly'
+            priority = 0.6
+          }
+          // Static pages (rarely change)
+          else if (['/about', '/contact', '/portfolio'].includes(path)) {
+            changefreq = 'monthly'
+            priority = 0.5
+          }
+
+          return {
+            url: path,
+            changefreq,
+            priority,
+          }
+        },
       },
     },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: config.siteUrl,
-        sitemap: `${config.siteUrl}/sitemap/sitemap-index.xml`,
+        sitemap: `${config.siteUrl}/sitemap-index.xml`,
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
