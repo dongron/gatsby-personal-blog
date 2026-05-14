@@ -1,176 +1,168 @@
-# gatsby-starter-gcn
+# Dominik Gronkiewicz - Senior React & Next.js Developer
 
-A starter template to build amazing static websites with Gatsby, Contentful and Netlify. Inspired by [gatsby-contentful-starter](https://github.com/contentful-userland/gatsby-contentful-starter).
+I help founders and product teams turn slow, brittle or unfinished web apps into fast, maintainable products that support real business growth.
 
-For Gatsby `v1` please use the [v1 branch](https://github.com/ryanwiemer/gatsby-starter-gcn/tree/v1)
+Available for remote React, Next.js and TypeScript projects: **20-40 hours/week**, with overlapping EU/AU hours.
 
-## Features
+This repository powers [dominikgronkiewicz.com](https://dominikgronkiewicz.com), my portfolio, technical blog and service website.
 
-- Contentful integration with ready to go placeholder content
-- Netlify integration including a pre-built contact form
-- Minimal responsive design - made to customize or tear apart
-- Pagination logic
-- Styled components
-- SEO Friendly Component
-  - JSON-LD Schema
-  - OpenGraph sharing support
-  - Sitemap Generation
-- Google Analytics
-- Progressive Web app
-- Offline Support
-- RSS Feed
-- [Gatsby Standard module](https://www.npmjs.com/package/eslint-config-gatsby-standard) for linting Javascript with StandardJS
-- Stylelint support for Styled Components to lint the CSS in JS
+**Need help with a React, Next.js or TypeScript product?** Start here: [dominikgronkiewicz.com/contact](https://dominikgronkiewicz.com/contact/)
 
-## Demo
+[Visit the live website](https://dominikgronkiewicz.com) | [View portfolio](https://dominikgronkiewicz.com/portfolio/) | [Read the blog](https://dominikgronkiewicz.com/blog/) | [Start a project](https://dominikgronkiewicz.com/contact/)
 
-https://gcn.netlify.com/
+[![Live website](https://img.shields.io/badge/live-dominikgronkiewicz.com-121212?style=flat-square)](https://dominikgronkiewicz.com)
+[![Gatsby](https://img.shields.io/badge/Gatsby-5-663399?style=flat-square&logo=gatsby)](https://www.gatsbyjs.com/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=121212)](https://react.dev/)
+[![Contentful](https://img.shields.io/badge/CMS-Contentful-2478CC?style=flat-square&logo=contentful)](https://www.contentful.com/)
+[![Netlify](https://img.shields.io/badge/Hosting-Netlify-00C7B7?style=flat-square&logo=netlify&logoColor=121212)](https://www.netlify.com/)
 
-![](screenshots/demo.jpg)
+## Proof Of Work
 
-## Getting Started
+- **Flowrence Healthcare Platform:** Built full-stack product features for a healthcare platform connecting patients with nurse practitioners across clinic locations and mobile services.
+- **CeHDI - Global Center For Health Diplomacy And Inclusion:** Rebuilt and improved a global health diplomacy website with modern frontend architecture, accessible UI patterns and maintainable content workflows.
+- **Novartis / Altimetrik:** Worked on enterprise pharmaceutical web applications, dashboards, Progressive Web App architecture and shared frontend systems.
+- **More case studies:** See the current portfolio at [dominikgronkiewicz.com/portfolio](https://dominikgronkiewicz.com/portfolio/).
 
-### Install
+## What I Do
 
+- **Modern web apps:** React, Next.js and TypeScript applications built for performance, reliability and scale.
+- **Healthcare and enterprise software:** Secure, accessible interfaces for teams that need dependable workflows and careful delivery.
+- **Progressive Web Apps:** Offline-capable experiences with app-like behavior across devices.
+- **Product rescue and modernization:** Taking over messy, unfinished or aging products and turning them into maintainable systems.
+- **Technical consulting:** Architecture reviews, code audits, frontend modernization and delivery guidance.
+
+## Why Teams Work With Me
+
+- **10 years of production experience:** I have shipped real web applications across healthcare, enterprise, SaaS, Web3 and agency environments.
+- **Senior execution without hand-holding:** I can own features, clarify requirements, make architecture decisions and keep delivery moving.
+- **Strong frontend depth:** React, Next.js, TypeScript, CMS integrations, accessibility, performance and design-system implementation.
+- **Business-aware delivery:** I care about conversion, maintainability, product risk and what the software is supposed to unlock for the business.
+- **Clear async communication:** Remote-first collaboration with overlap for EU, Australia and Switzerland.
+
+## Best Fit
+
+I am a strong fit if you need:
+
+- A senior React or Next.js developer who can work independently.
+- A technical partner for rebuilding, modernizing or finishing a web product.
+- Help with frontend architecture, Contentful or Sanity CMS, accessibility or performance.
+- Someone comfortable with product delivery, technical communication and practical tradeoffs.
+
+## The Agentic Architect AI Lab
+
+I also run [The Agentic Architect AI Lab](https://www.skool.com/ai-for-software-business-9941), a Skool community for senior developers learning to ship products with AI leverage, agentic workflows and practical software architecture.
+
+## What This Repo Proves
+
+This repository is the production codebase behind the live site and a public example of how I structure a content-driven portfolio with performance, SEO and maintainability in mind.
+
+- Gatsby 5 and React 18 application architecture.
+- Contentful-backed pages, blog posts, tags and portfolio entries.
+- Styled Components design-system primitives.
+- SEO metadata, canonical URLs, Open Graph data, JSON-LD schema and sitemap generation.
+- RSS feed, PWA manifest and offline support.
+- Netlify deployment setup and contact form integration.
+- Responsive templates for home, blog, portfolio, accessibility landing pages and contact flows.
+- Public code showing how I organize a real content-driven marketing site.
+
+## Tech Stack
+
+The site is intentionally built as a real production example of the kind of systems I ship: content-driven, SEO-aware, maintainable and deployed.
+
+| Area      | Tools                                                  |
+| --------- | ------------------------------------------------------ |
+| Framework | Gatsby 5, React 18                                     |
+| Content   | Contentful, Markdown, GraphQL                          |
+| Styling   | styled-components, shared theme tokens                 |
+| Media     | Gatsby Image, Sharp, Contentful assets                 |
+| SEO       | React Helmet, canonical URLs, sitemap, robots.txt, RSS |
+| Hosting   | Netlify                                                |
+| Quality   | ESLint, Stylelint, Prettier                            |
+
+## Work With Me
+
+Use the live site if you want to discuss a React, Next.js, TypeScript, accessibility or web app modernization project:
+
+- Website: [dominikgronkiewicz.com](https://dominikgronkiewicz.com)
+- Contact: [dominikgronkiewicz.com/contact](https://dominikgronkiewicz.com/contact/)
+- Email: [me@dominikgronkiewicz.com](mailto:me@dominikgronkiewicz.com)
+- LinkedIn: [Dominik Gronkiewicz](https://www.linkedin.com/in/dominik-gronkiewicz-b696b950/)
+- GitHub: [dongron](https://github.com/dongron)
+- Secondary GitHub: [dominikgronkiewicz](https://github.com/dominikgronkiewicz)
+- Skool Community: [The Agentic Architect AI Lab](https://www.skool.com/ai-for-software-business-9941)
+
+**Ready to improve a web product?** Send the project context through [the contact page](https://dominikgronkiewicz.com/contact/).
+
+## Repository Tour
+
+- [src/components](src/components) - reusable UI, layout, navigation, service cards, portfolio cards and content sections.
+- [src/templates](src/templates) - Gatsby templates for home, pages, blog posts, portfolio listings and case studies.
+- [src/pages](src/pages) - file-based pages, including contact.
+- [src/styles](src/styles) - theme and global styling foundations.
+- [src/utils/siteConfig.js](src/utils/siteConfig.js) - site metadata, contact links, availability and SEO defaults.
+- [gatsby-node.js](gatsby-node.js) - dynamic page creation for Contentful content.
+- [SETUP_INSTRUCTIONS.md](SETUP_INSTRUCTIONS.md) - extra notes for the portfolio content model and redesign setup.
+
+## Local Development
+
+This project uses Contentful as the content source. You need Contentful credentials before Gatsby can build the full site locally.
+
+1. Install dependencies:
+
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+2. Configure Contentful credentials. The setup script can import the starter content model and create the local environment file:
+
+   ```bash
+   npm run setup
+   ```
+
+   For Netlify and production builds, configure these environment variables:
+
+   ```bash
+   ACCESS_TOKEN
+   SPACE_ID
+   GOOGLE_ANALYTICS
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Create a production build:
+
+   ```bash
+   npm run build
+   ```
+
+5. Serve the production build locally:
+
+   ```bash
+   npm run serve-local
+   ```
+
+Useful maintenance command:
+
+```bash
+npm run clean
 ```
-git clone https://github.com/ryanwiemer/gatsby-starter-gcn.git
-npm i
-```
 
-Or via the [Gatsby CLI](https://www.npmjs.com/package/gatsby-cli)
+## Content Notes
 
-```
-gatsby new gatsby-starter-gcn https://github.com/ryanwiemer/gatsby-starter-gcn.git
-```
+The live site content is managed in Contentful. Blog posts, pages, tags and portfolio items are generated from Contentful entries at build time.
 
-### Setup Contentful
+The portfolio redesign expects a `portfolioItem` content type. See [SETUP_INSTRUCTIONS.md](SETUP_INSTRUCTIONS.md) for the field list and setup checklist.
 
-1.  [Sign up](https://www.contentful.com/sign-up/) for Contentful and create a new empty space
+Do not commit Contentful tokens, space IDs or other credentials. Treat them like production secrets.
 
-2.  `npm run setup`
+## Acknowledgements
 
-3.  Enter in the requested info for your Contentful space found here: **app.contentful.com** → **Space Settings** → **API keys**. You will need to provide both a standard API key (first tab) and a management key (second tab).
+This site started from [gatsby-starter-gcn](https://github.com/ryanwiemer/gatsby-starter-gcn), then evolved into a custom portfolio, blog and service website.
 
-## Customization
+## License
 
-### Website Data
-
-Edit [`/src/utils/siteConfig.js`](https://github.com/ryanwiemer/gatsby-starter-gcn/blob/master/src/utils/siteConfig.js)
-
-```js
-module.exports = {
-  siteTitle: 'GCN',
-  siteTitleAlt: 'GCN Gatsby Starter',
-  publisher: 'Publisher named GCN',
-  siteDescription:
-    'A starter template to build amazing static websites with Gatsby, Contentful and Netlify',
-  siteUrl: 'https://gcn.netlify.com',
-  postsPerHomePage: 7,
-  postsPerPage: 6,
-  author: 'GCN User',
-  authorUrl: 'https://gcn.netlify.com/about/',
-  userTwitter: '@twitter',
-  shortTitle: 'GCN App',
-  shareImage: '/logos/share.jpg',
-  shareImageWidth: 900,
-  shareImageHeight: 600,
-  siteLogo: '/logos/logo-512.png',
-  backgroundColor: '#e9e9e9',
-  themeColor: '#121212',
-  copyright: 'Copyright © 2018 GCN User',
-}
-```
-
-**Note:** If you do not see your changes reflected when developing locally you may need to delete the `.cache` folder and restart the development server.
-
-### Theme
-
-Edit [`/src/styles/theme.js`](https://github.com/ryanwiemer/gatsby-starter-gcn/blob/master/src/styles/theme.js)
-
-```js
-const theme = {
-  colors: {
-    base: '#121212',
-    secondary: '#e9e9e9',
-    tertiary: '#f3f3f3',
-    highlight: '#5b8bf7',
-  },
-  sizes: {
-    maxWidth: '1200px',
-    maxWidthCentered: '650px',
-  },
-  responsive: {
-    small: '35em',
-    medium: '50em',
-    large: '70em',
-  },
-}
-```
-
-### Using Gatsby Standard
-
-1.  Quickly check your code for errors with the `npm test` script
-2.  You can view the [Gatsby Standard README](https://github.com/brandonkal/eslint-config-gatsby-standard) for details on how to integrate this project's included Gatsby Standard, Stylelint, and Prettier modules into your text editor
-
-### Content and SEO
-
-1.  You can replace the `share.jpg` and `logo-512` files in the `static/logos` directory. After replacing these files ensure that you edit the image size dimensions specified in `/src/utils/siteConfig.js`
-2.  Meta descriptions are defined in Contentful. If you choose to leave this field blank on new posts a 320 character excerpt of the post/page will be used.
-3.  **IMPORTANT:** Be sure to manually enter at least one meta description on a page and post in Contentful or the site will fail to build.
-
-## Deployment
-
-### Manual Netlify Deployment
-
-1.  Run `gatsby build`
-
-2.  Drag and drop the folder `/public/` into Netlify
-
-### Netlify Deployment From Git (Recommended)
-
-1.  [New Netlify website from Git](https://app.netlify.com/start)
-
-2.  Connect with GitHub and select your repo
-
-3.  Navigate to Netlify: **Settings** → **Build & Deploy** → **Build Environment Variables**. Add the following environment variables using the Space ID and Production Access Token from Contentful. Additionally if desired you can enter a Google Analytics ID. The variables must be named exactly like this in order to work properly.
-
-```
-ACCESS_TOKEN
-SPACE_ID
-GOOGLE_ANALYTICS
-```
-
-![](screenshots/netlify-build-environment-variables.jpg)
-
-4.  Navigate to Netlify: **Deploys**. Click `Trigger deploy` to manually trigger a deploy to confirm the website is building successfully using your build environment variables. At this point be aware that every time you push to `master` a deploy will automatically start and be published to production.
-
-## Additional Settings
-
-### Contentful Webhook (Optional)
-
-1.  Navigate to Netlify:
-    **Settings** → **Build & Deploy** → **Build hooks**.
-    Create a new build hook.
-
-2.  Navigate to Contentful:
-    **app.contentful.com** → **Space Settings** → **Webhooks**. Create a webhook using the Netlify build URL that you just created
-    and configure which events should trigger the build on production. For example the following will rebuild the production website every time a post or page is published, unpublished or deleted:
-
-![](screenshots/contentful-webhook-selected-events.jpg)
-
-### Netlify Form Notifications (Optional)
-
-1.  Navigate to Netlify:
-    **Forms** → **Notifications**
-
-2.  Click the add notification dropdown and select your desired notification method.
-
-![](screenshots/netlify-form-notifcations.jpg)
-
-## Useful Tips
-
-- If you make edits to your Contentful space while running `gatsby develop` you will need to stop it and rerun the command to see the changes reflected. For example a new post or page will not automatically show up until the website has been rebuilt.
-- The template assumes you have at least **one page**, **one post** and **one tag** in Contentful. If you do not the website will fail to build.
-- The SEO component assumes you have entered at least one meta description in Contentful for a post and one for a page. If you do not the website will fail to build. See the Content and SEO section above.
-- **DO NOT** store your Contentful access tokens or space ids anywhere in GitHub. Treat them like passwords.
-- **Yarn Users:** remove the `yarn*` line from the `.gitignore` file to avoid discrepancies in the Netlify deploy.
+This project is available under the [MIT License](LICENSE).
