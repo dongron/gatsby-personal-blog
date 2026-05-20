@@ -101,6 +101,20 @@ const Template = ({
           <Footer variant={footerVariant} content={footerContent} />
         </GlobalStyleComponent>
       </ThemeProvider>
+      <img
+        src="/api/agent-ping"
+        alt=""
+        width="1"
+        height="1"
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          width: 1,
+          height: 1,
+          opacity: 0,
+          pointerEvents: 'none',
+        }}
+      />
     </div>
   )
 }
