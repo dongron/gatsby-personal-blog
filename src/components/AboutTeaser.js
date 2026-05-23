@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Button from './Button'
 import config from '../utils/siteConfig'
-import profileImage from '../images/profile-picture.jpg'
+import profileImage from '../images/profile-picture-2025-05.png'
 
 const defaultContent = {
   title: 'About Me',
