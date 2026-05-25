@@ -26,7 +26,6 @@ const Index = ({ data, pageContext }) => {
       <SEO
         pagePath={pagePath}
         customTitle
-        noIndex={!isFirstPage}
         postNode={{
           title: pageTitle,
           description: config.siteDescription,

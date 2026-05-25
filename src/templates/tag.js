@@ -30,6 +30,7 @@ const TagTemplate = ({ data, pageContext }) => {
       <SEO
         pagePath={pagePath}
         customTitle
+        noIndex
         postNode={{
           title: pageTitle,
           description: `Browse ${numberOfPosts} posts tagged ${title} on ${config.siteTitle}.`,

@@ -89,8 +89,7 @@ module.exports = {
         excludes: [
           '/404*',
           '/dev-404-page',
-          '/blog/+([0-9])',
-          '/blog/+([0-9])/',
+          '/tag/**',
         ],
         serialize: ({ path }) => {
           let changefreq = 'weekly'
