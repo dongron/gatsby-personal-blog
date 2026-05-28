@@ -4,9 +4,6 @@ import { Link } from 'gatsby'
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: ${props => props.theme.sizes.maxWidthCentered};
   a {
     background: ${props => props.theme.colors.base};
     color: white;
