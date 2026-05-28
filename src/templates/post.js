@@ -9,6 +9,7 @@ import PageBody from '../components/PageBody'
 import TagList from '../components/TagList'
 import PostLinks from '../components/PostLinks'
 import PostDate from '../components/PostDate'
+import CommunityCTA from '../components/CommunityCTA'
 import SEO from '../components/SEO'
 
 const PostTemplate = ({ data, pageContext }) => {
@@ -32,6 +33,7 @@ const PostTemplate = ({ data, pageContext }) => {
         {tags && <TagList tags={tags} />}
         <PostDate date={publishDate} />
         <PageBody body={body} $noMaxWidth />
+        <CommunityCTA postSlug={slug} />
         <PostLinks previous={previous} next={next} />
       </Container>
     </Layout>

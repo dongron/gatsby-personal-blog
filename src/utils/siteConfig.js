@@ -68,4 +68,6 @@ module.exports = {
     'The contact form below is the preferred way to reach me.',
   contactPointDescription:
     'Use the contact form or email for new project inquiries.',
+  skoolCommunityName: 'The Agentic Architect Lab',
+  skoolCommunityUrl: 'https://www.skool.com/ai-for-software-business-9941',
 }
