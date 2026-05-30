@@ -52,6 +52,7 @@
     "develop": "gatsby develop",
     "develop-local": "./node_modules/gatsby/dist/bin/gatsby.js develop",
     "test": "npm run lint:css && npm run lint:js && npm run check-pretty",
+    "test:unit": "node --test src/components/__tests__/YouTube.test.js",
     "setup": "node ./bin/setup.js",
     "dev": "gatsby develop",
     "lint:js": "eslint --ext .js,.jsx .",

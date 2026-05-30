@@ -92,6 +92,27 @@ const landingPageContent = {
       title: 'What I Do',
       items: englishServices,
     },
+    youtube: {
+      title: 'YouTube',
+      subtitle:
+        'I break down software engineering and practical AI on my channel. A few to start with:',
+      videos: [
+        {
+          id: 'ToxZJ6e2AZU',
+          title:
+            'Stop Using Cursor. This IDE Gives the AI Full Control - Agent-first OpenCode',
+        },
+        {
+          id: 'OphMn16HG58',
+          title:
+            'Stop Overthinking. Ship SaaS in 24 Hours With Claude Code and Spec Kit.',
+        },
+        {
+          id: 'PEU4xZMyXXg',
+          title: 'The Only 3 Design Patterns You Need to Evaluate Every Dev Hire',
+        },
+      ],
+    },
     about: {
       title: 'About Me',
       description: `I'm ${config.author}, a ${
@@ -129,6 +150,7 @@ const landingPageContent = {
     sections: {
       showFeaturedWork: true,
       showLatestArticles: true,
+      showYouTube: true,
     },
   },
   pl: {
@@ -221,6 +243,7 @@ const landingPageContent = {
     sections: {
       showFeaturedWork: false,
       showLatestArticles: false,
+      showYouTube: false,
     },
   },
 }

@@ -7,6 +7,7 @@ import Welcome from '../components/Welcome'
 import Services from '../components/Services'
 import FeaturedWork from '../components/FeaturedWork'
 import LatestArticles from '../components/LatestArticles'
+import YouTube from '../components/YouTube'
 import AboutTeaser from '../components/AboutTeaser'
 import AvailabilityBanner from '../components/AvailabilityBanner'
 import { getLandingPageContent } from '../utils/landingPageContent'
@@ -45,6 +46,9 @@ const Index = ({ data, pageContext }) => {
       )}
       {landingPageContent.sections.showLatestArticles && (
         <LatestArticles posts={latestPosts} />
+      )}
+      {landingPageContent.sections.showYouTube && (
+        <YouTube content={landingPageContent.youtube} />
       )}
       <AboutTeaser content={landingPageContent.about} />
       <AvailabilityBanner content={landingPageContent.availability} />
