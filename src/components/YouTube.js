@@ -156,7 +156,7 @@ const WatchLink = styled.a`
 `
 
 export const buildEmbedUrl = id =>
-  `https://www.youtube.com/embed/${id}?autoplay=1`
+  `https://www.youtube.com/embed/${id}`
 
 export const buildThumbnailUrl = id =>
   `https://i.ytimg.com/vi/${id}/mqdefault.jpg`
