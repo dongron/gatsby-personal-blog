@@ -156,7 +156,7 @@ const WatchLink = styled.a`
 `
 
 export const buildEmbedUrl = id =>
-  `https://www.youtube.com/embed/${id}`
+  `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`
 
 export const buildThumbnailUrl = id =>
   `https://i.ytimg.com/vi/${id}/mqdefault.jpg`
@@ -178,7 +178,7 @@ const YouTube = ({ content }) => {
 
   useEffect(() => {
     const handler = e => {
-      if (e.origin !== 'https://www.youtube.com') return
+      if (e.origin !== 'https://www.youtube-nocookie.com') return
       try {
         const data = JSON.parse(e.data)
         if (data.event === 'onError') {
@@ -212,6 +212,7 @@ const YouTube = ({ content }) => {
                     src={buildEmbedUrl(video.id)}
                     title={video.title}
                     allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                    referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                   />
                 ) : playingId === video.id ? (

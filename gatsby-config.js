@@ -219,7 +219,20 @@ module.exports = {
         color: config.themeColor,
       },
     },
-    'gatsby-plugin-netlify',
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        mergeSecurityHeaders: false,
+        headers: {
+          '/*': [
+            'X-Frame-Options: DENY',
+            'X-XSS-Protection: 1; mode=block',
+            'X-Content-Type-Options: nosniff',
+            'Referrer-Policy: strict-origin-when-cross-origin',
+          ],
+        },
+      },
+    },
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
