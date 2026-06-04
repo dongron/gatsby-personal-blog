@@ -138,22 +138,58 @@ const VideoCaption = styled.h3`
   color: ${props => props.theme.colors.base};
 `
 
+const WatchLink = styled.a`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 export const buildEmbedUrl = id =>
-  `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`
+  `https://www.youtube.com/embed/${id}?autoplay=1`
 
 export const buildThumbnailUrl = id =>
   `https://i.ytimg.com/vi/${id}/mqdefault.jpg`
 
 const YouTube = ({ content }) => {
   const [playingId, setPlayingId] = useState(null)
+  const [errors, setErrors] = useState({})
   const playerRef = useRef(null)
+  const playingIdRef = useRef(null)
   const videos = content?.videos || []
+
+  playingIdRef.current = playingId
 
   useEffect(() => {
     if (playingId && playerRef.current) {
       playerRef.current.focus()
     }
   }, [playingId])
+
+  useEffect(() => {
+    const handler = e => {
+      if (e.origin !== 'https://www.youtube.com') return
+      try {
+        const data = JSON.parse(e.data)
+        if (data.event === 'onError') {
+          const id = data.info?.videoId ?? playingIdRef.current
+          if (id) setErrors(prev => ({ ...prev, [id]: true }))
+        }
+      } catch {}
+    }
+    window.addEventListener('message', handler)
+    return () => window.removeEventListener('message', handler)
+  }, [])
 
   if (videos.length === 0) {
     return null
@@ -170,7 +206,7 @@ const YouTube = ({ content }) => {
           {videos.map(video => (
             <VideoItem key={video.id}>
               <Frame>
-                {playingId === video.id ? (
+                {playingId === video.id && !errors[video.id] ? (
                   <Player
                     ref={playerRef}
                     src={buildEmbedUrl(video.id)}
@@ -178,6 +214,14 @@ const YouTube = ({ content }) => {
                     allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                     allowFullScreen
                   />
+                ) : playingId === video.id ? (
+                  <WatchLink
+                    href={`https://www.youtube.com/watch?v=${video.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Watch on YouTube
+                  </WatchLink>
                 ) : (
                   <Facade
                     type="button"
