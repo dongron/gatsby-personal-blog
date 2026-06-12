@@ -64,7 +64,8 @@ const landingPageContent = {
     },
     seo: {
       pagePath: '',
-      title: config.siteTitle,
+      title:
+        'Dominik Gronkiewicz | Senior React & Next.js Consultant · WCAG Audits',
       description: config.siteDescription,
     },
     layout: {
