@@ -3,10 +3,12 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import config from '../utils/siteConfig'
+import serviceLinks from '../utils/serviceLinks'
 
 const defaultContent = {
   footerTitle: 'Site Footer',
   navigationTitle: 'Navigation',
+  servicesTitle: 'Services',
   connectTitle: 'Connect',
   teamProjectsTitle: 'Team Projects',
   emailLabel: 'Email',
@@ -89,14 +91,14 @@ const List = styled.div`
   margin: 0 1.5em;
   gap: 2em;
 
-  @media screen and (min-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
     flex-wrap: nowrap;
   }
 `
 
 const Column = styled.section`
-  flex: 1;
-  min-width: 150px;
+  flex: 1 1 100%;
+  min-width: 0;
 
   ul {
     list-style: none;
@@ -117,6 +119,34 @@ const Column = styled.section`
     &:hover {
       color: ${(props) => props.theme.colors.highlight};
     }
+  }
+
+  @media screen and (min-width: ${(props) => props.theme.responsive.small}) {
+    flex-basis: 40%;
+  }
+
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
+    flex-basis: 0;
+    min-width: 150px;
+  }
+`
+
+const ServicesColumn = styled(Column)`
+  @media screen and (min-width: ${(props) => props.theme.responsive.small}) {
+    flex-basis: 100%;
+
+    ul {
+      column-count: 2;
+      column-gap: 2em;
+    }
+
+    li {
+      break-inside: avoid;
+    }
+  }
+
+  @media screen and (min-width: ${(props) => props.theme.responsive.medium}) {
+    flex-grow: 2;
   }
 `
 
@@ -175,6 +205,21 @@ const Footer = ({ variant = 'default', content = defaultContent }) => {
               </li>
             </ul>
           </Column>
+        )}
+
+        {showNavigation && (
+          <ServicesColumn as="nav" aria-labelledby="footer-services-title">
+            <ColumnTitle id="footer-services-title">
+              {footerContent.servicesTitle}
+            </ColumnTitle>
+            <ul>
+              {serviceLinks.map((service) => (
+                <li key={service.to}>
+                  <Link to={service.to}>{service.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </ServicesColumn>
         )}
 
         <Column aria-labelledby="footer-connect-title">
