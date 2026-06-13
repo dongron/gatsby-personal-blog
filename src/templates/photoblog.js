@@ -1,34 +1,20 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Helmet from 'react-helmet'
 import Container from '../components/Container'
 import Pagination from '../components/Pagination'
 import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
 import PhotoCard from '../components/PhotoCard'
 
-
 const Index = ({ data, pageContext }) => {
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1
   let photoPosts = extractPhotoPosts(data)
   // todo: pagination
-  const pageTitle = `${config.siteTitle} - Photoblogs`
 
   return (
     <Layout>
-      <SEO
-        pagePath="photoblog"
-        customTitle
-        postNode={{
-          title: pageTitle,
-          description: config.siteDescription,
-        }}
-      />
-      <Helmet>
-        <title>{pageTitle}</title>
-      </Helmet>
       <Container>
         {photoPosts.map((photoPost, index) => (
           <PhotoCard key={index} {...photoPost} />
@@ -42,6 +28,24 @@ const extractPhotoPosts = (queryResult) => {
   return queryResult.allContentfulAlbumEntry.edges[0].node.urls
 }
 
+export const Head = () => {
+  const pageTitle = `${config.siteTitle} - Photoblogs`
+
+  return (
+    <>
+      <title>{pageTitle}</title>
+      <SEO
+        pagePath="photoblog"
+        customTitle
+        postNode={{
+          title: pageTitle,
+          description: config.siteDescription,
+        }}
+      />
+    </>
+  )
+}
+
 // scrapping function to run in photo album console
 const scrapPhotoblogData = () => {
   let url, image, title, description
@@ -49,24 +53,18 @@ const scrapPhotoblogData = () => {
 
   for (let domElement of allHeadMetaTags) {
     let property = domElement.getAttribute('property')
-    if (property === 'og:title')
-      title = domElement.getAttribute('content')
-    else if (property === 'og:url')
-      url = domElement.getAttribute('content')
+    if (property === 'og:title') title = domElement.getAttribute('content')
+    else if (property === 'og:url') url = domElement.getAttribute('content')
     else if (property === 'og:description')
       description = domElement.getAttribute('content')
-    else if (property === 'og:image')
-      image = domElement.getAttribute('content')
+    else if (property === 'og:image') image = domElement.getAttribute('content')
   }
   return { url, image, title, description }
 }
 
 export const query = graphql`
-  query($skip: Int!, $limit: Int!) {
-    allContentfulAlbumEntry(
-      limit: $limit
-      skip: $skip
-    ) {
+  query ($skip: Int!, $limit: Int!) {
+    allContentfulAlbumEntry(limit: $limit, skip: $skip) {
       edges {
         node {
           urls {

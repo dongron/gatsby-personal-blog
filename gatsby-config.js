@@ -51,7 +51,6 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`, // Needed for dynamic images
     'gatsby-plugin-styled-components',
-    'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -80,11 +79,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
-        excludes: [
-          '/404*',
-          '/dev-404-page',
-          '/tag/**',
-        ],
+        excludes: ['/404*', '/dev-404-page', '/tag/**'],
         serialize: ({ path }) => {
           let changefreq = 'weekly'
           let priority = 0.7

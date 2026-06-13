@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
 import config from '../utils/siteConfig'
 import Layout from '../components/Layout'
 import Hero from '../components/Hero'
@@ -22,11 +21,6 @@ const PostTemplate = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>{`${title} - ${config.siteTitle}`}</title>
-      </Helmet>
-      <SEO pagePath={`blog/${slug}`} postNode={postNode} postSEO />
-
       <Hero title={title} image={heroImage} height={'50vh'} />
 
       <Container>
@@ -37,6 +31,18 @@ const PostTemplate = ({ data, pageContext }) => {
         <PostLinks previous={previous} next={next} />
       </Container>
     </Layout>
+  )
+}
+
+export const Head = ({ data }) => {
+  const { title, slug } = data.contentfulPost
+  const postNode = data.contentfulPost
+
+  return (
+    <>
+      <title>{`${title} - ${config.siteTitle}`}</title>
+      <SEO pagePath={`blog/${slug}`} postNode={postNode} postSEO />
+    </>
   )
 }
 

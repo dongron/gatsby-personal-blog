@@ -3,7 +3,6 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import CardList from '../components/CardList'
 import Card from '../components/Card'
-import Helmet from 'react-helmet'
 import Container from '../components/Container'
 import PageTitle from '../components/PageTitle'
 import Pagination from '../components/Pagination'
@@ -15,25 +14,10 @@ const Index = ({ data, pageContext }) => {
   const featuredPost = posts[0].node
   const { currentPage } = pageContext
   const isFirstPage = currentPage === 1
-  const pageTitle = isFirstPage
-    ? `Blog - ${config.siteTitle}`
-    : `Blog - Page ${currentPage} - ${config.siteTitle}`
   const visibleTitle = isFirstPage ? 'Blog' : `Blog, Page ${currentPage}`
-  const pagePath = isFirstPage ? 'blog' : `blog/${currentPage}`
 
   return (
     <Layout>
-      <SEO
-        pagePath={pagePath}
-        customTitle
-        postNode={{
-          title: pageTitle,
-          description: config.siteDescription,
-        }}
-      />
-      <Helmet>
-        <title>{pageTitle}</title>
-      </Helmet>
       <Container>
         <PageTitle small>{visibleTitle}</PageTitle>
         {isFirstPage ? (
@@ -53,6 +37,29 @@ const Index = ({ data, pageContext }) => {
         <Pagination context={pageContext} />
       </Container>
     </Layout>
+  )
+}
+
+export const Head = ({ pageContext }) => {
+  const { currentPage } = pageContext
+  const isFirstPage = currentPage === 1
+  const pageTitle = isFirstPage
+    ? `Blog - ${config.siteTitle}`
+    : `Blog - Page ${currentPage} - ${config.siteTitle}`
+  const pagePath = isFirstPage ? 'blog' : `blog/${currentPage}`
+
+  return (
+    <>
+      <title>{pageTitle}</title>
+      <SEO
+        pagePath={pagePath}
+        customTitle
+        postNode={{
+          title: pageTitle,
+          description: config.siteDescription,
+        }}
+      />
+    </>
   )
 }
 

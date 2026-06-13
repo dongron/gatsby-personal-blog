@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Helmet from 'react-helmet'
 import config from '../utils/siteConfig'
 
 const buildPageUrl = (pagePath = '') => {
@@ -325,7 +324,8 @@ class SEO extends Component {
     }
 
     return (
-      <Helmet htmlAttributes={{ lang: pageLocale.htmlLanguage }}>
+      <>
+        <html lang={pageLocale.htmlLanguage} />
         {/* General tags */}
         <link rel="canonical" href={pageUrl} />
         {!noIndex &&
@@ -392,7 +392,7 @@ class SEO extends Component {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:image" content={image} />
         <meta name="twitter:description" content={description} />
-      </Helmet>
+      </>
     )
   }
 }

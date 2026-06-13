@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Helmet from 'react-helmet'
 import SEO from '../components/SEO'
 import Welcome from '../components/Welcome'
 import Services from '../components/Services'
@@ -11,7 +10,6 @@ import YouTube from '../components/YouTube'
 import AboutTeaser from '../components/AboutTeaser'
 import AvailabilityBanner from '../components/AvailabilityBanner'
 import { getLandingPageContent } from '../utils/landingPageContent'
-
 
 const Index = ({ data, pageContext }) => {
   const locale = pageContext.locale || 'en'
@@ -26,19 +24,6 @@ const Index = ({ data, pageContext }) => {
       footerVariant={landingPageContent.layout.footerVariant}
       footerContent={landingPageContent.footer}
     >
-      <SEO
-        pagePath={landingPageContent.seo.pagePath}
-        customTitle
-        postNode={{
-          title: landingPageContent.seo.title,
-          description: landingPageContent.seo.description,
-        }}
-        localeConfig={landingPageContent.locale}
-        alternates={pageContext.seoAlternates}
-      />
-      <Helmet>
-        <title>{landingPageContent.seo.title}</title>
-      </Helmet>
       <Welcome content={landingPageContent.welcome} />
       <Services content={landingPageContent.services} />
       {landingPageContent.sections.showFeaturedWork && (
@@ -56,11 +41,32 @@ const Index = ({ data, pageContext }) => {
   )
 }
 
+export const Head = ({ pageContext }) => {
+  const locale = pageContext.locale || 'en'
+  const landingPageContent = getLandingPageContent(locale)
+
+  return (
+    <>
+      <title>{landingPageContent.seo.title}</title>
+      <SEO
+        pagePath={landingPageContent.seo.pagePath}
+        customTitle
+        postNode={{
+          title: landingPageContent.seo.title,
+          description: landingPageContent.seo.description,
+        }}
+        localeConfig={landingPageContent.locale}
+        alternates={pageContext.seoAlternates}
+      />
+    </>
+  )
+}
+
 export const query = graphql`
   query ($skip: Int!, $limit: Int!) {
     allContentfulPortfolioItem(
-      filter: {featured: {eq: true}}
-      sort: {order: ASC}
+      filter: { featured: { eq: true } }
+      sort: { order: ASC }
       limit: 3
     ) {
       edges {
@@ -70,22 +76,27 @@ export const query = graphql`
           description
           technologies
           heroImage {
-            gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 600)
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              placeholder: BLURRED
+              width: 600
+            )
           }
         }
       }
     }
-    allContentfulPost(
-      sort: {publishDate: DESC}
-      limit: 3
-    ) {
+    allContentfulPost(sort: { publishDate: DESC }, limit: 3) {
       edges {
         node {
           title
           slug
           publishDate(formatString: "MMMM DD, YYYY")
           heroImage {
-            gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 600)
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              placeholder: BLURRED
+              width: 600
+            )
           }
           body {
             childMarkdownRemark {
@@ -96,10 +107,10 @@ export const query = graphql`
       }
     }
     allContentfulFragment(
-      sort: {order: DESC}
+      sort: { order: DESC }
       limit: $limit
       skip: $skip
-      filter: {target: {eq: "home"}}
+      filter: { target: { eq: "home" } }
     ) {
       edges {
         node {

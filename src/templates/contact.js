@@ -1,5 +1,4 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import Layout from '../components/Layout'
 import Container from '../components/Container'
 import PageTitle from '../components/PageTitle'
@@ -125,20 +124,6 @@ const ContactTemplate = ({ pageContext }) => {
       footerVariant={landingPageContent.layout.footerVariant}
       footerContent={landingPageContent.footer}
     >
-      <Helmet>
-        <title>{contactPageContent.seo.title}</title>
-      </Helmet>
-      <SEO
-        postNode={{
-          title: contactPageContent.seo.title,
-          description: contactPageContent.seo.description,
-        }}
-        pagePath={contactPageContent.seo.pagePath}
-        customTitle
-        localeConfig={landingPageContent.locale}
-        alternates={pageContext.seoAlternates}
-      />
-
       <Container>
         <PageTitle>{contactPageContent.page.title}</PageTitle>
 
@@ -197,6 +182,28 @@ const ContactTemplate = ({ pageContext }) => {
         </AlternativeContact>
       </Container>
     </Layout>
+  )
+}
+
+export const Head = ({ pageContext }) => {
+  const locale = pageContext.locale || 'en'
+  const landingPageContent = getLandingPageContent(locale)
+  const contactPageContent = getContactPageContent(locale)
+
+  return (
+    <>
+      <title>{contactPageContent.seo.title}</title>
+      <SEO
+        postNode={{
+          title: contactPageContent.seo.title,
+          description: contactPageContent.seo.description,
+        }}
+        pagePath={contactPageContent.seo.pagePath}
+        customTitle
+        localeConfig={landingPageContent.locale}
+        alternates={pageContext.seoAlternates}
+      />
+    </>
   )
 }
 

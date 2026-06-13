@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Helmet from 'react-helmet'
 import Layout from '../components/Layout'
 
 const Box = styled.div`
@@ -25,16 +24,18 @@ const Title = styled.h1`
 
 const NotFoundPage = () => (
   <Layout>
-    <Helmet>
-      <title>404 - Page Not Found</title>
-      <meta name="description" content="Page not found" />
-    </Helmet>
-
     <Box>
       <Title>Error 404</Title>
       <Text>Sorry, that page can't be found</Text>
     </Box>
   </Layout>
+)
+
+export const Head = () => (
+  <>
+    <title>404 - Page Not Found</title>
+    <meta name="description" content="Page not found" />
+  </>
 )
 
 export default NotFoundPage

@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import sortBy from 'lodash/sortBy'
-import Helmet from 'react-helmet'
 import config from '../utils/siteConfig'
 import Layout from '../components/Layout'
 import Card from '../components/Card'
@@ -14,32 +13,14 @@ import SEO from '../components/SEO'
 const TagTemplate = ({ data, pageContext }) => {
   const posts = sortBy(data.contentfulTag.post, 'publishDate').reverse()
 
-  const { title, slug } = data.contentfulTag
+  const { title } = data.contentfulTag
   const numberOfPosts = posts.length
   const skip = pageContext.skip
   const limit = pageContext.limit
   const currentPage = pageContext.currentPage
-  const isFirstPage = currentPage === 1
-  const pageTitle = isFirstPage
-    ? `Tag: ${title} - ${config.siteTitle}`
-    : `Tag: ${title} - Page ${currentPage} - ${config.siteTitle}`
-  const pagePath = isFirstPage ? `tag/${slug}` : `tag/${slug}/${currentPage}`
 
   return (
     <Layout>
-      <SEO
-        pagePath={pagePath}
-        customTitle
-        noIndex
-        postNode={{
-          title: pageTitle,
-          description: `Browse ${numberOfPosts} posts tagged ${title} on ${config.siteTitle}.`,
-        }}
-      />
-      <Helmet>
-        <title>{pageTitle}</title>
-      </Helmet>
-
       <Container>
         <PageTitle small>
           {numberOfPosts} Posts Tagged: &ldquo;
@@ -55,6 +36,32 @@ const TagTemplate = ({ data, pageContext }) => {
         <Pagination context={pageContext} />
       </Container>
     </Layout>
+  )
+}
+
+export const Head = ({ data, pageContext }) => {
+  const { title, slug, post } = data.contentfulTag
+  const numberOfPosts = (post || []).length
+  const { currentPage } = pageContext
+  const isFirstPage = currentPage === 1
+  const pageTitle = isFirstPage
+    ? `Tag: ${title} - ${config.siteTitle}`
+    : `Tag: ${title} - Page ${currentPage} - ${config.siteTitle}`
+  const pagePath = isFirstPage ? `tag/${slug}` : `tag/${slug}/${currentPage}`
+
+  return (
+    <>
+      <title>{pageTitle}</title>
+      <SEO
+        pagePath={pagePath}
+        customTitle
+        noIndex
+        postNode={{
+          title: pageTitle,
+          description: `Browse ${numberOfPosts} posts tagged ${title} on ${config.siteTitle}.`,
+        }}
+      />
+    </>
   )
 }
 

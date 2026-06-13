@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Affiliates from './components/Affiliates'
 import config from './utils/siteConfig'
+import favicon from './images/favicon.ico'
 
 export default class HTML extends React.Component {
   render() {
@@ -19,6 +20,7 @@ export default class HTML extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+          <link rel="icon" href={favicon} />
           {this.props.headComponents}
           <Affiliates />
         </head>

@@ -1,5 +1,4 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -462,6 +461,176 @@ const StickyMobileCta = styled.div`
 const WcagAuditTemplate = ({ pageContext }) => {
   const locale = pageContext.locale || 'en'
   const content = getWcagAuditPageContent(locale)
+
+  return (
+    <Layout
+      navigationVariant={content.layout.navigationVariant}
+      menuContent={content.menu}
+      footerVariant={content.layout.footerVariant}
+      footerContent={content.footer}
+    >
+      {/* ── Hero ───────────────────────────────────────────────────────── */}
+      <HeroSection aria-labelledby="wcag-hero-heading">
+        <HeroInner>
+          <HeroEyebrow>{content.hero.eyebrow}</HeroEyebrow>
+          <HeroHeadline id="wcag-hero-heading">
+            {content.hero.headline.map((line, i) => (
+              <HeroHeadlineBreak key={i}>{line}</HeroHeadlineBreak>
+            ))}
+          </HeroHeadline>
+          <HeroSubheadline>{content.hero.subheadline}</HeroSubheadline>
+          <HeroCtaWrapper>
+            <Button to={content.hero.cta.to} primary onDark>
+              {content.hero.cta.label}
+            </Button>
+          </HeroCtaWrapper>
+          <TrustBadges>
+            {content.hero.trustBadges.map((badge) => (
+              <TrustBadge key={badge.text}>
+                <FontAwesomeIcon icon={badge.icon} aria-hidden="true" />
+                {badge.text}
+              </TrustBadge>
+            ))}
+          </TrustBadges>
+        </HeroInner>
+      </HeroSection>
+      {/* ── Problem ────────────────────────────────────────────────────── */}
+      <SectionLight aria-labelledby="wcag-problem-heading">
+        <SectionInner>
+          <SectionHeading id="wcag-problem-heading">
+            {content.problem.title}
+          </SectionHeading>
+          <SectionIntro>{content.problem.intro}</SectionIntro>
+          <CardGrid>
+            {content.problem.cards.map((card) => (
+              <ServiceCard
+                key={card.title}
+                icon={card.icon}
+                title={card.title}
+                description={card.body}
+              />
+            ))}
+          </CardGrid>
+        </SectionInner>
+      </SectionLight>
+      {/* ── Audience ───────────────────────────────────────────────────── */}
+      <SectionWhite aria-labelledby="wcag-audience-heading">
+        <SectionInner>
+          <SectionHeading id="wcag-audience-heading">
+            {content.audience.title}
+          </SectionHeading>
+          <SectionIntro>{content.audience.intro}</SectionIntro>
+          <CheckList>
+            {content.audience.items.map((item) => (
+              <CheckItem key={item}>
+                <FontAwesomeIcon icon="check-square" aria-hidden="true" />
+                {item}
+              </CheckItem>
+            ))}
+          </CheckList>
+        </SectionInner>
+      </SectionWhite>
+      {/* ── Deliverables ───────────────────────────────────────────────── */}
+      <SectionLight aria-labelledby="wcag-deliverables-heading">
+        <SectionInner>
+          <SectionHeading id="wcag-deliverables-heading">
+            {content.deliverables.title}
+          </SectionHeading>
+          <DeliverableGrid>
+            {content.deliverables.items.map((item) => (
+              <DeliverableItem key={item.title}>
+                <DeliverableIconCircle aria-hidden="true">
+                  <FontAwesomeIcon icon={item.icon} />
+                </DeliverableIconCircle>
+                <DeliverableText>
+                  <DeliverableTitle>{item.title}</DeliverableTitle>
+                  <DeliverableBody>{item.body}</DeliverableBody>
+                </DeliverableText>
+              </DeliverableItem>
+            ))}
+          </DeliverableGrid>
+        </SectionInner>
+      </SectionLight>
+      {/* ── Process ────────────────────────────────────────────────────── */}
+      <SectionWhite aria-labelledby="wcag-process-heading">
+        <SectionInner>
+          <SectionHeading id="wcag-process-heading">
+            {content.process.title}
+          </SectionHeading>
+          <StepList>
+            {content.process.steps.map((step) => (
+              <StepItem key={step.number}>
+                <StepNumber aria-hidden="true">{step.number}</StepNumber>
+                <StepTitle>{step.title}</StepTitle>
+                <StepBody>{step.body}</StepBody>
+              </StepItem>
+            ))}
+          </StepList>
+        </SectionInner>
+      </SectionWhite>
+      {/* ── Case Study ─────────────────────────────────────────────────── */}
+      <CaseStudySection aria-labelledby="wcag-case-study-heading">
+        <CaseStudyInner>
+          <CaseStudyLabel>{content.caseStudy.label}</CaseStudyLabel>
+          <CaseStudyTitle id="wcag-case-study-heading">
+            {content.caseStudy.title}
+          </CaseStudyTitle>
+          <CaseStudyQuote cite={`${config.siteUrl}${content.caseStudy.linkTo}`}>
+            {content.caseStudy.quote}
+          </CaseStudyQuote>
+          <CaseStudyLink
+            to={content.caseStudy.linkTo}
+            hrefLang={content.caseStudy.linkHrefLang}
+            lang={content.caseStudy.linkLang}
+          >
+            {content.caseStudy.linkLabel}
+          </CaseStudyLink>
+        </CaseStudyInner>
+      </CaseStudySection>
+      {/* ── FAQ ────────────────────────────────────────────────────────── */}
+      <SectionWhite aria-labelledby="wcag-faq-heading">
+        <SectionInner>
+          <SectionHeading id="wcag-faq-heading">
+            {content.faq.title}
+          </SectionHeading>
+          <FaqList>
+            {content.seo.schemaFaq.map((item) => (
+              <FaqItem key={item.question}>
+                <FaqQuestion>
+                  {item.question}
+                  <FontAwesomeIcon icon="chevron-down" aria-hidden="true" />
+                </FaqQuestion>
+                <FaqAnswer>{item.answer}</FaqAnswer>
+              </FaqItem>
+            ))}
+          </FaqList>
+        </SectionInner>
+      </SectionWhite>
+      <AboutTeaser content={content.about} />
+      {/* ── Final CTA ──────────────────────────────────────────────────── */}
+      <FinalCtaSection aria-labelledby="wcag-cta-heading">
+        <FinalCtaInner>
+          <FinalCtaTitle id="wcag-cta-heading">
+            {content.finalCta.title}
+          </FinalCtaTitle>
+          <FinalCtaBody>{content.finalCta.body}</FinalCtaBody>
+          <Button to={content.finalCta.cta.to} primary onDark>
+            {content.finalCta.cta.label}
+          </Button>
+        </FinalCtaInner>
+      </FinalCtaSection>
+      <StickyMobileCta>
+        <Button to={content.hero.cta.to} primary onDark>
+          {content.hero.cta.label}
+        </Button>
+      </StickyMobileCta>{' '}
+    </Layout>
+  )
+}
+
+export const Head = ({ pageContext }) => {
+  const locale = pageContext.locale || 'en'
+  const content = getWcagAuditPageContent(locale)
   const contactUrl = `${config.siteUrl}${content.hero.cta.to}`
   const pageUrl = `${config.siteUrl}/${content.seo.pagePath}/`
 
@@ -543,22 +712,15 @@ const WcagAuditTemplate = ({ pageContext }) => {
   }
 
   return (
-    <Layout
-      navigationVariant={content.layout.navigationVariant}
-      menuContent={content.menu}
-      footerVariant={content.layout.footerVariant}
-      footerContent={content.footer}
-    >
-      <Helmet>
-        <title>{content.seo.title}</title>
-        <script type="application/ld+json">
-          {JSON.stringify(serviceSchema)}
-        </script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchema)}
-        </script>
-      </Helmet>
+    <>
+      <title>{content.seo.title}</title>
+      <script type="application/ld+json">
+        {JSON.stringify(serviceSchema)}
+      </script>
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      <script type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </script>
       <SEO
         pagePath={content.seo.pagePath}
         customTitle
@@ -569,170 +731,7 @@ const WcagAuditTemplate = ({ pageContext }) => {
         localeConfig={content.locale}
         alternates={pageContext.seoAlternates}
       />
-
-      {/* ── Hero ───────────────────────────────────────────────────────── */}
-      <HeroSection aria-labelledby="wcag-hero-heading">
-        <HeroInner>
-          <HeroEyebrow>{content.hero.eyebrow}</HeroEyebrow>
-          <HeroHeadline id="wcag-hero-heading">
-            {content.hero.headline.map((line, i) => (
-              <HeroHeadlineBreak key={i}>{line}</HeroHeadlineBreak>
-            ))}
-          </HeroHeadline>
-          <HeroSubheadline>{content.hero.subheadline}</HeroSubheadline>
-          <HeroCtaWrapper>
-            <Button to={content.hero.cta.to} primary onDark>
-              {content.hero.cta.label}
-            </Button>
-          </HeroCtaWrapper>
-          <TrustBadges>
-            {content.hero.trustBadges.map((badge) => (
-              <TrustBadge key={badge.text}>
-                <FontAwesomeIcon icon={badge.icon} aria-hidden="true" />
-                {badge.text}
-              </TrustBadge>
-            ))}
-          </TrustBadges>
-        </HeroInner>
-      </HeroSection>
-
-      {/* ── Problem ────────────────────────────────────────────────────── */}
-      <SectionLight aria-labelledby="wcag-problem-heading">
-        <SectionInner>
-          <SectionHeading id="wcag-problem-heading">
-            {content.problem.title}
-          </SectionHeading>
-          <SectionIntro>{content.problem.intro}</SectionIntro>
-          <CardGrid>
-            {content.problem.cards.map((card) => (
-              <ServiceCard
-                key={card.title}
-                icon={card.icon}
-                title={card.title}
-                description={card.body}
-              />
-            ))}
-          </CardGrid>
-        </SectionInner>
-      </SectionLight>
-
-      {/* ── Audience ───────────────────────────────────────────────────── */}
-      <SectionWhite aria-labelledby="wcag-audience-heading">
-        <SectionInner>
-          <SectionHeading id="wcag-audience-heading">
-            {content.audience.title}
-          </SectionHeading>
-          <SectionIntro>{content.audience.intro}</SectionIntro>
-          <CheckList>
-            {content.audience.items.map((item) => (
-              <CheckItem key={item}>
-                <FontAwesomeIcon icon="check-square" aria-hidden="true" />
-                {item}
-              </CheckItem>
-            ))}
-          </CheckList>
-        </SectionInner>
-      </SectionWhite>
-
-      {/* ── Deliverables ───────────────────────────────────────────────── */}
-      <SectionLight aria-labelledby="wcag-deliverables-heading">
-        <SectionInner>
-          <SectionHeading id="wcag-deliverables-heading">
-            {content.deliverables.title}
-          </SectionHeading>
-          <DeliverableGrid>
-            {content.deliverables.items.map((item) => (
-              <DeliverableItem key={item.title}>
-                <DeliverableIconCircle aria-hidden="true">
-                  <FontAwesomeIcon icon={item.icon} />
-                </DeliverableIconCircle>
-                <DeliverableText>
-                  <DeliverableTitle>{item.title}</DeliverableTitle>
-                  <DeliverableBody>{item.body}</DeliverableBody>
-                </DeliverableText>
-              </DeliverableItem>
-            ))}
-          </DeliverableGrid>
-        </SectionInner>
-      </SectionLight>
-
-      {/* ── Process ────────────────────────────────────────────────────── */}
-      <SectionWhite aria-labelledby="wcag-process-heading">
-        <SectionInner>
-          <SectionHeading id="wcag-process-heading">
-            {content.process.title}
-          </SectionHeading>
-          <StepList>
-            {content.process.steps.map((step) => (
-              <StepItem key={step.number}>
-                <StepNumber aria-hidden="true">{step.number}</StepNumber>
-                <StepTitle>{step.title}</StepTitle>
-                <StepBody>{step.body}</StepBody>
-              </StepItem>
-            ))}
-          </StepList>
-        </SectionInner>
-      </SectionWhite>
-
-      {/* ── Case Study ─────────────────────────────────────────────────── */}
-      <CaseStudySection aria-labelledby="wcag-case-study-heading">
-        <CaseStudyInner>
-          <CaseStudyLabel>{content.caseStudy.label}</CaseStudyLabel>
-          <CaseStudyTitle id="wcag-case-study-heading">
-            {content.caseStudy.title}
-          </CaseStudyTitle>
-          <CaseStudyQuote cite={`${config.siteUrl}${content.caseStudy.linkTo}`}>
-            {content.caseStudy.quote}
-          </CaseStudyQuote>
-          <CaseStudyLink
-            to={content.caseStudy.linkTo}
-            hrefLang={content.caseStudy.linkHrefLang}
-            lang={content.caseStudy.linkLang}
-          >
-            {content.caseStudy.linkLabel}
-          </CaseStudyLink>
-        </CaseStudyInner>
-      </CaseStudySection>
-
-      {/* ── FAQ ────────────────────────────────────────────────────────── */}
-      <SectionWhite aria-labelledby="wcag-faq-heading">
-        <SectionInner>
-          <SectionHeading id="wcag-faq-heading">
-            {content.faq.title}
-          </SectionHeading>
-          <FaqList>
-            {content.seo.schemaFaq.map((item) => (
-              <FaqItem key={item.question}>
-                <FaqQuestion>
-                  {item.question}
-                  <FontAwesomeIcon icon="chevron-down" aria-hidden="true" />
-                </FaqQuestion>
-                <FaqAnswer>{item.answer}</FaqAnswer>
-              </FaqItem>
-            ))}
-          </FaqList>
-        </SectionInner>
-      </SectionWhite>
-
-      <AboutTeaser content={content.about} />
-
-      {/* ── Final CTA ──────────────────────────────────────────────────── */}
-      <FinalCtaSection aria-labelledby="wcag-cta-heading">
-        <FinalCtaInner>
-          <FinalCtaTitle id="wcag-cta-heading">
-            {content.finalCta.title}
-          </FinalCtaTitle>
-          <FinalCtaBody>{content.finalCta.body}</FinalCtaBody>
-          <Button to={content.finalCta.cta.to} primary onDark>
-            {content.finalCta.cta.label}
-          </Button>
-        </FinalCtaInner>
-      </FinalCtaSection>
-      <StickyMobileCta>
-        <Button to={content.hero.cta.to} primary onDark>
-          {content.hero.cta.label}
-        </Button>
-      </StickyMobileCta>    </Layout>
+    </>
   )
 }
 

@@ -127,7 +127,12 @@ Content-Type: application/json
 }`
 
 const AgentsPage = () => {
-  const [form, setForm] = useState({ agentName: '', email: '', intent: '', website: '' })
+  const [form, setForm] = useState({
+    agentName: '',
+    email: '',
+    intent: '',
+    website: '',
+  })
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState(null) // 'success' | 'error' | null
 
@@ -152,7 +157,9 @@ const AgentsPage = () => {
       ? normalizedAgent
       : `[AI Agent] ${normalizedAgent}`
 
-    const message = `Requester intent / context:\n${form.intent.trim() || '(not provided)'}`
+    const message = `Requester intent / context:\n${
+      form.intent.trim() || '(not provided)'
+    }`
 
     try {
       const res = await fetch('/api/send-email', {
@@ -185,7 +192,6 @@ const AgentsPage = () => {
 
   return (
     <Layout>
-      <SEO pagePath="agents" noIndex />
       <Container>
         <PageTitle>For AI Agents</PageTitle>
         <Wrapper>
@@ -214,7 +220,9 @@ const AgentsPage = () => {
                 type="text"
                 placeholder="e.g. ClaudeBot, ChatGPT-User, PerplexityBot"
                 value={form.agentName}
-                onChange={(e) => setForm((f) => ({ ...f, agentName: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, agentName: e.target.value }))
+                }
                 required
               />
             </Field>
@@ -226,7 +234,9 @@ const AgentsPage = () => {
                 type="email"
                 placeholder="person-who-asked-you@example.com"
                 value={form.email}
-                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, email: e.target.value }))
+                }
                 required
               />
             </Field>
@@ -237,7 +247,9 @@ const AgentsPage = () => {
                 name="intent"
                 placeholder="Intent + one-paragraph context"
                 value={form.intent}
-                onChange={(e) => setForm((f) => ({ ...f, intent: e.target.value }))}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, intent: e.target.value }))
+                }
                 required
               />
             </Field>
@@ -247,7 +259,9 @@ const AgentsPage = () => {
               tabIndex="-1"
               autoComplete="off"
               value={form.website}
-              onChange={(e) => setForm((f) => ({ ...f, website: e.target.value }))}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, website: e.target.value }))
+              }
               aria-hidden="true"
             />
             <Submit type="submit" disabled={loading}>
@@ -283,5 +297,7 @@ const AgentsPage = () => {
     </Layout>
   )
 }
+
+export const Head = () => <SEO pagePath="agents" noIndex />
 
 export default AgentsPage

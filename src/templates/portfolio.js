@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../components/Layout'
-import Helmet from 'react-helmet'
 import Container from '../components/Container'
 import SEO from '../components/SEO'
 import config from '../utils/siteConfig'
@@ -295,17 +294,6 @@ const Portfolio = ({ data }) => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>{`Portfolio - ${config.siteTitle}`}</title>
-      </Helmet>
-      <SEO
-        pagePath="portfolio"
-        customTitle
-        postNode={{
-          title: 'Portfolio',
-        }}
-      />
-
       <Container>
         <PageTitle>My Work</PageTitle>
         <Intro>
@@ -432,6 +420,19 @@ const Portfolio = ({ data }) => {
     </Layout>
   )
 }
+
+export const Head = () => (
+  <>
+    <title>{`Portfolio - ${config.siteTitle}`}</title>
+    <SEO
+      pagePath="portfolio"
+      customTitle
+      postNode={{
+        title: 'Portfolio',
+      }}
+    />
+  </>
+)
 
 export const query = graphql`
   query {
