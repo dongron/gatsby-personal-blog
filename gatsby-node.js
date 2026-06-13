@@ -61,6 +61,11 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               slug
               publishDate
+              body {
+                childMarkdownRemark {
+                  id
+                }
+              }
             }
           }
         }
@@ -73,7 +78,10 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     `).then((result) => {
-      const posts = result.data.allContentfulPost.edges
+      const posts = result.data.allContentfulPost.edges.filter(
+        (edge) =>
+          edge.node && edge.node.body && edge.node.body.childMarkdownRemark
+      )
       const contentfulPages = result.data.allContentfulPage
         ? result.data.allContentfulPage.edges
         : []
@@ -261,33 +269,32 @@ exports.createPages = ({ graphql, actions }) => {
       }
     `).then((result) => {
       const postsPerPage = config.postsPerPage
-      
+
       // Build a map of tag slugs to posts
       const tagPostsMap = {}
-      
+
       result.data.allContentfulPost.edges.forEach(({ node }) => {
         if (node.tags && node.tags.length > 0) {
           node.tags.forEach((tag) => {
             if (!tagPostsMap[tag.slug]) {
               tagPostsMap[tag.slug] = {
                 title: tag.title,
-                posts: []
+                posts: [],
               }
             }
             tagPostsMap[tag.slug].posts.push(node.id)
           })
         }
       })
-      
+
       // Create tag pages with pagination
       Object.entries(tagPostsMap).forEach(([slug, { title, posts }]) => {
         const totalPosts = posts.length
         const numPages = Math.ceil(totalPosts / postsPerPage)
-        
+
         Array.from({ length: numPages }).forEach((_, i) => {
           createPage({
-            path:
-              i === 0 ? `/tag/${slug}/` : `/tag/${slug}/${i + 1}/`,
+            path: i === 0 ? `/tag/${slug}/` : `/tag/${slug}/${i + 1}/`,
             component: path.resolve(`./src/templates/tag.js`),
             context: {
               slug: slug,

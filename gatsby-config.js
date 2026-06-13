@@ -50,12 +50,6 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`, // Needed for dynamic images
-    {
-      resolve: 'gatsby-plugin-canonical-urls',
-      options: {
-        siteUrl: config.siteUrl,
-      },
-    },
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     {

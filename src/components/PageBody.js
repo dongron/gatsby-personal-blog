@@ -125,6 +125,9 @@ const PostBody = styled(Body)`
 `
 
 const PageBody = (props) => {
+  if (!props || !props.body || !props.body.childMarkdownRemark) {
+    return null
+  }
   return props && props.page ? (
     <PostBody
       dangerouslySetInnerHTML={{ __html: props.body.childMarkdownRemark.html }}
